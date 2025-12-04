@@ -14,6 +14,8 @@ using LinkTo.Helpers;
 
 namespace LinkTo.Views;
 
+
+
 /// <summary>
 /// Page for creating symbolic and hard links
 /// </summary>
@@ -26,8 +28,13 @@ public sealed partial class CreateLinkPage : Page
         InitializeComponent();
         _resourceLoader = new ResourceLoader();
         ApplyLocalization();
-        LoadCommonDirectories();
         UpdateHardLinkAvailability();
+        this.Loaded += CreateLinkPage_Loaded;
+    }
+
+    private void CreateLinkPage_Loaded(object sender, RoutedEventArgs e)
+    {
+        LoadCommonDirectories();
     }
 
     /// <summary>
@@ -65,7 +72,14 @@ public sealed partial class CreateLinkPage : Page
 
     private void LoadCommonDirectories()
     {
-        CommonDirsList.ItemsSource = ConfigService.Instance.Config.CommonDirectories.ToList();
+        var dirs = ConfigService.Instance.Config.CommonDirectories;
+        if (dirs != null)
+        {
+            var items = new System.Collections.ObjectModel.ObservableCollection<object>(
+                dirs.Select(d => new CommonDirItem { Path = d })
+            );
+            CommonDirsList.ItemsSource = items;
+        }
     }
 
     #region Drag and Drop
@@ -158,18 +172,18 @@ public sealed partial class CreateLinkPage : Page
 
     private void CommonDir_Tapped(object sender, TappedRoutedEventArgs e)
     {
-        if (sender is TextBlock textBlock && textBlock.Text is string path)
+        if (sender is FrameworkElement element && element.DataContext is CommonDirItem item)
         {
-            TargetPathTextBox.Text = path;
+            TargetPathTextBox.Text = item.Path;
             UpdateHardLinkAvailability();
         }
     }
 
     private void DeleteCommonDir_Click(object sender, RoutedEventArgs e)
     {
-        if (sender is Button button && button.Tag is string path)
+        if (sender is Button button && button.Tag is CommonDirItem item)
         {
-            ConfigService.Instance.RemoveCommonDirectory(path);
+            ConfigService.Instance.RemoveCommonDirectory(item.Path);
             LoadCommonDirectories();
         }
     }

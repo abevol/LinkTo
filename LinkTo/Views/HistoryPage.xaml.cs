@@ -36,11 +36,15 @@ public sealed partial class HistoryPage : Page
 
     private void LoadHistory()
     {
-        var history = ConfigService.Instance.Config.LinkHistory.ToList();
-        HistoryListView.ItemsSource = history;
+        var history = ConfigService.Instance.Config.LinkHistory;
+        if (history != null)
+        {
+            var observableHistory = new System.Collections.ObjectModel.ObservableCollection<LinkTo.Models.LinkHistoryEntry>(history);
+            HistoryListView.ItemsSource = observableHistory;
 
-        EmptyMessage.Visibility = history.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
-        HistoryListView.Visibility = history.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+            EmptyMessage.Visibility = history.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+            HistoryListView.Visibility = history.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+        }
     }
 
     private async void DeleteHistory_Click(object sender, RoutedEventArgs e)

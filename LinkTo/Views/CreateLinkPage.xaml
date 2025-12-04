@@ -6,6 +6,7 @@
     xmlns:local="using:LinkTo.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:LinkTo.Models"
     mc:Ignorable="d"
     AllowDrop="True"
     DragOver="Page_DragOver"
@@ -76,13 +77,13 @@
                                       MaxHeight="150"
                                       SelectionMode="None">
                                 <ListView.ItemTemplate>
-                                    <DataTemplate>
+                                    <DataTemplate x:DataType="models:CommonDirItem">
                                         <Grid ColumnSpacing="8" Padding="4">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Text="{Binding}" 
+                                            <TextBlock Text="{x:Bind Path}" 
                                                        VerticalAlignment="Center"
                                                        TextTrimming="CharacterEllipsis"
                                                        Grid.Column="0"
@@ -90,7 +91,7 @@
                                             <Button Content="&#xE74D;" 
                                                     FontFamily="Segoe MDL2 Assets"
                                                     Click="DeleteCommonDir_Click"
-                                                    Tag="{Binding}"
+                                                    Tag="{x:Bind}"
                                                     Background="Transparent"
                                                     Grid.Column="1" />
                                         </Grid>
