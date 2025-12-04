@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="LinkTo.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LinkTo.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Key="CardBorderStyle" TargetType="Border">
+            <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
+            <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="16" />
+        </Style>
+    </Page.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Spacing="16" Padding="0,0,0,20">
+
+            <!-- Language Setting -->
+            <Border Style="{StaticResource CardBorderStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Spacing="4">
+                        <TextBlock x:Name="LanguageLabel" Text="Interface Language" 
+                                   Style="{StaticResource SubtitleTextBlockStyle}" />
+                    </StackPanel>
+                    <ComboBox x:Name="LanguageComboBox" 
+                              Grid.Column="1"
+                              MinWidth="150"
+                              SelectionChanged="LanguageComboBox_SelectionChanged">
+                        <ComboBoxItem x:Name="EnglishItem" Tag="en-US" Content="English" />
+                        <ComboBoxItem x:Name="ChineseItem" Tag="zh-CN" Content="中文" />
+                    </ComboBox>
+                </Grid>
+            </Border>
+
+            <!-- Shell Menu Setting -->
+            <Border Style="{StaticResource CardBorderStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Spacing="4">
+                        <TextBlock x:Name="ShellMenuLabel" Text="Enable Shell Context Menu" 
+                                   Style="{StaticResource SubtitleTextBlockStyle}" />
+                        <TextBlock x:Name="ShellMenuDescription" 
+                                   Text="Add 'Link to...' option in Windows Explorer right-click menu"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                   TextWrapping="Wrap" />
+                        <StackPanel x:Name="AdminWarningPanel" Orientation="Horizontal" Spacing="4" Visibility="Collapsed">
+                            <FontIcon Glyph="&#xE7BA;" FontSize="12" Foreground="{ThemeResource SystemFillColorCautionBrush}" />
+                            <TextBlock x:Name="AdminWarningText" Text="Requires Administrator"
+                                       Foreground="{ThemeResource SystemFillColorCautionBrush}"
+                                       FontSize="12" />
+                        </StackPanel>
+                    </StackPanel>
+                    <ToggleSwitch x:Name="ShellMenuToggle" 
+                                  Grid.Column="1"
+                                  OnContent=""
+                                  OffContent=""
+                                  Toggled="ShellMenuToggle_Toggled" />
+                </Grid>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

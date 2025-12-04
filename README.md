@@ -1,0 +1,108 @@
+# LinkTo
+
+A Windows application for creating and managing symbolic links and hard links.
+
+![WinUI 3](https://img.shields.io/badge/WinUI-3-blue)
+![.NET 10](https://img.shields.io/badge/.NET-10.0-purple)
+![Platform](https://img.shields.io/badge/platform-Windows-lightgrey)
+
+## Features
+
+- **Create Symbolic Links** - Create symbolic links for files and directories
+- **Create Hard Links** - Create hard links for files (same volume only)
+- **Shell Integration** - Right-click context menu integration in Windows Explorer
+- **Link History** - Track and manage created links
+- **Multi-language** - English and Chinese interface
+- **Modern UI** - Beautiful WinUI 3 interface with Mica backdrop
+
+## Screenshots
+
+*(Screenshots will be added after first build)*
+
+## Requirements
+
+- Windows 10 version 1809 (build 17763) or later
+- [.NET 10.0 Runtime](https://dotnet.microsoft.com/download/dotnet/10.0)
+
+## Installation
+
+### From Release
+
+1. Download the latest release from the Releases page
+2. Extract the archive
+3. Run `LinkTo.exe`
+
+### Build from Source
+
+```powershell
+# Clone the repository
+git clone https://github.com/yourname/linkto.git
+cd linkto
+
+# Build
+dotnet build LinkTo.slnx -c Release
+
+# Run
+.\LinkTo\bin\Release\net10.0-windows10.0.19041.0\win-x64\LinkTo.exe
+```
+
+## Usage
+
+### Creating Links via UI
+
+1. Launch LinkTo
+2. Select a source file or directory (or drag & drop)
+3. Choose target directory
+4. Optionally modify link name
+5. Select link type (Symbolic or Hard)
+6. Click "Create Link"
+
+### Creating Links via Context Menu
+
+1. Enable shell integration in Settings
+2. Right-click any file or folder in Windows Explorer
+3. Select "Link to..."
+4. Choose target directory and create link
+
+## Link Types
+
+| Feature | Symbolic Link | Hard Link |
+|---------|--------------|-----------|
+| Files | ✅ | ✅ |
+| Directories | ✅ | ❌ |
+| Cross-volume | ✅ | ❌ |
+| Network paths | ✅ | ❌ |
+| Original deleted | Broken | Still works |
+| Admin required | Yes* | No |
+
+\* Not required if Developer Mode is enabled in Windows Settings
+
+## Permissions
+
+- **Creating Symbolic Links**: Requires Administrator privileges OR Developer Mode enabled
+- **Shell Integration**: Requires Administrator privileges
+- **Creating Hard Links**: No special privileges required
+
+## Configuration
+
+Configuration is stored at:
+```
+%APPDATA%\LinkTo\Config.json
+```
+
+Logs are stored at:
+```
+%APPDATA%\LinkTo\Logs\
+```
+
+## License
+
+MIT License
+
+## Author
+
+Your Name
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit issues and pull requests.

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="0" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+
+  <!-- Window -->
+  <data name="AppTitle" xml:space="preserve">
+    <value>LinkTo</value>
+  </data>
+
+  <!-- Tab Headers -->
+  <data name="Tab_CreateLink" xml:space="preserve">
+    <value>Create Link</value>
+  </data>
+  <data name="Tab_History" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="Tab_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Tab_Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="Tab_About" xml:space="preserve">
+    <value>About</value>
+  </data>
+
+  <!-- Create Link Page -->
+  <data name="Group_Source" xml:space="preserve">
+    <value>Source File / Directory</value>
+  </data>
+  <data name="Group_Target" xml:space="preserve">
+    <value>Target Directory</value>
+  </data>
+  <data name="Group_LinkName" xml:space="preserve">
+    <value>Link Name</value>
+  </data>
+  <data name="Group_LinkType" xml:space="preserve">
+    <value>Link Type</value>
+  </data>
+  <data name="Button_Browse" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="Button_BrowseFile" xml:space="preserve">
+    <value>File...</value>
+  </data>
+  <data name="Button_BrowseFolder" xml:space="preserve">
+    <value>Folder...</value>
+  </data>
+  <data name="Button_CreateLink" xml:space="preserve">
+    <value>Create Link</value>
+  </data>
+  <data name="LinkType_Symbolic" xml:space="preserve">
+    <value>Symbolic Link</value>
+  </data>
+  <data name="LinkType_Hard" xml:space="preserve">
+    <value>Hard Link</value>
+  </data>
+  <data name="Hint_DragDrop" xml:space="preserve">
+    <value>Drag and drop file or folder here</value>
+  </data>
+  <data name="CommonDirectories" xml:space="preserve">
+    <value>Common Directories</value>
+  </data>
+  <data name="Button_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+
+  <!-- History Page -->
+  <data name="History_Empty" xml:space="preserve">
+    <value>No link history yet</value>
+  </data>
+  <data name="History_Source" xml:space="preserve">
+    <value>Source:</value>
+  </data>
+  <data name="History_Link" xml:space="preserve">
+    <value>Link:</value>
+  </data>
+  <data name="History_Type" xml:space="preserve">
+    <value>Type:</value>
+  </data>
+  <data name="History_Created" xml:space="preserve">
+    <value>Created:</value>
+  </data>
+  <data name="History_DeleteConfirm" xml:space="preserve">
+    <value>Delete this link and remove from history?</value>
+  </data>
+
+  <!-- Settings Page -->
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Interface Language</value>
+  </data>
+  <data name="Settings_ShellMenu" xml:space="preserve">
+    <value>Enable Shell Context Menu</value>
+  </data>
+  <data name="Settings_ShellMenuDesc" xml:space="preserve">
+    <value>Add "Link to..." option in Windows Explorer right-click menu</value>
+  </data>
+  <data name="Settings_RequiresAdmin" xml:space="preserve">
+    <value>Requires Administrator</value>
+  </data>
+  <data name="Settings_RestartRequired" xml:space="preserve">
+    <value>Restart required to apply language change</value>
+  </data>
+  <data name="Language_English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Language_Chinese" xml:space="preserve">
+    <value>中文</value>
+  </data>
+
+  <!-- Help Page -->
+  <data name="Help_Title" xml:space="preserve">
+    <value>Symbolic Link vs Hard Link</value>
+  </data>
+  <data name="Help_SymbolicLink" xml:space="preserve">
+    <value>Symbolic Link</value>
+  </data>
+  <data name="Help_SymbolicLinkDesc" xml:space="preserve">
+    <value>• Works like a shortcut, points to the original file/folder path
+• Supports both files and directories
+• Can link across different drives/volumes
+• Can link to network paths
+• If original is deleted, symbolic link becomes broken
+• Requires Developer Mode or Administrator privileges to create</value>
+  </data>
+  <data name="Help_HardLink" xml:space="preserve">
+    <value>Hard Link</value>
+  </data>
+  <data name="Help_HardLinkDesc" xml:space="preserve">
+    <value>• Creates another reference to the same file data on disk
+• Only supports files, not directories
+• Must be on the same drive/volume as the original
+• Cannot link to network paths
+• If original is deleted, hard link still works (data persists)
+• Does not require special privileges to create</value>
+  </data>
+
+  <!-- About Page -->
+  <data name="About_Description" xml:space="preserve">
+    <value>A simple tool for creating and managing symbolic links and hard links on Windows.</value>
+  </data>
+  <data name="About_Author" xml:space="preserve">
+    <value>Author:</value>
+  </data>
+  <data name="About_Homepage" xml:space="preserve">
+    <value>Homepage:</value>
+  </data>
+  <data name="About_Version" xml:space="preserve">
+    <value>Version:</value>
+  </data>
+
+  <!-- Dialogs -->
+  <data name="Dialog_Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="Dialog_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Dialog_Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Dialog_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Dialog_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Dialog_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Dialog_Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="Dialog_Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="Dialog_OverwriteConfirm" xml:space="preserve">
+    <value>A file or directory with this name already exists. Do you want to overwrite it?</value>
+  </data>
+  <data name="Dialog_LinkCreated" xml:space="preserve">
+    <value>Link created successfully!</value>
+  </data>
+  <data name="Dialog_AdminRequired" xml:space="preserve">
+    <value>This operation requires administrator privileges. Do you want to restart the application as administrator?</value>
+  </data>
+  <data name="Dialog_DeveloperModeHint" xml:space="preserve">
+    <value>Creating symbolic links requires Administrator privileges, unless Developer Mode is enabled in Windows Settings.</value>
+  </data>
+
+  <!-- Errors -->
+  <data name="Error_SourceNotExist" xml:space="preserve">
+    <value>Source file or directory does not exist.</value>
+  </data>
+  <data name="Error_TargetNotExist" xml:space="preserve">
+    <value>Target directory does not exist.</value>
+  </data>
+  <data name="Error_TargetExists" xml:space="preserve">
+    <value>A file or directory already exists at the target location.</value>
+  </data>
+  <data name="Error_AccessDenied" xml:space="preserve">
+    <value>Access denied. Administrator privileges may be required.</value>
+  </data>
+  <data name="Error_HardLinkFailed" xml:space="preserve">
+    <value>Failed to create hard link.</value>
+  </data>
+  <data name="Error_SourceRequired" xml:space="preserve">
+    <value>Please select a source file or directory.</value>
+  </data>
+  <data name="Error_TargetRequired" xml:space="preserve">
+    <value>Please select a target directory.</value>
+  </data>
+  <data name="Error_LinkNameRequired" xml:space="preserve">
+    <value>Please enter a link name.</value>
+  </data>
+
+  <!-- Hard Link Reasons -->
+  <data name="HardLinkReason_DirectoryNotSupported" xml:space="preserve">
+    <value>Hard links do not support directories.</value>
+  </data>
+  <data name="HardLinkReason_NetworkNotSupported" xml:space="preserve">
+    <value>Hard links do not support network paths.</value>
+  </data>
+  <data name="HardLinkReason_CrossVolumeNotSupported" xml:space="preserve">
+    <value>Hard links cannot span across different volumes.</value>
+  </data>
+</root>

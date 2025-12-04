@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="LinkTo.Views.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LinkTo.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Key="CardBorderStyle" TargetType="Border">
+            <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
+            <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="16" />
+        </Style>
+    </Page.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Spacing="24" Padding="0,0,0,20" HorizontalAlignment="Center" MaxWidth="500">
+
+            <!-- App Icon -->
+            <Image Source="ms-appx:///Assets/StoreLogo.png" 
+                   Width="96" Height="96"
+                   HorizontalAlignment="Center" />
+
+            <!-- App Name -->
+            <TextBlock Text="LinkTo" 
+                       Style="{StaticResource TitleTextBlockStyle}"
+                       HorizontalAlignment="Center" />
+
+            <!-- Version -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="4">
+                <TextBlock x:Name="VersionLabel" Text="Version:" 
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                <TextBlock x:Name="VersionText" Text="1.0.0" 
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+            </StackPanel>
+
+            <!-- Description -->
+            <TextBlock x:Name="DescriptionText" 
+                       Text="A simple tool for creating and managing symbolic links and hard links on Windows."
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+
+            <!-- Info Card -->
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Spacing="12">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <TextBlock x:Name="AuthorLabel" Text="Author:" Width="80" />
+                        <TextBlock Text="Your Name" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <TextBlock x:Name="HomepageLabel" Text="Homepage:" Width="80" />
+                        <HyperlinkButton Content="https://github.com/yourname/linkto" 
+                                         NavigateUri="https://github.com/yourname/linkto" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Copyright -->
+            <TextBlock Text="© 2024 All Rights Reserved"
+                       HorizontalAlignment="Center"
+                       Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                       FontSize="12" />
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

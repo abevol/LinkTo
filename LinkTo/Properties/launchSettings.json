@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "LinkTo (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "LinkTo (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
