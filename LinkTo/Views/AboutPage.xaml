@@ -51,12 +51,12 @@
                 <StackPanel Spacing="12">
                     <StackPanel Orientation="Horizontal" Spacing="8">
                         <TextBlock x:Name="AuthorLabel" Text="Author:" Width="80" />
-                        <TextBlock Text="Your Name" />
+                        <TextBlock Text="Abevol" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Spacing="8">
                         <TextBlock x:Name="HomepageLabel" Text="Homepage:" Width="80" />
-                        <HyperlinkButton Content="https://github.com/yourname/linkto" 
-                                         NavigateUri="https://github.com/yourname/linkto" />
+                        <HyperlinkButton Content="https://github.com/abevol/linkto" 
+                                         NavigateUri="https://github.com/abevol/linkto" />
                     </StackPanel>
                 </StackPanel>
             </Border>

@@ -20,11 +20,24 @@ public sealed partial class MainWindow : Window
     {
         InitializeComponent();
 
-        // Set window size
+        // Set window size and center on screen
         var hwnd = WindowNative.GetWindowHandle(this);
         var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hwnd);
         var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
-        appWindow.Resize(new Windows.Graphics.SizeInt32(800, 700));
+        
+        var windowWidth = 800;
+        var windowHeight = 780;
+        appWindow.Resize(new Windows.Graphics.SizeInt32(windowWidth, windowHeight));
+        
+        // Center window on screen
+        var displayArea = Microsoft.UI.Windowing.DisplayArea.GetFromWindowId(windowId, Microsoft.UI.Windowing.DisplayAreaFallback.Nearest);
+        if (displayArea != null)
+        {
+            var workArea = displayArea.WorkArea;
+            var centerX = (workArea.Width - windowWidth) / 2 + workArea.X;
+            var centerY = (workArea.Height - windowHeight) / 2 + workArea.Y;
+            appWindow.Move(new Windows.Graphics.PointInt32(centerX, centerY));
+        }
 
         // Load resources based on saved language
         _resourceLoader = new ResourceLoader();
