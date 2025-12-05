@@ -15,7 +15,24 @@
     </Window.SystemBackdrop>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="AppTitleBar" Height="32" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="8,0,0,0">
+                <Image Source="ms-appx:///Assets/StoreLogo.png" Height="16" Width="16" Margin="0,0,8,0"/>
+                <TextBlock Text="LinkTo" VerticalAlignment="Center" Style="{ThemeResource CaptionTextBlockStyle}"/>
+            </StackPanel>
+        </Grid>
+
         <NavigationView x:Name="NavView"
+                        Grid.Row="1"
                         IsBackButtonVisible="Collapsed"
                         IsSettingsVisible="False"
                         PaneDisplayMode="Top"
