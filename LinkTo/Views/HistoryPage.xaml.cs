@@ -1,8 +1,13 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Microsoft.UI;
+using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.Windows.ApplicationModel.Resources;
+using LinkTo.Models;
 using LinkTo.Services;
 
 namespace LinkTo.Views;
@@ -13,6 +18,7 @@ namespace LinkTo.Views;
 public sealed partial class HistoryPage : Page
 {
     private readonly ResourceLoader _resourceLoader;
+    private List<LinkHistoryEntry> _historyData = new();
 
     public HistoryPage()
     {
@@ -36,22 +42,119 @@ public sealed partial class HistoryPage : Page
 
     private void LoadHistory()
     {
+        HistoryListView.Items.Clear();
+        _historyData.Clear();
+        
         var history = ConfigService.Instance.Config.LinkHistory;
         if (history != null)
         {
-            var observableHistory = new System.Collections.ObjectModel.ObservableCollection<LinkTo.Models.LinkHistoryEntry>(history);
-            HistoryListView.ItemsSource = observableHistory;
+            _historyData = history.ToList();
+            
+            foreach (var entry in _historyData)
+            {
+                // Create UI elements manually to avoid AOT issues with ItemsSource binding
+                var border = new Border
+                {
+                    Background = (Brush)Application.Current.Resources["CardBackgroundFillColorDefaultBrush"],
+                    BorderBrush = (Brush)Application.Current.Resources["CardStrokeColorDefaultBrush"],
+                    BorderThickness = new Thickness(1),
+                    CornerRadius = new CornerRadius(8),
+                    Padding = new Thickness(16),
+                    Margin = new Thickness(0, 4, 0, 4)
+                };
 
-            EmptyMessage.Visibility = history.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
-            HistoryListView.Visibility = history.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+                var grid = new Grid { ColumnSpacing = 16 };
+                grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+
+                var contentStack = new StackPanel { Spacing = 4 };
+                Grid.SetColumn(contentStack, 0);
+
+                // Link path row
+                var linkPathStack = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
+                linkPathStack.Children.Add(new FontIcon { Glyph = "\uE71B", FontSize = 16 });
+                linkPathStack.Children.Add(new TextBlock 
+                { 
+                    Text = entry.LinkPath, 
+                    TextTrimming = TextTrimming.CharacterEllipsis,
+                    FontWeight = FontWeights.SemiBold
+                });
+                contentStack.Children.Add(linkPathStack);
+
+                // Source path row
+                var sourceStack = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 4 };
+                sourceStack.Children.Add(new TextBlock 
+                { 
+                    Text = "Source:", 
+                    Foreground = (Brush)Application.Current.Resources["TextFillColorSecondaryBrush"]
+                });
+                sourceStack.Children.Add(new TextBlock 
+                { 
+                    Text = entry.SourcePath, 
+                    TextTrimming = TextTrimming.CharacterEllipsis,
+                    Foreground = (Brush)Application.Current.Resources["TextFillColorSecondaryBrush"]
+                });
+                contentStack.Children.Add(sourceStack);
+
+                // Type and date row
+                var metaStack = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 16 };
+                
+                var typeStack = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 4 };
+                typeStack.Children.Add(new TextBlock 
+                { 
+                    Text = "Type:", 
+                    Foreground = (Brush)Application.Current.Resources["TextFillColorTertiaryBrush"]
+                });
+                typeStack.Children.Add(new TextBlock 
+                { 
+                    Text = entry.LinkType.ToString(), 
+                    Foreground = (Brush)Application.Current.Resources["TextFillColorTertiaryBrush"]
+                });
+                metaStack.Children.Add(typeStack);
+
+                var dateStack = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 4 };
+                dateStack.Children.Add(new TextBlock 
+                { 
+                    Text = "Created:", 
+                    Foreground = (Brush)Application.Current.Resources["TextFillColorTertiaryBrush"]
+                });
+                dateStack.Children.Add(new TextBlock 
+                { 
+                    Text = entry.CreatedAt.ToString("g"), 
+                    Foreground = (Brush)Application.Current.Resources["TextFillColorTertiaryBrush"]
+                });
+                metaStack.Children.Add(dateStack);
+                
+                contentStack.Children.Add(metaStack);
+                grid.Children.Add(contentStack);
+
+                // Delete button
+                var deleteButton = new Button
+                {
+                    Content = "\uE74D",
+                    FontFamily = new FontFamily("Segoe MDL2 Assets"),
+                    Background = new SolidColorBrush(Colors.Transparent),
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Tag = entry.Id
+                };
+                deleteButton.Click += DeleteHistory_Click;
+                Grid.SetColumn(deleteButton, 1);
+                grid.Children.Add(deleteButton);
+
+                border.Child = grid;
+                HistoryListView.Items.Add(border);
+            }
         }
+        
+        EmptyMessage.Visibility = _historyData.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+        HistoryListView.Visibility = _historyData.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
     }
 
     private async void DeleteHistory_Click(object sender, RoutedEventArgs e)
     {
         if (sender is Button button && button.Tag is Guid id)
         {
-            var entry = ConfigService.Instance.Config.LinkHistory.FirstOrDefault(h => h.Id == id);
+            var entry = _historyData.FirstOrDefault(h => h.Id == id);
             if (entry == null) return;
 
             // Confirm deletion

@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:LinkTo.Views"
+    xmlns:models="using:LinkTo.Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -18,62 +19,6 @@
 
         <ListView x:Name="HistoryListView" 
                   SelectionMode="None"
-                  Padding="0,0,0,20">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                            BorderThickness="1"
-                            CornerRadius="8"
-                            Padding="16"
-                            Margin="0,4">
-                        <Grid ColumnSpacing="16">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-
-                            <StackPanel Grid.Column="0" Spacing="4">
-                                <StackPanel Orientation="Horizontal" Spacing="8">
-                                    <FontIcon Glyph="&#xE71B;" FontSize="16" />
-                                    <TextBlock Text="{Binding LinkPath}" 
-                                               TextTrimming="CharacterEllipsis"
-                                               FontWeight="SemiBold" />
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" Spacing="4">
-                                    <TextBlock x:Name="SourceLabel" Text="Source:" 
-                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                    <TextBlock Text="{Binding SourcePath}" 
-                                               TextTrimming="CharacterEllipsis"
-                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" Spacing="16">
-                                    <StackPanel Orientation="Horizontal" Spacing="4">
-                                        <TextBlock Text="Type:" 
-                                                   Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
-                                        <TextBlock Text="{Binding LinkType}" 
-                                                   Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" Spacing="4">
-                                        <TextBlock Text="Created:" 
-                                                   Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
-                                        <TextBlock Text="{Binding CreatedAt}" 
-                                                   Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
-                                    </StackPanel>
-                                </StackPanel>
-                            </StackPanel>
-
-                            <Button Grid.Column="1" 
-                                    Content="&#xE74D;"
-                                    FontFamily="Segoe MDL2 Assets"
-                                    Background="Transparent"
-                                    VerticalAlignment="Center"
-                                    Click="DeleteHistory_Click"
-                                    Tag="{Binding Id}" />
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                  Padding="0,0,0,20" />
     </Grid>
 </Page>

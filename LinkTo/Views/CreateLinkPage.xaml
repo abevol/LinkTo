@@ -75,29 +75,7 @@
                         <Expander.Content>
                             <ListView x:Name="CommonDirsList" 
                                       MaxHeight="150"
-                                      SelectionMode="None">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate x:DataType="models:CommonDirItem">
-                                        <Grid ColumnSpacing="8" Padding="4">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
-                                            <TextBlock Text="{x:Bind Path}" 
-                                                       VerticalAlignment="Center"
-                                                       TextTrimming="CharacterEllipsis"
-                                                       Grid.Column="0"
-                                                       Tapped="CommonDir_Tapped" />
-                                            <Button Content="&#xE74D;" 
-                                                    FontFamily="Segoe MDL2 Assets"
-                                                    Click="DeleteCommonDir_Click"
-                                                    Tag="{x:Bind}"
-                                                    Background="Transparent"
-                                                    Grid.Column="1" />
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
+                                      SelectionMode="None" />
                         </Expander.Content>
                     </Expander>
                 </StackPanel>

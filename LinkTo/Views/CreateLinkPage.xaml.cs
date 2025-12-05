@@ -72,13 +72,55 @@ public sealed partial class CreateLinkPage : Page
 
     private void LoadCommonDirectories()
     {
+        CommonDirsList.Items.Clear();
         var dirs = ConfigService.Instance.Config.CommonDirectories;
         if (dirs != null)
         {
-            var items = new System.Collections.ObjectModel.ObservableCollection<object>(
-                dirs.Select(d => new CommonDirItem { Path = d })
-            );
-            CommonDirsList.ItemsSource = items;
+            foreach (var dir in dirs)
+            {
+                // Create UI elements manually to avoid AOT issues with ItemsSource binding
+                var grid = new Grid
+                {
+                    ColumnSpacing = 8,
+                    Padding = new Thickness(4)
+                };
+                grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+
+                var textBlock = new TextBlock
+                {
+                    Text = dir,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    TextTrimming = TextTrimming.CharacterEllipsis
+                };
+                textBlock.Tapped += (s, e) =>
+                {
+                    TargetPathTextBox.Text = dir;
+                    UpdateHardLinkAvailability();
+                };
+                Grid.SetColumn(textBlock, 0);
+                grid.Children.Add(textBlock);
+
+                var deleteButton = new Button
+                {
+                    Content = "\uE74D",
+                    FontFamily = new Microsoft.UI.Xaml.Media.FontFamily("Segoe MDL2 Assets"),
+                    Background = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Transparent),
+                    Tag = dir
+                };
+                deleteButton.Click += (s, e) =>
+                {
+                    if (s is Button btn && btn.Tag is string path)
+                    {
+                        ConfigService.Instance.RemoveCommonDirectory(path);
+                        LoadCommonDirectories();
+                    }
+                };
+                Grid.SetColumn(deleteButton, 1);
+                grid.Children.Add(deleteButton);
+
+                CommonDirsList.Items.Add(grid);
+            }
         }
     }
 

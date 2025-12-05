@@ -49,5 +49,5 @@ public class LogService
     public void LogInfo(string message) => WriteLog("INFO", message);
     public void LogWarning(string message) => WriteLog("WARN", message);
     public void LogError(string message) => WriteLog("ERROR", message);
-    public void LogError(string message, Exception ex) => WriteLog("ERROR", $"{message}: {ex.Message}");
+    public void LogError(string message, Exception ex) => WriteLog("ERROR", $"{message}: {ex}");
 }

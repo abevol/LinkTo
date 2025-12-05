@@ -18,6 +18,8 @@ public enum LinkType
 /// </summary>
 public class LinkHistoryEntry
 {
+    public LinkHistoryEntry() { }
+
     public Guid Id { get; set; } = Guid.NewGuid();
     public string SourcePath { get; set; } = string.Empty;
     public string LinkPath { get; set; } = string.Empty;
@@ -31,6 +33,8 @@ public class LinkHistoryEntry
 /// </summary>
 public class AppConfig
 {
+    public AppConfig() { }
+
     public string Language { get; set; } = "en-US";
     public bool ShellMenuEnabled { get; set; } = false;
     public List<string> CommonDirectories { get; set; } = new();
@@ -43,8 +47,16 @@ public class AppConfig
 [JsonSourceGenerationOptions(WriteIndented = true)]
 [JsonSerializable(typeof(AppConfig))]
 [JsonSerializable(typeof(LinkHistoryEntry))]
+[JsonSerializable(typeof(CommonDirItem))]
 [JsonSerializable(typeof(List<string>))]
 [JsonSerializable(typeof(List<LinkHistoryEntry>))]
+[JsonSerializable(typeof(List<CommonDirItem>))]
+[JsonSerializable(typeof(LinkType))]
+[JsonSerializable(typeof(Guid))]
+[JsonSerializable(typeof(DateTime))]
+[JsonSerializable(typeof(bool))]
+[JsonSerializable(typeof(int))]
+[JsonSerializable(typeof(string))]
 public partial class AppConfigJsonContext : JsonSerializerContext
 {
 }

@@ -37,17 +37,28 @@ public class ConfigService
             if (File.Exists(_configPath))
             {
                 var json = File.ReadAllText(_configPath);
-                var config = JsonSerializer.Deserialize(json, AppConfigJsonContext.Default.AppConfig);
-                if (config != null)
+                LogService.Instance.LogInfo($"Read config file. Length: {json.Length}");
+                
+                try 
                 {
-                    LogService.Instance.LogInfo("Configuration loaded successfully");
-                    return config;
+                    var config = JsonSerializer.Deserialize(json, AppConfigJsonContext.Default.AppConfig);
+                    if (config != null)
+                    {
+                        LogService.Instance.LogInfo("Configuration loaded successfully");
+                        return config;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogService.Instance.LogError("Deserialization failed", ex);
+                    // Return default config but backup corrupt file? 
+                    // For now just log.
                 }
             }
         }
         catch (Exception ex)
         {
-            LogService.Instance.LogError("Failed to load configuration", ex);
+            LogService.Instance.LogError("Failed to load configuration file", ex);
         }
 
         return new AppConfig();
