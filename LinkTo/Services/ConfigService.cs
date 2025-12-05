@@ -103,6 +103,12 @@ public class ConfigService
     // Link history management
     public void AddLinkHistory(LinkHistoryEntry entry)
     {
+        // Remove existing entry with same source, target and type to prevent duplicates
+        _config.LinkHistory.RemoveAll(e => 
+            string.Equals(e.SourcePath, entry.SourcePath, StringComparison.OrdinalIgnoreCase) && 
+            string.Equals(e.LinkPath, entry.LinkPath, StringComparison.OrdinalIgnoreCase) &&
+            e.LinkType == entry.LinkType);
+
         _config.LinkHistory.Insert(0, entry);
         Save();
     }
