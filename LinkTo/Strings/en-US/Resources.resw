@@ -80,6 +80,15 @@
   <data name="Button_Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="Placeholder_SelectSource" xml:space="preserve">
+    <value>Select file or folder...</value>
+  </data>
+  <data name="Placeholder_SelectTarget" xml:space="preserve">
+    <value>Select target directory...</value>
+  </data>
+  <data name="Placeholder_LinkName" xml:space="preserve">
+    <value>Enter link name...</value>
+  </data>
 
   <!-- History Page -->
   <data name="History_Empty" xml:space="preserve">
@@ -96,6 +105,12 @@
   </data>
   <data name="History_Created" xml:space="preserve">
     <value>Created:</value>
+  </data>
+  <data name="History_LinkType_Symbolic" xml:space="preserve">
+    <value>Symbolic</value>
+  </data>
+  <data name="History_LinkType_Hard" xml:space="preserve">
+    <value>Hard</value>
   </data>
   <data name="History_DeleteConfirm" xml:space="preserve">
     <value>Delete this link and remove from history?</value>
@@ -153,7 +168,7 @@
 
   <!-- About Page -->
   <data name="About_Description" xml:space="preserve">
-    <value>A simple tool for creating and managing symbolic links and hard links on Windows.</value>
+    <value>A utility tool for creating and managing symbolic links and hard links on Windows.</value>
   </data>
   <data name="About_Author" xml:space="preserve">
     <value>Author:</value>
@@ -230,6 +245,9 @@
   </data>
 
   <!-- Hard Link Reasons -->
+  <data name="HardLinkReason_SourceNotExist" xml:space="preserve">
+    <value>Source file does not exist.</value>
+  </data>
   <data name="HardLinkReason_DirectoryNotSupported" xml:space="preserve">
     <value>Hard links do not support directories.</value>
   </data>

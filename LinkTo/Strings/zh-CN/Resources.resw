@@ -80,6 +80,15 @@
   <data name="Button_Delete" xml:space="preserve">
     <value>删除</value>
   </data>
+  <data name="Placeholder_SelectSource" xml:space="preserve">
+    <value>选择文件或文件夹...</value>
+  </data>
+  <data name="Placeholder_SelectTarget" xml:space="preserve">
+    <value>选择目标目录...</value>
+  </data>
+  <data name="Placeholder_LinkName" xml:space="preserve">
+    <value>输入链接名称...</value>
+  </data>
 
   <!-- History Page -->
   <data name="History_Empty" xml:space="preserve">
@@ -96,6 +105,12 @@
   </data>
   <data name="History_Created" xml:space="preserve">
     <value>创建时间：</value>
+  </data>
+  <data name="History_LinkType_Symbolic" xml:space="preserve">
+    <value>符号链接</value>
+  </data>
+  <data name="History_LinkType_Hard" xml:space="preserve">
+    <value>硬链接</value>
   </data>
   <data name="History_DeleteConfirm" xml:space="preserve">
     <value>是否删除此链接并从历史记录中移除？</value>
@@ -153,7 +168,7 @@
 
   <!-- About Page -->
   <data name="About_Description" xml:space="preserve">
-    <value>一个用于在 Windows 上创建和管理符号链接和硬链接的简单工具。</value>
+    <value>一个用于在 Windows 上创建和管理符号链接和硬链接的实用工具。</value>
   </data>
   <data name="About_Author" xml:space="preserve">
     <value>作者：</value>
@@ -230,6 +245,9 @@
   </data>
 
   <!-- Hard Link Reasons -->
+  <data name="HardLinkReason_SourceNotExist" xml:space="preserve">
+    <value>源文件不存在。</value>
+  </data>
   <data name="HardLinkReason_DirectoryNotSupported" xml:space="preserve">
     <value>硬链接不支持目录。</value>
   </data>

@@ -63,6 +63,11 @@ public sealed partial class CreateLinkPage : Page
             SymbolicLinkRadio.Content = _resourceLoader.GetString("LinkType_Symbolic");
             HardLinkRadio.Content = _resourceLoader.GetString("LinkType_Hard");
             CommonDirsHeader.Text = _resourceLoader.GetString("CommonDirectories");
+            
+            // TextBox PlaceholderText
+            SourcePathTextBox.PlaceholderText = _resourceLoader.GetString("Placeholder_SelectSource");
+            TargetPathTextBox.PlaceholderText = _resourceLoader.GetString("Placeholder_SelectTarget");
+            LinkNameTextBox.PlaceholderText = _resourceLoader.GetString("Placeholder_LinkName");
         }
         catch
         {

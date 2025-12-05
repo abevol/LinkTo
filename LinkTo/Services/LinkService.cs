@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using Microsoft.Windows.ApplicationModel.Resources;
 using LinkTo.Helpers;
 using LinkTo.Models;
 
@@ -206,18 +207,16 @@ public partial class LinkService
 
     private static string GetLocalizedString(string key)
     {
-        // Will be replaced with actual localization later
-        return key switch
+        try
         {
-            "HardLinkReason_SourceNotExist" => "Source file does not exist",
-            "HardLinkReason_DirectoryNotSupported" => "Hard links do not support directories",
-            "HardLinkReason_NetworkNotSupported" => "Hard links do not support network paths",
-            "HardLinkReason_CrossVolumeNotSupported" => "Hard links do not support cross-volume links",
-            "Error_SourceNotExist" => "Source file or directory does not exist",
-            "Error_AccessDenied" => "Access denied. Administrator privileges may be required.",
-            "Error_HardLinkFailed" => "Failed to create hard link",
-            "Error_TargetExists" => "A file or directory already exists at the target location",
-            _ => key
-        };
+            var resourceLoader = new ResourceLoader();
+            var value = resourceLoader.GetString(key);
+            return string.IsNullOrEmpty(value) ? key : value;
+        }
+        catch
+        {
+            // Fallback to key if resource loading fails
+            return key;
+        }
     }
 }

@@ -85,7 +85,7 @@ public sealed partial class HistoryPage : Page
                 var sourceStack = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 4 };
                 sourceStack.Children.Add(new TextBlock 
                 { 
-                    Text = "Source:", 
+                    Text = _resourceLoader.GetString("History_Source"), 
                     Foreground = (Brush)Application.Current.Resources["TextFillColorSecondaryBrush"]
                 });
                 sourceStack.Children.Add(new TextBlock 
@@ -102,12 +102,15 @@ public sealed partial class HistoryPage : Page
                 var typeStack = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 4 };
                 typeStack.Children.Add(new TextBlock 
                 { 
-                    Text = "Type:", 
+                    Text = _resourceLoader.GetString("History_Type"), 
                     Foreground = (Brush)Application.Current.Resources["TextFillColorTertiaryBrush"]
                 });
+                var linkTypeText = entry.LinkType == Models.LinkType.Symbolic 
+                    ? _resourceLoader.GetString("History_LinkType_Symbolic") 
+                    : _resourceLoader.GetString("History_LinkType_Hard");
                 typeStack.Children.Add(new TextBlock 
                 { 
-                    Text = entry.LinkType.ToString(), 
+                    Text = linkTypeText, 
                     Foreground = (Brush)Application.Current.Resources["TextFillColorTertiaryBrush"]
                 });
                 metaStack.Children.Add(typeStack);
@@ -115,7 +118,7 @@ public sealed partial class HistoryPage : Page
                 var dateStack = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 4 };
                 dateStack.Children.Add(new TextBlock 
                 { 
-                    Text = "Created:", 
+                    Text = _resourceLoader.GetString("History_Created"), 
                     Foreground = (Brush)Application.Current.Resources["TextFillColorTertiaryBrush"]
                 });
                 dateStack.Children.Add(new TextBlock 
