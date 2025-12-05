@@ -22,102 +22,112 @@
         </Style>
     </Page.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Spacing="16" Padding="0,0,0,20">
-            
-            <!-- Source File/Directory Group -->
-            <Border Style="{StaticResource CardBorderStyle}">
-                <StackPanel Spacing="8">
-                    <TextBlock x:Name="SourceGroupHeader" Text="Source File / Directory" Style="{StaticResource SubtitleTextBlockStyle}" />
-                    <TextBlock x:Name="DragDropHint" Text="Drag and drop file or folder here" 
-                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
-                               FontStyle="Italic" />
-                    <Grid ColumnSpacing="8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox x:Name="SourcePathTextBox" 
-                                 PlaceholderText="Select file or folder..."
-                                 IsReadOnly="True"
-                                 Grid.Column="0" />
-                        <Button x:Name="BrowseFileButton" Content="File..." 
-                                Click="BrowseFile_Click" Grid.Column="1" />
-                        <Button x:Name="BrowseFolderButton" Content="Folder..." 
-                                Click="BrowseFolder_Click" Grid.Column="2" />
-                    </Grid>
-                </StackPanel>
-            </Border>
-
-            <!-- Target Directory Group -->
-            <Border Style="{StaticResource CardBorderStyle}">
-                <StackPanel Spacing="8">
-                    <TextBlock x:Name="TargetGroupHeader" Text="Target Directory" Style="{StaticResource SubtitleTextBlockStyle}" />
-                    <Grid ColumnSpacing="8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox x:Name="TargetPathTextBox" 
-                                 PlaceholderText="Select target directory..."
-                                 TextChanged="TargetPathTextBox_TextChanged"
-                                 Grid.Column="0" />
-                        <Button x:Name="BrowseTargetButton" Content="Browse..." 
-                                Click="BrowseTarget_Click" Grid.Column="1" />
-                    </Grid>
-                    
-                    <!-- Common Directories Expander -->
-                    <Expander x:Name="CommonDirsExpander" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
-                        <Expander.Header>
-                            <TextBlock x:Name="CommonDirsHeader" Text="Common Directories" />
-                        </Expander.Header>
-                        <Expander.Content>
-                            <ListView x:Name="CommonDirsList" 
-                                      MaxHeight="150"
-                                      SelectionMode="None" />
-                        </Expander.Content>
-                    </Expander>
-                </StackPanel>
-            </Border>
-
-            <!-- Link Name Group -->
-            <Border Style="{StaticResource CardBorderStyle}">
-                <StackPanel Spacing="8">
-                    <TextBlock x:Name="LinkNameGroupHeader" Text="Link Name" Style="{StaticResource SubtitleTextBlockStyle}" />
-                    <TextBox x:Name="LinkNameTextBox" PlaceholderText="Enter link name..." />
-                </StackPanel>
-            </Border>
-
-            <!-- Link Type Group -->
-            <Border Style="{StaticResource CardBorderStyle}">
-                <StackPanel Spacing="8">
-                    <TextBlock x:Name="LinkTypeGroupHeader" Text="Link Type" Style="{StaticResource SubtitleTextBlockStyle}" />
-                    <StackPanel Orientation="Horizontal" Spacing="16">
-                        <RadioButton x:Name="SymbolicLinkRadio" 
-                                     Content="Symbolic Link" 
-                                     IsChecked="True"
-                                     GroupName="LinkType" />
-                        <RadioButton x:Name="HardLinkRadio" 
-                                     Content="Hard Link" 
-                                     GroupName="LinkType" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <!-- Scrollable Content Area -->
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+            <StackPanel Spacing="16" Padding="0,0,0,16">
+                
+                <!-- Source File/Directory Group -->
+                <Border Style="{StaticResource CardBorderStyle}">
+                    <StackPanel Spacing="8">
+                        <TextBlock x:Name="SourceGroupHeader" Text="Source File / Directory" Style="{StaticResource SubtitleTextBlockStyle}" />
+                        <TextBlock x:Name="DragDropHint" Text="Drag and drop file or folder here" 
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
+                                   FontStyle="Italic" />
+                        <Grid ColumnSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="SourcePathTextBox" 
+                                     PlaceholderText="Select file or folder..."
+                                     IsReadOnly="True"
+                                     Grid.Column="0" />
+                            <Button x:Name="BrowseFileButton" Content="File..." 
+                                    Click="BrowseFile_Click" Grid.Column="1" />
+                            <Button x:Name="BrowseFolderButton" Content="Folder..." 
+                                    Click="BrowseFolder_Click" Grid.Column="2" />
+                        </Grid>
                     </StackPanel>
-                    <InfoBar x:Name="HardLinkInfoBar"
-                             IsOpen="False"
-                             IsClosable="False"
-                             Severity="Warning"
-                             Margin="0,4,0,0" />
-                </StackPanel>
-            </Border>
+                </Border>
 
-            <!-- Create Link Button -->
-            <Button x:Name="CreateLinkButton" 
-                    Content="Create Link"
-                    Style="{StaticResource AccentButtonStyle}"
-                    HorizontalAlignment="Stretch"
-                    Height="40"
-                    Click="CreateLink_Click" />
+                <!-- Target Directory Group -->
+                <Border Style="{StaticResource CardBorderStyle}">
+                    <StackPanel Spacing="8">
+                        <TextBlock x:Name="TargetGroupHeader" Text="Target Directory" Style="{StaticResource SubtitleTextBlockStyle}" />
+                        <Grid ColumnSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="TargetPathTextBox" 
+                                     PlaceholderText="Select target directory..."
+                                     TextChanged="TargetPathTextBox_TextChanged"
+                                     Grid.Column="0" />
+                            <Button x:Name="BrowseTargetButton" Content="Browse..." 
+                                    Click="BrowseTarget_Click" Grid.Column="1" />
+                        </Grid>
+                        
+                        <!-- Common Directories Expander -->
+                        <Expander x:Name="CommonDirsExpander" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                            <Expander.Header>
+                                <TextBlock x:Name="CommonDirsHeader" Text="Common Directories" />
+                            </Expander.Header>
+                            <Expander.Content>
+                                <ListView x:Name="CommonDirsList" 
+                                          MaxHeight="150"
+                                          SelectionMode="None" />
+                            </Expander.Content>
+                        </Expander>
+                    </StackPanel>
+                </Border>
 
-        </StackPanel>
-    </ScrollViewer>
+                <!-- Link Name Group -->
+                <Border Style="{StaticResource CardBorderStyle}">
+                    <StackPanel Spacing="8">
+                        <TextBlock x:Name="LinkNameGroupHeader" Text="Link Name" Style="{StaticResource SubtitleTextBlockStyle}" />
+                        <TextBox x:Name="LinkNameTextBox" PlaceholderText="Enter link name..." />
+                    </StackPanel>
+                </Border>
+
+                <!-- Link Type Group -->
+                <Border Style="{StaticResource CardBorderStyle}">
+                    <StackPanel Spacing="8">
+                        <TextBlock x:Name="LinkTypeGroupHeader" Text="Link Type" Style="{StaticResource SubtitleTextBlockStyle}" />
+                        <StackPanel Orientation="Horizontal" Spacing="16">
+                            <RadioButton x:Name="SymbolicLinkRadio" 
+                                         Content="Symbolic Link" 
+                                         IsChecked="True"
+                                         GroupName="LinkType" />
+                            <RadioButton x:Name="HardLinkRadio" 
+                                         Content="Hard Link" 
+                                         GroupName="LinkType" />
+                        </StackPanel>
+                        <InfoBar x:Name="HardLinkInfoBar"
+                                 IsOpen="False"
+                                 IsClosable="False"
+                                 Severity="Warning"
+                                 Margin="0,4,0,0" />
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+        
+        <!-- Fixed Create Link Button at Bottom -->
+        <Button x:Name="CreateLinkButton" 
+                Grid.Row="1"
+                Content="Create Link"
+                Style="{StaticResource AccentButtonStyle}"
+                HorizontalAlignment="Stretch"
+                Height="40"
+                Margin="0,16,0,0"
+                Click="CreateLink_Click" />
+    </Grid>
 </Page>
