@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Input;
 using Microsoft.Windows.ApplicationModel.Resources;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage.Pickers;
@@ -98,11 +99,10 @@ public sealed partial class CreateLinkPage : Page
                     VerticalAlignment = VerticalAlignment.Center,
                     TextTrimming = TextTrimming.CharacterEllipsis
                 };
-                textBlock.Tapped += (s, e) =>
-                {
-                    TargetPathTextBox.Text = dir;
-                    UpdateHardLinkAvailability();
-                };
+                // Tapped handler removed, moved to ItemClick
+                grid.Tag = dir;
+                grid.PointerEntered += CommonDir_PointerEntered;
+                grid.PointerExited += CommonDir_PointerExited;
                 Grid.SetColumn(textBlock, 0);
                 grid.Children.Add(textBlock);
 
@@ -233,6 +233,25 @@ public sealed partial class CreateLinkPage : Page
             ConfigService.Instance.RemoveCommonDirectory(item.Path);
             LoadCommonDirectories();
         }
+    }
+
+    private void CommonDirsList_ItemClick(object sender, ItemClickEventArgs e)
+    {
+        if (e.ClickedItem is Grid grid && grid.Tag is string path)
+        {
+            TargetPathTextBox.Text = path;
+            UpdateHardLinkAvailability();
+        }
+    }
+
+    private void CommonDir_PointerEntered(object sender, PointerRoutedEventArgs e)
+    {
+        this.ProtectedCursor = InputSystemCursor.Create(InputSystemCursorShape.Hand);
+    }
+
+    private void CommonDir_PointerExited(object sender, PointerRoutedEventArgs e)
+    {
+        this.ProtectedCursor = null;
     }
 
     #endregion

@@ -82,7 +82,9 @@
                             <Expander.Content>
                                 <ListView x:Name="CommonDirsList" 
                                           MaxHeight="150"
-                                          SelectionMode="None" />
+                                          SelectionMode="None"
+                                          IsItemClickEnabled="True"
+                                          ItemClick="CommonDirsList_ItemClick" />
                             </Expander.Content>
                         </Expander>
                     </StackPanel>
