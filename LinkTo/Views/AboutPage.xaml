@@ -48,17 +48,28 @@
 
             <!-- Info Card -->
             <Border Style="{StaticResource CardBorderStyle}">
-                <StackPanel Spacing="12">
-                    <StackPanel Orientation="Horizontal" Spacing="8">
-                        <TextBlock x:Name="AuthorLabel" Text="Author:" Width="80" />
-                        <TextBlock Text="Abevol" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Spacing="8">
-                        <TextBlock x:Name="HomepageLabel" Text="Homepage:" Width="80" />
-                        <HyperlinkButton Content="https://github.com/abevol/linkto" 
-                                         NavigateUri="https://github.com/abevol/linkto" />
-                    </StackPanel>
-                </StackPanel>
+                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="12">
+                    <TextBlock x:Name="AuthorLabel" Text="Author:" 
+                               Grid.Row="0" Grid.Column="0" 
+                               HorizontalAlignment="Right" 
+                               VerticalAlignment="Center" />
+                    <TextBlock Text="Abevol" 
+                               Grid.Row="0" Grid.Column="1" 
+                               HorizontalAlignment="Left" 
+                               VerticalAlignment="Center" />
+
+                    <TextBlock x:Name="HomepageLabel" Text="Homepage:" 
+                               Grid.Row="1" Grid.Column="0" 
+                               HorizontalAlignment="Right" 
+                               VerticalAlignment="Center" />
+                    <HyperlinkButton Content="https://github.com/abevol/linkto" 
+                                     NavigateUri="https://github.com/abevol/linkto"
+                                     Grid.Row="1" Grid.Column="1" 
+                                     HorizontalAlignment="Left" 
+                                     VerticalAlignment="Center"
+                                     Padding="0"
+                                     MinHeight="0" />
+                </Grid>
             </Border>
 
             <!-- Copyright -->
