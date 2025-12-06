@@ -278,7 +278,7 @@ public sealed partial class CreateLinkPage : Page
         if (string.IsNullOrEmpty(sourcePath) || string.IsNullOrEmpty(targetDir))
         {
             HardLinkRadio.IsEnabled = true;
-            HardLinkInfoBar.IsOpen = false;
+            HardLinkInfoPanel.Visibility = Visibility.Collapsed;
             return;
         }
 
@@ -287,8 +287,8 @@ public sealed partial class CreateLinkPage : Page
 
         if (!canUse && reason != null)
         {
-            HardLinkInfoBar.Message = reason;
-            HardLinkInfoBar.IsOpen = true;
+            HardLinkInfoText.Text = reason;
+            HardLinkInfoPanel.Visibility = Visibility.Visible;
             
             // If hard link was selected, switch to symbolic
             if (HardLinkRadio.IsChecked == true)
@@ -298,7 +298,7 @@ public sealed partial class CreateLinkPage : Page
         }
         else
         {
-            HardLinkInfoBar.IsOpen = false;
+            HardLinkInfoPanel.Visibility = Visibility.Collapsed;
         }
     }
 

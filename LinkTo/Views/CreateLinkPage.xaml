@@ -102,20 +102,36 @@
                 <Border Style="{StaticResource CardBorderStyle}">
                     <StackPanel Spacing="8">
                         <TextBlock x:Name="LinkTypeGroupHeader" Text="Link Type" Style="{StaticResource SubtitleTextBlockStyle}" />
-                        <StackPanel Orientation="Horizontal" Spacing="16">
-                            <RadioButton x:Name="SymbolicLinkRadio" 
-                                         Content="Symbolic Link" 
-                                         IsChecked="True"
-                                         GroupName="LinkType" />
+                        <RadioButton x:Name="SymbolicLinkRadio" 
+                                     Content="Symbolic Link" 
+                                     IsChecked="True"
+                                     GroupName="LinkType" />
+                        <Grid ColumnSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
                             <RadioButton x:Name="HardLinkRadio" 
+                                         Grid.Column="0"
                                          Content="Hard Link" 
-                                         GroupName="LinkType" />
-                        </StackPanel>
-                        <InfoBar x:Name="HardLinkInfoBar"
-                                 IsOpen="False"
-                                 IsClosable="False"
-                                 Severity="Warning"
-                                 Margin="0,4,0,0" />
+                                         GroupName="LinkType"
+                                         VerticalAlignment="Center" />
+                            <StackPanel x:Name="HardLinkInfoPanel"
+                                        Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        Spacing="8"
+                                        VerticalAlignment="Center"
+                                        Visibility="Collapsed">
+                                <FontIcon Glyph="&#xE7BA;" 
+                                          FontFamily="Segoe MDL2 Assets" 
+                                          Foreground="{ThemeResource SystemFillColorCautionBrush}" 
+                                          FontSize="16" />
+                                <TextBlock x:Name="HardLinkInfoText" 
+                                           VerticalAlignment="Center" 
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           TextTrimming="CharacterEllipsis" />
+                            </StackPanel>
+                        </Grid>
                     </StackPanel>
                 </Border>
 
