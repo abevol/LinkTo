@@ -2,6 +2,7 @@ using System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.ApplicationModel.Resources;
+using LinkTo.Helpers;
 using LinkTo.Services;
 using LinkTo.Views;
 using WinRT.Interop;
@@ -13,7 +14,6 @@ namespace LinkTo;
 /// </summary>
 public sealed partial class MainWindow : Window
 {
-    private readonly ResourceLoader _resourceLoader;
     private string? _initialSourcePath;
 
     public MainWindow()
@@ -42,9 +42,6 @@ public sealed partial class MainWindow : Window
             appWindow.Move(new Windows.Graphics.PointInt32(centerX, centerY));
         }
 
-        // Load resources based on saved language
-        _resourceLoader = new ResourceLoader();
-        
         // Apply localized strings
         ApplyLocalization();
 
@@ -70,15 +67,15 @@ public sealed partial class MainWindow : Window
     {
         try
         {
-            NavItem_CreateLink.Content = _resourceLoader.GetString("Tab_CreateLink");
-            NavItem_History.Content = _resourceLoader.GetString("Tab_History");
-            NavItem_Settings.Content = _resourceLoader.GetString("Tab_Settings");
-            NavItem_Help.Content = _resourceLoader.GetString("Tab_Help");
-            NavItem_About.Content = _resourceLoader.GetString("Tab_About");
+            NavItem_CreateLink.Content = LocalizationHelper.GetString("Tab_CreateLink");
+            NavItem_History.Content = LocalizationHelper.GetString("Tab_History");
+            NavItem_Settings.Content = LocalizationHelper.GetString("Tab_Settings");
+            NavItem_Help.Content = LocalizationHelper.GetString("Tab_Help");
+            NavItem_About.Content = LocalizationHelper.GetString("Tab_About");
         }
         catch
         {
-            // Use default English if resource loading fails
+            // Ignore errors
         }
     }
 

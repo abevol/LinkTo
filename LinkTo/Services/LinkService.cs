@@ -207,16 +207,6 @@ public partial class LinkService
 
     private static string GetLocalizedString(string key)
     {
-        try
-        {
-            var resourceLoader = new ResourceLoader();
-            var value = resourceLoader.GetString(key);
-            return string.IsNullOrEmpty(value) ? key : value;
-        }
-        catch
-        {
-            // Fallback to key if resource loading fails
-            return key;
-        }
+        return LocalizationHelper.GetString(key);
     }
 }

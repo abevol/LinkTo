@@ -21,12 +21,12 @@ namespace LinkTo.Views;
 /// </summary>
 public sealed partial class CreateLinkPage : Page
 {
-    private readonly ResourceLoader _resourceLoader;
+
 
     public CreateLinkPage()
     {
         InitializeComponent();
-        _resourceLoader = new ResourceLoader();
+
         ApplyLocalization();
         UpdateHardLinkAvailability();
         this.Loaded += CreateLinkPage_Loaded;
@@ -51,23 +51,23 @@ public sealed partial class CreateLinkPage : Page
     {
         try
         {
-            SourceGroupHeader.Text = _resourceLoader.GetString("Group_Source");
-            TargetGroupHeader.Text = _resourceLoader.GetString("Group_Target");
-            LinkNameGroupHeader.Text = _resourceLoader.GetString("Group_LinkName");
-            LinkTypeGroupHeader.Text = _resourceLoader.GetString("Group_LinkType");
-            DragDropHint.Text = _resourceLoader.GetString("Hint_DragDrop");
-            BrowseFileButton.Content = _resourceLoader.GetString("Button_BrowseFile");
-            BrowseFolderButton.Content = _resourceLoader.GetString("Button_BrowseFolder");
-            BrowseTargetButton.Content = _resourceLoader.GetString("Button_Browse");
-            CreateLinkButton.Content = _resourceLoader.GetString("Button_CreateLink");
-            SymbolicLinkRadio.Content = _resourceLoader.GetString("LinkType_Symbolic");
-            HardLinkRadio.Content = _resourceLoader.GetString("LinkType_Hard");
-            CommonDirsHeader.Text = _resourceLoader.GetString("CommonDirectories");
+            SourceGroupHeader.Text = LocalizationHelper.GetString("Group_Source");
+            TargetGroupHeader.Text = LocalizationHelper.GetString("Group_Target");
+            LinkNameGroupHeader.Text = LocalizationHelper.GetString("Group_LinkName");
+            LinkTypeGroupHeader.Text = LocalizationHelper.GetString("Group_LinkType");
+            DragDropHint.Text = LocalizationHelper.GetString("Hint_DragDrop");
+            BrowseFileButton.Content = LocalizationHelper.GetString("Button_BrowseFile");
+            BrowseFolderButton.Content = LocalizationHelper.GetString("Button_BrowseFolder");
+            BrowseTargetButton.Content = LocalizationHelper.GetString("Button_Browse");
+            CreateLinkButton.Content = LocalizationHelper.GetString("Button_CreateLink");
+            SymbolicLinkRadio.Content = LocalizationHelper.GetString("LinkType_Symbolic");
+            HardLinkRadio.Content = LocalizationHelper.GetString("LinkType_Hard");
+            CommonDirsHeader.Text = LocalizationHelper.GetString("CommonDirectories");
             
             // TextBox PlaceholderText
-            SourcePathTextBox.PlaceholderText = _resourceLoader.GetString("Placeholder_SelectSource");
-            TargetPathTextBox.PlaceholderText = _resourceLoader.GetString("Placeholder_SelectTarget");
-            LinkNameTextBox.PlaceholderText = _resourceLoader.GetString("Placeholder_LinkName");
+            SourcePathTextBox.PlaceholderText = LocalizationHelper.GetString("Placeholder_SelectSource");
+            TargetPathTextBox.PlaceholderText = LocalizationHelper.GetString("Placeholder_SelectTarget");
+            LinkNameTextBox.PlaceholderText = LocalizationHelper.GetString("Placeholder_LinkName");
         }
         catch
         {
@@ -292,25 +292,25 @@ public sealed partial class CreateLinkPage : Page
 
         if (string.IsNullOrWhiteSpace(sourcePath))
         {
-            await ShowErrorDialog(_resourceLoader.GetString("Error_SourceRequired"));
+            await ShowErrorDialog(LocalizationHelper.GetString("Error_SourceRequired"));
             return;
         }
 
         if (string.IsNullOrWhiteSpace(targetDir))
         {
-            await ShowErrorDialog(_resourceLoader.GetString("Error_TargetRequired"));
+            await ShowErrorDialog(LocalizationHelper.GetString("Error_TargetRequired"));
             return;
         }
 
         if (string.IsNullOrWhiteSpace(linkName))
         {
-            await ShowErrorDialog(_resourceLoader.GetString("Error_LinkNameRequired"));
+            await ShowErrorDialog(LocalizationHelper.GetString("Error_LinkNameRequired"));
             return;
         }
 
         if (!Directory.Exists(targetDir))
         {
-            await ShowErrorDialog(_resourceLoader.GetString("Error_TargetNotExist"));
+            await ShowErrorDialog(LocalizationHelper.GetString("Error_TargetNotExist"));
             return;
         }
 
@@ -321,8 +321,8 @@ public sealed partial class CreateLinkPage : Page
         if (File.Exists(linkPath) || Directory.Exists(linkPath))
         {
             var confirmResult = await ShowConfirmDialog(
-                _resourceLoader.GetString("Dialog_Warning"),
-                _resourceLoader.GetString("Dialog_OverwriteConfirm"));
+                LocalizationHelper.GetString("Dialog_Warning"),
+                LocalizationHelper.GetString("Dialog_OverwriteConfirm"));
 
             if (!confirmResult)
             {
@@ -348,8 +348,8 @@ public sealed partial class CreateLinkPage : Page
         if (linkType == LinkType.Symbolic && LinkService.Instance.RequiresElevationForSymbolicLink())
         {
             var elevateResult = await ShowConfirmDialog(
-                _resourceLoader.GetString("Dialog_Warning"),
-                _resourceLoader.GetString("Dialog_AdminRequired"));
+                LocalizationHelper.GetString("Dialog_Warning"),
+                LocalizationHelper.GetString("Dialog_AdminRequired"));
 
             if (elevateResult)
             {
@@ -370,7 +370,7 @@ public sealed partial class CreateLinkPage : Page
         {
             LoadCommonDirectories(); // Refresh common directories
 
-            await ShowSuccessDialog(_resourceLoader.GetString("Dialog_LinkCreated"));
+            await ShowSuccessDialog(LocalizationHelper.GetString("Dialog_LinkCreated"));
 
             // Clear inputs
             SourcePathTextBox.Text = string.Empty;
@@ -388,9 +388,9 @@ public sealed partial class CreateLinkPage : Page
     {
         var dialog = new ContentDialog
         {
-            Title = _resourceLoader.GetString("Dialog_Error"),
+            Title = LocalizationHelper.GetString("Dialog_Error"),
             Content = message,
-            CloseButtonText = _resourceLoader.GetString("Dialog_OK"),
+            CloseButtonText = LocalizationHelper.GetString("Dialog_OK"),
             XamlRoot = this.XamlRoot
         };
         await dialog.ShowAsync();
@@ -400,9 +400,9 @@ public sealed partial class CreateLinkPage : Page
     {
         var dialog = new ContentDialog
         {
-            Title = _resourceLoader.GetString("Dialog_Success"),
+            Title = LocalizationHelper.GetString("Dialog_Success"),
             Content = message,
-            CloseButtonText = _resourceLoader.GetString("Dialog_OK"),
+            CloseButtonText = LocalizationHelper.GetString("Dialog_OK"),
             XamlRoot = this.XamlRoot
         };
         await dialog.ShowAsync();
@@ -414,8 +414,8 @@ public sealed partial class CreateLinkPage : Page
         {
             Title = title,
             Content = message,
-            PrimaryButtonText = _resourceLoader.GetString("Dialog_Yes"),
-            CloseButtonText = _resourceLoader.GetString("Dialog_No"),
+            PrimaryButtonText = LocalizationHelper.GetString("Dialog_Yes"),
+            CloseButtonText = LocalizationHelper.GetString("Dialog_No"),
             DefaultButton = ContentDialogButton.Primary,
             XamlRoot = this.XamlRoot
         };

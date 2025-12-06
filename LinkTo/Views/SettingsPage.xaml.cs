@@ -12,13 +12,11 @@ namespace LinkTo.Views;
 /// </summary>
 public sealed partial class SettingsPage : Page
 {
-    private readonly ResourceLoader _resourceLoader;
     private bool _isInitializing = true;
 
     public SettingsPage()
     {
         InitializeComponent();
-        _resourceLoader = new ResourceLoader();
         ApplyLocalization();
         LoadSettings();
         _isInitializing = false;
@@ -28,12 +26,12 @@ public sealed partial class SettingsPage : Page
     {
         try
         {
-            LanguageLabel.Text = _resourceLoader.GetString("Settings_Language");
-            ShellMenuLabel.Text = _resourceLoader.GetString("Settings_ShellMenu");
-            ShellMenuDescription.Text = _resourceLoader.GetString("Settings_ShellMenuDesc");
-            AdminWarningText.Text = _resourceLoader.GetString("Settings_RequiresAdmin");
-            EnglishItem.Content = _resourceLoader.GetString("Language_English");
-            ChineseItem.Content = _resourceLoader.GetString("Language_Chinese");
+            LanguageLabel.Text = LocalizationHelper.GetString("Settings_Language");
+            ShellMenuLabel.Text = LocalizationHelper.GetString("Settings_ShellMenu");
+            ShellMenuDescription.Text = LocalizationHelper.GetString("Settings_ShellMenuDesc");
+            AdminWarningText.Text = LocalizationHelper.GetString("Settings_RequiresAdmin");
+            EnglishItem.Content = LocalizationHelper.GetString("Language_English");
+            ChineseItem.Content = LocalizationHelper.GetString("Language_Chinese");
         }
         catch
         {
@@ -67,9 +65,9 @@ public sealed partial class SettingsPage : Page
                 // Show restart prompt
                 var dialog = new ContentDialog
                 {
-                    Title = _resourceLoader.GetString("Dialog_Confirm"),
-                    Content = _resourceLoader.GetString("Settings_RestartRequired"),
-                    PrimaryButtonText = _resourceLoader.GetString("Dialog_OK"),
+                    Title = LocalizationHelper.GetString("Dialog_Confirm"),
+                    Content = LocalizationHelper.GetString("Settings_RestartRequired"),
+                    PrimaryButtonText = LocalizationHelper.GetString("Dialog_OK"),
                     XamlRoot = this.XamlRoot
                 };
                 await dialog.ShowAsync();
@@ -91,10 +89,10 @@ public sealed partial class SettingsPage : Page
         {
             var confirmDialog = new ContentDialog
             {
-                Title = _resourceLoader.GetString("Dialog_Warning"),
-                Content = _resourceLoader.GetString("Dialog_AdminRequired"),
-                PrimaryButtonText = _resourceLoader.GetString("Dialog_Yes"),
-                CloseButtonText = _resourceLoader.GetString("Dialog_No"),
+                Title = LocalizationHelper.GetString("Dialog_Warning"),
+                Content = LocalizationHelper.GetString("Dialog_AdminRequired"),
+                PrimaryButtonText = LocalizationHelper.GetString("Dialog_Yes"),
+                CloseButtonText = LocalizationHelper.GetString("Dialog_No"),
                 DefaultButton = ContentDialogButton.Primary,
                 XamlRoot = this.XamlRoot
             };
@@ -124,9 +122,9 @@ public sealed partial class SettingsPage : Page
         {
             var errorDialog = new ContentDialog
             {
-                Title = _resourceLoader.GetString("Dialog_Error"),
+                Title = LocalizationHelper.GetString("Dialog_Error"),
                 Content = result.Error,
-                CloseButtonText = _resourceLoader.GetString("Dialog_OK"),
+                CloseButtonText = LocalizationHelper.GetString("Dialog_OK"),
                 XamlRoot = this.XamlRoot
             };
             await errorDialog.ShowAsync();

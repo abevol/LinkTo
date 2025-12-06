@@ -9,6 +9,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.Windows.ApplicationModel.Resources;
 using LinkTo.Models;
 using LinkTo.Services;
+using LinkTo.Helpers;
 
 namespace LinkTo.Views;
 
@@ -17,13 +18,12 @@ namespace LinkTo.Views;
 /// </summary>
 public sealed partial class HistoryPage : Page
 {
-    private readonly ResourceLoader _resourceLoader;
     private List<LinkHistoryEntry> _historyData = new();
 
     public HistoryPage()
     {
         InitializeComponent();
-        _resourceLoader = new ResourceLoader();
+        InitializeComponent();
         ApplyLocalization();
         LoadHistory();
     }
@@ -32,7 +32,7 @@ public sealed partial class HistoryPage : Page
     {
         try
         {
-            EmptyMessage.Text = _resourceLoader.GetString("History_Empty");
+            EmptyMessage.Text = LocalizationHelper.GetString("History_Empty");
         }
         catch
         {
@@ -85,7 +85,7 @@ public sealed partial class HistoryPage : Page
                 var sourceStack = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 4 };
                 sourceStack.Children.Add(new TextBlock 
                 { 
-                    Text = _resourceLoader.GetString("History_Source"), 
+                    Text = LocalizationHelper.GetString("History_Source"), 
                     Foreground = (Brush)Application.Current.Resources["TextFillColorSecondaryBrush"]
                 });
                 sourceStack.Children.Add(new TextBlock 
@@ -102,12 +102,12 @@ public sealed partial class HistoryPage : Page
                 var typeStack = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 4 };
                 typeStack.Children.Add(new TextBlock 
                 { 
-                    Text = _resourceLoader.GetString("History_Type"), 
+                    Text = LocalizationHelper.GetString("History_Type"), 
                     Foreground = (Brush)Application.Current.Resources["TextFillColorTertiaryBrush"]
                 });
                 var linkTypeText = entry.LinkType == Models.LinkType.Symbolic 
-                    ? _resourceLoader.GetString("History_LinkType_Symbolic") 
-                    : _resourceLoader.GetString("History_LinkType_Hard");
+                    ? LocalizationHelper.GetString("History_LinkType_Symbolic") 
+                    : LocalizationHelper.GetString("History_LinkType_Hard");
                 typeStack.Children.Add(new TextBlock 
                 { 
                     Text = linkTypeText, 
@@ -118,7 +118,7 @@ public sealed partial class HistoryPage : Page
                 var dateStack = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 4 };
                 dateStack.Children.Add(new TextBlock 
                 { 
-                    Text = _resourceLoader.GetString("History_Created"), 
+                    Text = LocalizationHelper.GetString("History_Created"), 
                     Foreground = (Brush)Application.Current.Resources["TextFillColorTertiaryBrush"]
                 });
                 dateStack.Children.Add(new TextBlock 
@@ -163,10 +163,10 @@ public sealed partial class HistoryPage : Page
             // Confirm deletion
             var dialog = new ContentDialog
             {
-                Title = _resourceLoader.GetString("Dialog_Confirm"),
-                Content = _resourceLoader.GetString("History_DeleteConfirm"),
-                PrimaryButtonText = _resourceLoader.GetString("Dialog_Yes"),
-                CloseButtonText = _resourceLoader.GetString("Dialog_No"),
+                Title = LocalizationHelper.GetString("Dialog_Confirm"),
+                Content = LocalizationHelper.GetString("History_DeleteConfirm"),
+                PrimaryButtonText = LocalizationHelper.GetString("Dialog_Yes"),
+                CloseButtonText = LocalizationHelper.GetString("Dialog_No"),
                 DefaultButton = ContentDialogButton.Primary,
                 XamlRoot = this.XamlRoot
             };
@@ -186,9 +186,9 @@ public sealed partial class HistoryPage : Page
                 // Show warning but don't block - history entry is already removed
                 var warningDialog = new ContentDialog
                 {
-                    Title = _resourceLoader.GetString("Dialog_Warning"),
+                    Title = LocalizationHelper.GetString("Dialog_Warning"),
                     Content = deleteResult.Error,
-                    CloseButtonText = _resourceLoader.GetString("Dialog_OK"),
+                    CloseButtonText = LocalizationHelper.GetString("Dialog_OK"),
                     XamlRoot = this.XamlRoot
                 };
                 await warningDialog.ShowAsync();

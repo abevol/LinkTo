@@ -1,5 +1,6 @@
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.ApplicationModel.Resources;
+using LinkTo.Helpers;
 
 namespace LinkTo.Views;
 
@@ -8,12 +9,11 @@ namespace LinkTo.Views;
 /// </summary>
 public sealed partial class HelpPage : Page
 {
-    private readonly ResourceLoader _resourceLoader;
+
 
     public HelpPage()
     {
         InitializeComponent();
-        _resourceLoader = new ResourceLoader();
         ApplyLocalization();
     }
 
@@ -21,11 +21,11 @@ public sealed partial class HelpPage : Page
     {
         try
         {
-            HelpTitle.Text = _resourceLoader.GetString("Help_Title");
-            SymbolicLinkTitle.Text = _resourceLoader.GetString("Help_SymbolicLink");
-            SymbolicLinkDesc.Text = _resourceLoader.GetString("Help_SymbolicLinkDesc");
-            HardLinkTitle.Text = _resourceLoader.GetString("Help_HardLink");
-            HardLinkDesc.Text = _resourceLoader.GetString("Help_HardLinkDesc");
+            HelpTitle.Text = LocalizationHelper.GetString("Help_Title");
+            SymbolicLinkTitle.Text = LocalizationHelper.GetString("Help_SymbolicLink");
+            SymbolicLinkDesc.Text = LocalizationHelper.GetString("Help_SymbolicLinkDesc");
+            HardLinkTitle.Text = LocalizationHelper.GetString("Help_HardLink");
+            HardLinkDesc.Text = LocalizationHelper.GetString("Help_HardLinkDesc");
         }
         catch
         {

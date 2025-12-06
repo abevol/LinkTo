@@ -18,6 +18,30 @@ public partial class App : Application
     /// </summary>
     public App()
     {
+        // Apply language setting
+        try 
+        {
+            var language = ConfigService.Instance.Language;
+            if (!string.IsNullOrEmpty(language))
+            {
+                // Set MRT Core language
+                Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = language;
+                
+                // Set .NET culture (important for unpackaged apps and formatting)
+                var culture = new System.Globalization.CultureInfo(language);
+                System.Globalization.CultureInfo.DefaultThreadCurrentCulture = culture;
+                System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = culture;
+                System.Threading.Thread.CurrentThread.CurrentCulture = culture;
+                System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
+            }
+        }
+        catch (Exception ex)
+        {
+            // LogService might not be initialized yet, but we can try
+            // or just ignore as this is very early
+            System.Diagnostics.Debug.WriteLine($"Failed to set application language: {ex.Message}");
+        }
+
         InitializeComponent();
         
         // Initialize logging

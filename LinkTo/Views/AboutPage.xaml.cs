@@ -1,6 +1,7 @@
 using System.Reflection;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.ApplicationModel.Resources;
+using LinkTo.Helpers;
 
 namespace LinkTo.Views;
 
@@ -9,12 +10,12 @@ namespace LinkTo.Views;
 /// </summary>
 public sealed partial class AboutPage : Page
 {
-    private readonly ResourceLoader _resourceLoader;
+
 
     public AboutPage()
     {
         InitializeComponent();
-        _resourceLoader = new ResourceLoader();
+        InitializeComponent();
         ApplyLocalization();
         LoadVersion();
     }
@@ -23,10 +24,10 @@ public sealed partial class AboutPage : Page
     {
         try
         {
-            DescriptionText.Text = _resourceLoader.GetString("About_Description");
-            AuthorLabel.Text = _resourceLoader.GetString("About_Author");
-            HomepageLabel.Text = _resourceLoader.GetString("About_Homepage");
-            VersionLabel.Text = _resourceLoader.GetString("About_Version");
+            DescriptionText.Text = LocalizationHelper.GetString("About_Description");
+            AuthorLabel.Text = LocalizationHelper.GetString("About_Author");
+            HomepageLabel.Text = LocalizationHelper.GetString("About_Homepage");
+            VersionLabel.Text = LocalizationHelper.GetString("About_Version");
         }
         catch
         {
