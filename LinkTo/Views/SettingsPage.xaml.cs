@@ -66,11 +66,25 @@ public sealed partial class SettingsPage : Page
                 var dialog = new ContentDialog
                 {
                     Title = LocalizationHelper.GetString("Dialog_Confirm"),
-                    Content = LocalizationHelper.GetString("Settings_RestartRequired"),
-                    PrimaryButtonText = LocalizationHelper.GetString("Dialog_OK"),
+                    Content = LocalizationHelper.GetString("Dialog_RestartConfirm"),
+                    PrimaryButtonText = LocalizationHelper.GetString("Settings_RestartNow"),
+                    CloseButtonText = LocalizationHelper.GetString("Settings_RestartLater"),
+                    DefaultButton = ContentDialogButton.Primary,
                     XamlRoot = this.XamlRoot
                 };
-                await dialog.ShowAsync();
+                
+                var result = await dialog.ShowAsync();
+                
+                if (result == ContentDialogResult.Primary)
+                {
+                    // Restart application
+                    var exePath = Environment.ProcessPath;
+                    if (!string.IsNullOrEmpty(exePath))
+                    {
+                        System.Diagnostics.Process.Start(exePath);
+                        Application.Current.Exit();
+                    }
+                }
             }
         }
     }

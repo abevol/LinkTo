@@ -138,6 +138,15 @@
   <data name="Language_Chinese" xml:space="preserve">
     <value>中文</value>
   </data>
+  <data name="Dialog_RestartConfirm" xml:space="preserve">
+    <value>是否立即重启应用以应用更改？</value>
+  </data>
+  <data name="Settings_RestartNow" xml:space="preserve">
+    <value>立即重启</value>
+  </data>
+  <data name="Settings_RestartLater" xml:space="preserve">
+    <value>稍后</value>
+  </data>
 
   <!-- Help Page -->
   <data name="Help_Title" xml:space="preserve">

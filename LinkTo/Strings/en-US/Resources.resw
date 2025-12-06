@@ -138,6 +138,15 @@
   <data name="Language_Chinese" xml:space="preserve">
     <value>中文</value>
   </data>
+  <data name="Dialog_RestartConfirm" xml:space="preserve">
+    <value>Do you want to restart the application now to apply changes?</value>
+  </data>
+  <data name="Settings_RestartNow" xml:space="preserve">
+    <value>Restart Now</value>
+  </data>
+  <data name="Settings_RestartLater" xml:space="preserve">
+    <value>Later</value>
+  </data>
 
   <!-- Help Page -->
   <data name="Help_Title" xml:space="preserve">
