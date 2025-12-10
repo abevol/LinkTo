@@ -175,9 +175,19 @@
 • 创建时不需要特殊权限</value>
   </data>
 
+  <data name="Help_ExecutableNoteTitle" xml:space="preserve">
+    <value>关于可执行文件的特别说明</value>
+  </data>
+  <data name="Help_ExecutableNote" xml:space="preserve">
+    <value>从符号链接启动的可执行文件的映像文件名是原始文件，而从硬链接启动的可执行文件的映像文件名是硬链接本身，这会导致那些依赖于原始映像文件名或路径的程序工作异常。因此，对于可执行文件，最好选择符号链接方式。
+此外，无论是符号链接还是硬链接，如果是从资源管理器中启动，都会将工作目录定位于链接文件所在的目录，这可能会导致部分编码不严谨的程序工作异常。
+如果遇到这种情况，可以使用传统的快捷方式，并修改快捷方式的起始位置至原始可执行文件所在的目录。
+亦或者编写批处理脚本，通过批处理脚本切换工作目录，然后再启动可执行文件。</value>
+  </data>
+
   <!-- About Page -->
   <data name="About_Description" xml:space="preserve">
-    <value>一个用于在 Windows 上创建和管理符号链接和硬链接的实用工具。</value>
+    <value>一个用于在 Windows 上创建和管理符号链接和硬链接的界面交互式工具。</value>
   </data>
   <data name="About_Author" xml:space="preserve">
     <value>作者：</value>

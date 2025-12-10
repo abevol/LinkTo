@@ -64,5 +64,9 @@ $RECYCLE.BIN/
 # Publish output
 publish/
 
+# Package output
+AppPackages/
+BundleArtifacts/
+
 # Generated files
 Generated\ Files/

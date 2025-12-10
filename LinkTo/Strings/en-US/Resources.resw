@@ -175,9 +175,19 @@
 • Does not require special privileges to create</value>
   </data>
 
+  <data name="Help_ExecutableNoteTitle" xml:space="preserve">
+    <value>Special Note for Executables</value>
+  </data>
+  <data name="Help_ExecutableNote" xml:space="preserve">
+    <value>Executable files launched from symbolic links keep the original image filename, whereas those launched from hard links use the hard link's name as the image filename. This can cause malfunctions in programs that rely on the original image filename or path. Therefore, it is recommended to use symbolic links for executable files.
+Additionally, whether using a symbolic or hard link, launching from File Explorer sets the working directory to the link's location. This may cause issues for programs with strict coding assumptions.
+In such cases, use a traditional shortcut and modify its "Start in" property to the original executable's directory.
+Alternatively, write a batch script to change the working directory before launching the executable.</value>
+  </data>
+
   <!-- About Page -->
   <data name="About_Description" xml:space="preserve">
-    <value>A utility tool for creating and managing symbolic links and hard links on Windows.</value>
+    <value>An interactive tool for creating and managing symbolic links and hard links on Windows.</value>
   </data>
   <data name="About_Author" xml:space="preserve">
     <value>Author:</value>
