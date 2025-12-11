@@ -66,20 +66,20 @@ dotnet build LinkTo.slnx -c Release
 
 ## Link Types
 
-| Feature               | Symbolic Link  | Hard Link      |
-| --------------------- | -------------- | -------------- |
-| Files                 | ✅              | ✅              |
-| Directories           | ✅              | ❌              |
-| Cross-volume          | ✅              | ❌              |
-| Network paths         | ✅              | ❌              |
-| Process Image Path*** | Original File  | Link File      |
-| Working Directory**   | Link Directory | Link Directory |
-| Original deleted      | Broken         | Still works    |
-| Admin required        | Yes*           | No             |
+| Feature                | Symbolic Link  | Hard Link      |
+| ---------------------- | -------------- | -------------- |
+| Files                  | ✅              | ✅              |
+| Directories            | ✅              | ❌              |
+| Cross-volume           | ✅              | ❌              |
+| Network paths          | ✅              | ❌              |
+| Process Image Path [1] | Original File  | Link File      |
+| Working Directory [2]  | Link Directory | Link Directory |
+| Original deleted       | Broken         | Still works    |
+| Admin required         | Yes [3]        | No             |
 
-\* Not required if Developer Mode is enabled in Windows Settings
-\** When launched from Windows Explorer, the working directory is set to the link's location.
-\*** Programs that depend on the original file path may malfunction when using Hard Links.
+1. Programs that depend on the original file path may malfunction when using Hard Links.
+2. When launched from Windows Explorer, the working directory is set to the link's location.
+3. Not required if Developer Mode is enabled in Windows Settings.
 
 ## Permissions
 
@@ -105,7 +105,7 @@ MIT License
 
 ## Author
 
-Your Name
+Abevol
 
 ## Contributing
 
