@@ -36,14 +36,20 @@ A Windows application for creating and managing symbolic links and hard links.
 
 ```powershell
 # Clone the repository
-git clone https://github.com/yourname/linkto.git
-cd linkto
+git clone https://github.com/abevol/LinkTo.git
+cd LinkTo
 
 # Build
 dotnet build LinkTo.slnx -c Release
 
 # Run
-.\LinkTo\bin\Release\net10.0-windows10.0.19041.0\win-x64\LinkTo.exe
+.\LinkTo\bin\x64\Release\net10.0-windows10.0.19041.0\LinkTo.exe
+
+# Publish (AOT)
+dotnet publish LinkTo\LinkTo.csproj /p:PublishProfile=win-x64
+
+# Run published app
+.\LinkTo\bin\Release\win-x64\publish\LinkTo.exe
 ```
 
 ## Usage
