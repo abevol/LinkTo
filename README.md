@@ -17,7 +17,7 @@ A Windows application for creating and managing symbolic links and hard links.
 
 ## Screenshots
 
-*(Screenshots will be added after first build)*
+![MainWindow](/LinkTo/Assets/MainWindow.png)
 
 ## Requirements
 
@@ -66,16 +66,20 @@ dotnet build LinkTo.slnx -c Release
 
 ## Link Types
 
-| Feature | Symbolic Link | Hard Link |
-|---------|--------------|-----------|
-| Files | ✅ | ✅ |
-| Directories | ✅ | ❌ |
-| Cross-volume | ✅ | ❌ |
-| Network paths | ✅ | ❌ |
-| Original deleted | Broken | Still works |
-| Admin required | Yes* | No |
+| Feature               | Symbolic Link  | Hard Link      |
+| --------------------- | -------------- | -------------- |
+| Files                 | ✅              | ✅              |
+| Directories           | ✅              | ❌              |
+| Cross-volume          | ✅              | ❌              |
+| Network paths         | ✅              | ❌              |
+| Process Image Path*** | Original File  | Link File      |
+| Working Directory**   | Link Directory | Link Directory |
+| Original deleted      | Broken         | Still works    |
+| Admin required        | Yes*           | No             |
 
 \* Not required if Developer Mode is enabled in Windows Settings
+\** When launched from Windows Explorer, the working directory is set to the link's location.
+\*** Programs that depend on the original file path may malfunction when using Hard Links.
 
 ## Permissions
 
