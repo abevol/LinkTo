@@ -3,7 +3,7 @@
 ## Phase 1: Foundation & UI Updates
 - [x] Task: Create `LinkType` Enum extension or update existing logic to support `Batch` and `Shortcut`. ccb56d3
 - [x] Task: Update `CreateLinkPage.xaml` to include the "Working Directory" GroupBox (TextBox + Button). 1799a53
-- [ ] Task: Update `CreateLinkPage.xaml.cs` (ViewModel logic) to toggle visibility of "Working Directory" based on selected Link Type.
+- [x] Task: Update `CreateLinkPage.xaml.cs` (ViewModel logic) to toggle visibility of "Working Directory" based on selected Link Type. 762f97b
     - *Sub-task:* Implement `IsWorkingDirectoryVisible` property.
     - *Sub-task:* Bind GroupBox visibility to this property.
     - *Sub-task:* Logic to auto-fill default working directory (Source Path's folder) when Source is selected.
