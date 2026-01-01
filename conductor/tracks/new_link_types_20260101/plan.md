@@ -18,10 +18,10 @@
 
 ## Phase 3: Shortcut Implementation
 - [x] Task: Research and add necessary COM/Interop dependencies for creating `.lnk` files in .NET 10 / WinUI 3. 1a73d3e
-- [x] Task: Implement `ShortcutService`. 1f60098
+- [x] Task: Implement `ShortcutService`. af508c3
     - [x] Sub-task: Write Tests: Verify shortcut creation logic (mocking file system/COM if possible, or integration test).
     - [x] Sub-task: Implement: `CreateShortcut(string sourcePath, string targetPath, string workingDir)`.
-- [x] Task: Integrate Shortcut creation into "Create" button logic. 1f60098
+- [x] Task: Integrate Shortcut creation into "Create" button logic. af508c3
 - [ ] Task: Conductor - User Manual Verification 'Shortcut Implementation' (Protocol in workflow.md)
 
 ## Phase 4: Validation & Polish
