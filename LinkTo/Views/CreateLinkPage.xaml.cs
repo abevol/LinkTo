@@ -64,12 +64,17 @@ public sealed partial class CreateLinkPage : Page
             CreateLinkButton.Content = LocalizationHelper.GetString("Button_CreateLink");
             SymbolicLinkRadio.Content = LocalizationHelper.GetString("LinkType_Symbolic");
             HardLinkRadio.Content = LocalizationHelper.GetString("LinkType_Hard");
+            BatchLinkRadio.Content = LocalizationHelper.GetString("LinkType_Batch");
+            ShortcutLinkRadio.Content = LocalizationHelper.GetString("LinkType_Shortcut");
+            WorkingDirHeader.Text = LocalizationHelper.GetString("Group_WorkingDirectory");
             CommonDirsHeader.Text = LocalizationHelper.GetString("CommonDirectories");
             
             // TextBox PlaceholderText
             SourcePathTextBox.PlaceholderText = LocalizationHelper.GetString("Placeholder_SelectSource");
             TargetPathTextBox.PlaceholderText = LocalizationHelper.GetString("Placeholder_SelectTarget");
+            WorkingDirTextBox.PlaceholderText = LocalizationHelper.GetString("Placeholder_SelectWorkingDir");
             LinkNameTextBox.PlaceholderText = LocalizationHelper.GetString("Placeholder_LinkName");
+            BrowseWorkingDirButton.Content = LocalizationHelper.GetString("Button_Browse");
         }
         catch
         {
