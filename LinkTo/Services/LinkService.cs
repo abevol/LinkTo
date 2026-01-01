@@ -194,6 +194,9 @@ public partial class LinkService
             case LinkType.Batch:
                 result = BatchLinkService.CreateBatchFile(sourcePath, linkPath, workingDir ?? string.Empty);
                 break;
+            case LinkType.Shortcut:
+                result = ShortcutService.CreateShortcut(sourcePath, linkPath, workingDir ?? string.Empty);
+                break;
             default:
                 return (false, "Not implemented yet");
         }

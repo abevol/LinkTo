@@ -17,11 +17,11 @@
 - [x] Task: Conductor - User Manual Verification 'Batch File Implementation' (Protocol in workflow.md)
 
 ## Phase 3: Shortcut Implementation
-- [ ] Task: Research and add necessary COM/Interop dependencies for creating `.lnk` files in .NET 10 / WinUI 3.
-- [ ] Task: Implement `ShortcutService`.
-    - *Sub-task:* Write Tests: Verify shortcut creation logic (mocking file system/COM if possible, or integration test).
-    - *Sub-task:* Implement: `CreateShortcut(string sourcePath, string targetPath, string workingDir)`.
-- [ ] Task: Integrate Shortcut creation into "Create" button logic.
+- [x] Task: Research and add necessary COM/Interop dependencies for creating `.lnk` files in .NET 10 / WinUI 3. 1a73d3e
+- [x] Task: Implement `ShortcutService`. 1f60098
+    - [x] Sub-task: Write Tests: Verify shortcut creation logic (mocking file system/COM if possible, or integration test).
+    - [x] Sub-task: Implement: `CreateShortcut(string sourcePath, string targetPath, string workingDir)`.
+- [x] Task: Integrate Shortcut creation into "Create" button logic. 1f60098
 - [ ] Task: Conductor - User Manual Verification 'Shortcut Implementation' (Protocol in workflow.md)
 
 ## Phase 4: Validation & Polish
