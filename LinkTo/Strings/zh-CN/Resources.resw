@@ -195,7 +195,24 @@
 • 如果原始文件被删除，硬链接仍然有效（数据保留）
 • 创建时不需要特殊权限</value>
   </data>
-
+  <data name="Help_BatchLink" xml:space="preserve">
+    <value>批处理启动器</value>
+  </data>
+  <data name="Help_BatchLinkDesc" xml:space="preserve">
+    <value>• 创建一个启动源文件的 .bat 脚本
+• 允许设置自定义的“工作目录”
+• 适用于需要特定执行环境的程序
+• 不需要特殊权限</value>
+  </data>
+  <data name="Help_ShortcutLink" xml:space="preserve">
+    <value>Windows 快捷方式</value>
+  </data>
+  <data name="Help_ShortcutLinkDesc" xml:space="preserve">
+    <value>• 创建标准的 Windows 外壳链接 (.lnk)
+• 允许设置自定义的“起始位置”目录
+• 与所有 Windows 应用程序的兼容性最好
+• 不需要特殊权限</value>
+  </data>
   <data name="Help_ExecutableNoteTitle" xml:space="preserve">
     <value>关于可执行文件的特别说明</value>
   </data>
@@ -208,7 +225,7 @@
 
   <!-- About Page -->
   <data name="About_Description" xml:space="preserve">
-    <value>一个用于在 Windows 上创建和管理符号链接和硬链接的界面交互式工具。</value>
+    <value>一个用于在 Windows 上创建和管理符号链接、硬链接、批处理文件及快捷方式的界面交互式工具。</value>
   </data>
   <data name="About_Author" xml:space="preserve">
     <value>作者：</value>

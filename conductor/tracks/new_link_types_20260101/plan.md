@@ -25,6 +25,6 @@
 - [x] Task: Conductor - User Manual Verification 'Shortcut Implementation' (Protocol in workflow.md)
 
 ## Phase 4: Validation & Polish
-- [ ] Task: Manual Verification: Verify all 4 types (Symlink, Hardlink, Batch, Shortcut) works as expected.
-- [ ] Task: Update "Help" or "About" page to mention new types if necessary.
+- [x] Task: Manual Verification: Verify all 4 types (Symlink, Hardlink, Batch, Shortcut) works as expected. 1a73d3e
+- [x] Task: Update "Help" or "About" page to mention new types if necessary. de7ce84
 - [ ] Task: Conductor - User Manual Verification 'Validation & Polish' (Protocol in workflow.md)

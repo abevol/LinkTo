@@ -26,6 +26,10 @@ public sealed partial class HelpPage : Page
             SymbolicLinkDesc.Text = LocalizationHelper.GetString("Help_SymbolicLinkDesc");
             HardLinkTitle.Text = LocalizationHelper.GetString("Help_HardLink");
             HardLinkDesc.Text = LocalizationHelper.GetString("Help_HardLinkDesc");
+            BatchLinkTitle.Text = LocalizationHelper.GetString("Help_BatchLink");
+            BatchLinkDesc.Text = LocalizationHelper.GetString("Help_BatchLinkDesc");
+            ShortcutLinkTitle.Text = LocalizationHelper.GetString("Help_ShortcutLink");
+            ShortcutLinkDesc.Text = LocalizationHelper.GetString("Help_ShortcutLinkDesc");
             ExecutableNoteTitle.Text = LocalizationHelper.GetString("Help_ExecutableNoteTitle");
             ExecutableNoteDesc.Text = LocalizationHelper.GetString("Help_ExecutableNote");
         }

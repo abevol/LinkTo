@@ -195,7 +195,24 @@
 • If original is deleted, hard link still works (data persists)
 • Does not require special privileges to create</value>
   </data>
-
+  <data name="Help_BatchLink" xml:space="preserve">
+    <value>Batch File Launcher</value>
+  </data>
+  <data name="Help_BatchLinkDesc" xml:space="preserve">
+    <value>• Creates a .bat script that launches the source file
+• Allows setting a custom Working Directory
+• Useful for programs that require specific execution environments
+• No special privileges required</value>
+  </data>
+  <data name="Help_ShortcutLink" xml:space="preserve">
+    <value>Windows Shortcut</value>
+  </data>
+  <data name="Help_ShortcutLinkDesc" xml:space="preserve">
+    <value>• Creates a standard Windows Shell Link (.lnk)
+• Allows setting a custom "Start in" directory
+• Most compatible with all Windows applications
+• No special privileges required</value>
+  </data>
   <data name="Help_ExecutableNoteTitle" xml:space="preserve">
     <value>Special Note for Executables</value>
   </data>
@@ -208,7 +225,7 @@ Alternatively, write a batch script to change the working directory before launc
 
   <!-- About Page -->
   <data name="About_Description" xml:space="preserve">
-    <value>An interactive tool for creating and managing symbolic links and hard links on Windows.</value>
+    <value>An interactive tool for creating and managing symbolic links, hard links, batch files, and windows shortcuts on Windows.</value>
   </data>
   <data name="About_Author" xml:space="preserve">
     <value>Author:</value>
