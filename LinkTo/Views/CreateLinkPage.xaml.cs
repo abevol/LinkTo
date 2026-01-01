@@ -45,6 +45,7 @@ public sealed partial class CreateLinkPage : Page
     {
         SourcePathTextBox.Text = path;
         UpdateLinkName();
+        UpdateWorkingDirectoryDefault();
         UpdateHardLinkAvailability();
     }
 
@@ -148,6 +149,7 @@ public sealed partial class CreateLinkPage : Page
             {
                 SourcePathTextBox.Text = items[0].Path;
                 UpdateLinkName();
+                UpdateWorkingDirectoryDefault();
                 UpdateHardLinkAvailability();
             }
         }
@@ -172,6 +174,7 @@ public sealed partial class CreateLinkPage : Page
         {
             SourcePathTextBox.Text = file.Path;
             UpdateLinkName();
+            UpdateWorkingDirectoryDefault();
             UpdateHardLinkAvailability();
         }
     }
@@ -191,6 +194,7 @@ public sealed partial class CreateLinkPage : Page
         {
             SourcePathTextBox.Text = folder.Path;
             UpdateLinkName();
+            UpdateWorkingDirectoryDefault();
             UpdateHardLinkAvailability();
         }
     }
@@ -276,6 +280,44 @@ public sealed partial class CreateLinkPage : Page
     private void TargetPathTextBox_TextChanged(object sender, TextChangedEventArgs e)
     {
         UpdateHardLinkAvailability();
+    }
+
+    private void LinkType_Checked(object sender, RoutedEventArgs e)
+    {
+        UpdateWorkingDirectoryVisibility();
+    }
+
+    private void UpdateWorkingDirectoryVisibility()
+    {
+        if (WorkingDirectoryBorder == null) return; // Not initialized yet
+
+        bool isBatchOrShortcut = BatchLinkRadio.IsChecked == true || ShortcutLinkRadio.IsChecked == true;
+        WorkingDirectoryBorder.Visibility = isBatchOrShortcut ? Visibility.Visible : Visibility.Collapsed;
+        
+        if (isBatchOrShortcut && string.IsNullOrEmpty(WorkingDirTextBox.Text))
+        {
+            UpdateWorkingDirectoryDefault();
+        }
+    }
+
+    private void UpdateWorkingDirectoryDefault()
+    {
+        var sourcePath = SourcePathTextBox.Text;
+        if (!string.IsNullOrEmpty(sourcePath))
+        {
+            try 
+            {
+                if (File.Exists(sourcePath))
+                {
+                    WorkingDirTextBox.Text = Path.GetDirectoryName(sourcePath);
+                }
+                else if (Directory.Exists(sourcePath))
+                {
+                    WorkingDirTextBox.Text = sourcePath;
+                }
+            }
+            catch {}
+        }
     }
 
     private void UpdateLinkName()

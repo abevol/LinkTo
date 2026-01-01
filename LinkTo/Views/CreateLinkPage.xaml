@@ -105,7 +105,8 @@
                         <RadioButton x:Name="SymbolicLinkRadio" 
                                      Content="Symbolic Link" 
                                      IsChecked="True"
-                                     GroupName="LinkType" />
+                                     GroupName="LinkType"
+                                     Checked="LinkType_Checked" />
                         <Grid ColumnSpacing="16">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -115,7 +116,8 @@
                                          Grid.Column="0"
                                          Content="Hard Link" 
                                          GroupName="LinkType"
-                                         VerticalAlignment="Center" />
+                                         VerticalAlignment="Center"
+                                         Checked="LinkType_Checked" />
                             <StackPanel x:Name="HardLinkInfoPanel"
                                         Grid.Column="1"
                                         Orientation="Horizontal"
@@ -134,10 +136,12 @@
                         </Grid>
                         <RadioButton x:Name="BatchLinkRadio" 
                                      Content="Batch File (.bat)" 
-                                     GroupName="LinkType" />
+                                     GroupName="LinkType"
+                                     Checked="LinkType_Checked" />
                         <RadioButton x:Name="ShortcutLinkRadio" 
                                      Content="Windows Shortcut (.lnk)" 
-                                     GroupName="LinkType" />
+                                     GroupName="LinkType"
+                                     Checked="LinkType_Checked" />
                     </StackPanel>
                 </Border>
 
