@@ -9,12 +9,12 @@
 - [x] Task: Update `CreateLinkPage.xaml.cs` (ViewModel logic) to toggle visibility of "Working Directory" based on selected Link Type. 762f97b
 - [x] Task: Conductor - User Manual Verification 'Foundation & UI Updates' (Protocol in workflow.md)
 
-## Phase 2: Batch File Implementation
+## Phase 2: Batch File Implementation [checkpoint: 232566f]
 - [x] Task: Implement `BatchLinkService` (or similar). 1f60098
     - [x] Sub-task: Write Tests: Verify correct string generation for batch content (with and without working dir).
     - [x] Sub-task: Implement: `CreateBatchFile(string sourcePath, string targetPath, string workingDir)`.
 - [x] Task: Integrate Batch creation into `MainWindow` / `CreateLinkPage` "Create" button logic. 1f60098
-- [ ] Task: Conductor - User Manual Verification 'Batch File Implementation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Batch File Implementation' (Protocol in workflow.md)
 
 ## Phase 3: Shortcut Implementation
 - [ ] Task: Research and add necessary COM/Interop dependencies for creating `.lnk` files in .NET 10 / WinUI 3.
