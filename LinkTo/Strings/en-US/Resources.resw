@@ -71,6 +71,15 @@
   <data name="LinkType_Hard" xml:space="preserve">
     <value>Hard Link</value>
   </data>
+  <data name="LinkType_Batch" xml:space="preserve">
+    <value>Batch File (.bat)</value>
+  </data>
+  <data name="LinkType_Shortcut" xml:space="preserve">
+    <value>Windows Shortcut (.lnk)</value>
+  </data>
+  <data name="Group_WorkingDirectory" xml:space="preserve">
+    <value>Working Directory</value>
+  </data>
   <data name="Hint_DragDrop" xml:space="preserve">
     <value>Drag and drop file or folder here</value>
   </data>
@@ -85,6 +94,9 @@
   </data>
   <data name="Placeholder_SelectTarget" xml:space="preserve">
     <value>Select target directory...</value>
+  </data>
+  <data name="Placeholder_SelectWorkingDir" xml:space="preserve">
+    <value>Select working directory...</value>
   </data>
   <data name="Placeholder_LinkName" xml:space="preserve">
     <value>Enter link name...</value>
