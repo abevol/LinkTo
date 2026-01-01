@@ -32,7 +32,9 @@ Expand the capabilities of LinkTo by adding two new "link" types: Batch File Lau
   - Set `WorkingDirectory` to user input (defaulting to source file's directory).
 
 ### 3. UI/UX General
-- The "Working Directory" GroupBox should be visible **only** when "Batch File" or "Shortcut" is selected. It should be hidden for "Symbolic Link" and "Hard Link".
+- The "Working Directory" GroupBox should be visible **only** when "Batch File" or "Shortcut" is selected.
+- **Layout Order:** The "Working Directory" GroupBox must be positioned **above** the "Link Type" GroupBox.
+- **Localization:** All new UI strings (e.g., "Batch File", "Shortcut", "Working Directory") must support localization in both English and Chinese.
 - Validation: Ensure the target path for the `.bat` or `.lnk` does not already exist (or prompt to overwrite).
 
 ## Technical Considerations
