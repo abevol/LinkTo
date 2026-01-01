@@ -294,7 +294,7 @@ public sealed partial class CreateLinkPage : Page
 
     private void UpdateWorkingDirectoryVisibility()
     {
-        if (WorkingDirectoryBorder == null) return; // Not initialized yet
+        if (WorkingDirectoryBorder == null || BatchLinkRadio == null || ShortcutLinkRadio == null) return; // Not initialized yet
 
         bool isBatchOrShortcut = BatchLinkRadio.IsChecked == true || ShortcutLinkRadio.IsChecked == true;
         WorkingDirectoryBorder.Visibility = isBatchOrShortcut ? Visibility.Visible : Visibility.Collapsed;
