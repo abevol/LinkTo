@@ -10,10 +10,10 @@
 - [x] Task: Conductor - User Manual Verification 'Foundation & UI Updates' (Protocol in workflow.md)
 
 ## Phase 2: Batch File Implementation
-- [~] Task: Implement `BatchLinkService` (or similar).
-    - *Sub-task:* Write Tests: Verify correct string generation for batch content (with and without working dir).
-    - *Sub-task:* Implement: `CreateBatchFile(string sourcePath, string targetPath, string workingDir)`.
-- [x] Task: Integrate Batch creation into `MainWindow` / `CreateLinkPage` "Create" button logic. 762f97b
+- [x] Task: Implement `BatchLinkService` (or similar). 1f60098
+    - [x] Sub-task: Write Tests: Verify correct string generation for batch content (with and without working dir).
+    - [x] Sub-task: Implement: `CreateBatchFile(string sourcePath, string targetPath, string workingDir)`.
+- [x] Task: Integrate Batch creation into `MainWindow` / `CreateLinkPage` "Create" button logic. 1f60098
 - [ ] Task: Conductor - User Manual Verification 'Batch File Implementation' (Protocol in workflow.md)
 
 ## Phase 3: Shortcut Implementation
