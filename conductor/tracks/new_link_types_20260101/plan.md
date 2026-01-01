@@ -24,8 +24,8 @@
 - [x] Task: Integrate Shortcut creation into "Create" button logic. af508c3
 - [x] Task: Conductor - User Manual Verification 'Shortcut Implementation' (Protocol in workflow.md)
 
-## Phase 4: Validation & Polish
+## Phase 4: Validation & Polish [checkpoint: 894b869]
 - [x] Task: Manual Verification: Verify all 4 types (Symlink, Hardlink, Batch, Shortcut) works as expected. 1a73d3e
 - [x] Task: Update "Help" or "About" page to mention new types if necessary. 4aea8a8
 - [x] Task: Auto-update link name extension based on selected Link Type. e954b85
-- [ ] Task: Conductor - User Manual Verification 'Validation & Polish' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Validation & Polish' (Protocol in workflow.md)
