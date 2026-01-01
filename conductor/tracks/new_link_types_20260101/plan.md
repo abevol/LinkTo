@@ -5,7 +5,7 @@
 - [x] Task: Update `CreateLinkPage.xaml` to include the "Working Directory" GroupBox (TextBox + Button). 1799a53
 - [x] Task: Reorder UI: Move "Working Directory" GroupBox above "Link Type" GroupBox in `CreateLinkPage.xaml`. 9f9ac5a
 - [x] Task: Localization: Add resource strings for "Batch File", "Shortcut", and "Working Directory" in `Resources.resw` (en-US and zh-CN). eb13533
-- [ ] Task: Localization: Update `CreateLinkPage.xaml.cs` to apply localized strings to the new UI elements.
+- [x] Task: Localization: Update `CreateLinkPage.xaml.cs` to apply localized strings to the new UI elements. 229c1bc
 - [x] Task: Update `CreateLinkPage.xaml.cs` (ViewModel logic) to toggle visibility of "Working Directory" based on selected Link Type. 762f97b
     - *Sub-task:* Implement `IsWorkingDirectoryVisible` property.
     - *Sub-task:* Bind GroupBox visibility to this property.
