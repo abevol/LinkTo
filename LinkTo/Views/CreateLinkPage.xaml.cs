@@ -397,8 +397,26 @@ public sealed partial class CreateLinkPage : Page
             return;
         }
 
-        var linkType = HardLinkRadio.IsChecked == true ? LinkType.Hard : LinkType.Symbolic;
+        LinkType linkType;
+        if (HardLinkRadio.IsChecked == true) linkType = LinkType.Hard;
+        else if (BatchLinkRadio.IsChecked == true) linkType = LinkType.Batch;
+        else if (ShortcutLinkRadio.IsChecked == true) linkType = LinkType.Shortcut;
+        else linkType = LinkType.Symbolic;
+
+        var workingDir = WorkingDirTextBox.Text;
         var linkPath = Path.Combine(targetDir, linkName);
+
+        // Append extension for Batch or Shortcut if not present
+        if (linkType == LinkType.Batch && !linkPath.EndsWith(".bat", StringComparison.OrdinalIgnoreCase))
+        {
+            linkPath += ".bat";
+            linkName += ".bat";
+        }
+        else if (linkType == LinkType.Shortcut && !linkPath.EndsWith(".lnk", StringComparison.OrdinalIgnoreCase))
+        {
+            linkPath += ".lnk";
+            linkName += ".lnk";
+        }
 
         // Check if target exists
         if (File.Exists(linkPath) || Directory.Exists(linkPath))
@@ -447,7 +465,7 @@ public sealed partial class CreateLinkPage : Page
         }
 
         // Create the link
-        var result = LinkService.Instance.CreateLink(sourcePath, targetDir, linkName, linkType);
+        var result = LinkService.Instance.CreateLink(sourcePath, targetDir, linkName, linkType, workingDir);
 
         if (result.Success)
         {

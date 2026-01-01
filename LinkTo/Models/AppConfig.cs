@@ -25,6 +25,7 @@ public class LinkHistoryEntry
     public Guid Id { get; set; } = Guid.NewGuid();
     public string SourcePath { get; set; } = string.Empty;
     public string LinkPath { get; set; } = string.Empty;
+    public string? WorkingDirectory { get; set; }
     public LinkType LinkType { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public bool IsDirectory { get; set; }

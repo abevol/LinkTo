@@ -96,6 +96,24 @@ public sealed partial class HistoryPage : Page
                 });
                 contentStack.Children.Add(sourceStack);
 
+                // Working Directory row (if applicable)
+                if (!string.IsNullOrEmpty(entry.WorkingDirectory))
+                {
+                    var workDirStack = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 4 };
+                    workDirStack.Children.Add(new TextBlock 
+                    { 
+                        Text = LocalizationHelper.GetString("History_WorkingDirectory"), 
+                        Foreground = (Brush)Application.Current.Resources["TextFillColorSecondaryBrush"]
+                    });
+                    workDirStack.Children.Add(new TextBlock 
+                    { 
+                        Text = entry.WorkingDirectory, 
+                        TextTrimming = TextTrimming.CharacterEllipsis,
+                        Foreground = (Brush)Application.Current.Resources["TextFillColorSecondaryBrush"]
+                    });
+                    contentStack.Children.Add(workDirStack);
+                }
+
                 // Type and date row
                 var metaStack = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 16 };
                 
@@ -105,9 +123,14 @@ public sealed partial class HistoryPage : Page
                     Text = LocalizationHelper.GetString("History_Type"), 
                     Foreground = (Brush)Application.Current.Resources["TextFillColorTertiaryBrush"]
                 });
-                var linkTypeText = entry.LinkType == Models.LinkType.Symbolic 
-                    ? LocalizationHelper.GetString("History_LinkType_Symbolic") 
-                    : LocalizationHelper.GetString("History_LinkType_Hard");
+                string linkTypeText = entry.LinkType switch
+                {
+                    Models.LinkType.Symbolic => LocalizationHelper.GetString("History_LinkType_Symbolic"),
+                    Models.LinkType.Hard => LocalizationHelper.GetString("History_LinkType_Hard"),
+                    Models.LinkType.Batch => LocalizationHelper.GetString("History_LinkType_Batch"),
+                    Models.LinkType.Shortcut => LocalizationHelper.GetString("History_LinkType_Shortcut"),
+                    _ => entry.LinkType.ToString()
+                };
                 typeStack.Children.Add(new TextBlock 
                 { 
                     Text = linkTypeText, 

@@ -124,6 +124,15 @@
   <data name="History_LinkType_Hard" xml:space="preserve">
     <value>硬链接</value>
   </data>
+  <data name="History_LinkType_Batch" xml:space="preserve">
+    <value>批处理</value>
+  </data>
+  <data name="History_LinkType_Shortcut" xml:space="preserve">
+    <value>快捷方式</value>
+  </data>
+  <data name="History_WorkingDirectory" xml:space="preserve">
+    <value>工作目录：</value>
+  </data>
   <data name="History_DeleteConfirm" xml:space="preserve">
     <value>是否删除此链接并从历史记录中移除？</value>
   </data>

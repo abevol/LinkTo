@@ -167,9 +167,9 @@ public partial class LinkService
     }
 
     /// <summary>
-    /// Create a link (symbolic or hard) and add to history
+    /// Create a link (symbolic, hard, batch or shortcut) and add to history
     /// </summary>
-    public (bool Success, string? Error) CreateLink(string sourcePath, string targetDirectory, string linkName, LinkType linkType)
+    public (bool Success, string? Error) CreateLink(string sourcePath, string targetDirectory, string linkName, LinkType linkType, string? workingDir = null)
     {
         var linkPath = Path.Combine(targetDirectory, linkName);
         var isDirectory = Directory.Exists(sourcePath);
@@ -181,9 +181,22 @@ public partial class LinkService
         }
 
         // Create the link
-        var result = linkType == LinkType.Symbolic
-            ? CreateSymbolicLink(sourcePath, linkPath)
-            : CreateHardLink(sourcePath, linkPath);
+        (bool Success, string? Error) result;
+        
+        switch (linkType)
+        {
+            case LinkType.Symbolic:
+                result = CreateSymbolicLink(sourcePath, linkPath);
+                break;
+            case LinkType.Hard:
+                result = CreateHardLink(sourcePath, linkPath);
+                break;
+            case LinkType.Batch:
+                result = BatchLinkService.CreateBatchFile(sourcePath, linkPath, workingDir ?? string.Empty);
+                break;
+            default:
+                return (false, "Not implemented yet");
+        }
 
         if (result.Success)
         {
@@ -192,6 +205,7 @@ public partial class LinkService
             {
                 SourcePath = sourcePath,
                 LinkPath = linkPath,
+                WorkingDirectory = workingDir,
                 LinkType = linkType,
                 IsDirectory = isDirectory,
                 CreatedAt = DateTime.Now

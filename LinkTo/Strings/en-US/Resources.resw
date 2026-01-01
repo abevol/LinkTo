@@ -124,6 +124,15 @@
   <data name="History_LinkType_Hard" xml:space="preserve">
     <value>Hard</value>
   </data>
+  <data name="History_LinkType_Batch" xml:space="preserve">
+    <value>Batch</value>
+  </data>
+  <data name="History_LinkType_Shortcut" xml:space="preserve">
+    <value>Shortcut</value>
+  </data>
+  <data name="History_WorkingDirectory" xml:space="preserve">
+    <value>Work Dir:</value>
+  </data>
   <data name="History_DeleteConfirm" xml:space="preserve">
     <value>Delete this link and remove from history?</value>
   </data>
