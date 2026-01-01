@@ -1,7 +1,7 @@
 # Plan: New Link Types (Batch & Shortcut)
 
 ## Phase 1: Foundation & UI Updates
-- [ ] Task: Create `LinkType` Enum extension or update existing logic to support `Batch` and `Shortcut`.
+- [x] Task: Create `LinkType` Enum extension or update existing logic to support `Batch` and `Shortcut`. ccb56d3
 - [ ] Task: Update `CreateLinkPage.xaml` to include the "Working Directory" GroupBox (TextBox + Button).
 - [ ] Task: Update `CreateLinkPage.xaml.cs` (ViewModel logic) to toggle visibility of "Working Directory" based on selected Link Type.
     - *Sub-task:* Implement `IsWorkingDirectoryVisible` property.
