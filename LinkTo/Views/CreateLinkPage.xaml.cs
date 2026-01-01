@@ -213,6 +213,23 @@ public sealed partial class CreateLinkPage : Page
         }
     }
 
+    private async void BrowseWorkingDir_Click(object sender, RoutedEventArgs e)
+    {
+        if (App.MainWindow == null) return;
+
+        var picker = new FolderPicker();
+        picker.FileTypeFilter.Add("*");
+
+        var hwnd = WindowNative.GetWindowHandle(App.MainWindow);
+        InitializeWithWindow.Initialize(picker, hwnd);
+
+        var folder = await picker.PickSingleFolderAsync();
+        if (folder != null)
+        {
+            WorkingDirTextBox.Text = folder.Path;
+        }
+    }
+
     #endregion
 
     #region Common Directories

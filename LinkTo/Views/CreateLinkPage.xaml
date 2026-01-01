@@ -132,6 +132,30 @@
                                            TextTrimming="CharacterEllipsis" />
                             </StackPanel>
                         </Grid>
+                        <RadioButton x:Name="BatchLinkRadio" 
+                                     Content="Batch File (.bat)" 
+                                     GroupName="LinkType" />
+                        <RadioButton x:Name="ShortcutLinkRadio" 
+                                     Content="Windows Shortcut (.lnk)" 
+                                     GroupName="LinkType" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Working Directory Group (Conditional) -->
+                <Border x:Name="WorkingDirectoryBorder" Style="{StaticResource CardBorderStyle}" Visibility="Collapsed">
+                    <StackPanel Spacing="8">
+                        <TextBlock x:Name="WorkingDirHeader" Text="Working Directory" Style="{StaticResource SubtitleTextBlockStyle}" />
+                         <Grid ColumnSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="WorkingDirTextBox" 
+                                     PlaceholderText="Select working directory..."
+                                     Grid.Column="0" />
+                            <Button x:Name="BrowseWorkingDirButton" Content="Browse..." 
+                                    Click="BrowseWorkingDir_Click" Grid.Column="1" />
+                        </Grid>
                     </StackPanel>
                 </Border>
 
