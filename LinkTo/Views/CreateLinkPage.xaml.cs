@@ -290,6 +290,7 @@ public sealed partial class CreateLinkPage : Page
     private void LinkType_Checked(object sender, RoutedEventArgs e)
     {
         UpdateWorkingDirectoryVisibility();
+        UpdateLinkName();
     }
 
     private void UpdateWorkingDirectoryVisibility()
@@ -328,7 +329,17 @@ public sealed partial class CreateLinkPage : Page
     private void UpdateLinkName()
     {
         var sourcePath = SourcePathTextBox.Text;
-        if (!string.IsNullOrEmpty(sourcePath))
+        if (string.IsNullOrEmpty(sourcePath)) return;
+
+        if (BatchLinkRadio?.IsChecked == true)
+        {
+            LinkNameTextBox.Text = Path.GetFileNameWithoutExtension(sourcePath) + ".bat";
+        }
+        else if (ShortcutLinkRadio?.IsChecked == true)
+        {
+            LinkNameTextBox.Text = Path.GetFileNameWithoutExtension(sourcePath) + ".lnk";
+        }
+        else
         {
             LinkNameTextBox.Text = Path.GetFileName(sourcePath);
         }
