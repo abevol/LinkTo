@@ -10,7 +10,9 @@ namespace LinkTo.Models;
 public enum LinkType
 {
     Symbolic,
-    Hard
+    Hard,
+    Batch,
+    Shortcut
 }
 
 /// <summary>
