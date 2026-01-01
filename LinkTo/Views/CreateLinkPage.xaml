@@ -98,6 +98,24 @@
                     </StackPanel>
                 </Border>
 
+                <!-- Working Directory Group (Conditional) -->
+                <Border x:Name="WorkingDirectoryBorder" Style="{StaticResource CardBorderStyle}" Visibility="Collapsed">
+                    <StackPanel Spacing="8">
+                        <TextBlock x:Name="WorkingDirHeader" Text="Working Directory" Style="{StaticResource SubtitleTextBlockStyle}" />
+                         <Grid ColumnSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="WorkingDirTextBox" 
+                                     PlaceholderText="Select working directory..."
+                                     Grid.Column="0" />
+                            <Button x:Name="BrowseWorkingDirButton" Content="Browse..." 
+                                    Click="BrowseWorkingDir_Click" Grid.Column="1" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
                 <!-- Link Type Group -->
                 <Border Style="{StaticResource CardBorderStyle}">
                     <StackPanel Spacing="8">
@@ -142,24 +160,6 @@
                                      Content="Windows Shortcut (.lnk)" 
                                      GroupName="LinkType"
                                      Checked="LinkType_Checked" />
-                    </StackPanel>
-                </Border>
-
-                <!-- Working Directory Group (Conditional) -->
-                <Border x:Name="WorkingDirectoryBorder" Style="{StaticResource CardBorderStyle}" Visibility="Collapsed">
-                    <StackPanel Spacing="8">
-                        <TextBlock x:Name="WorkingDirHeader" Text="Working Directory" Style="{StaticResource SubtitleTextBlockStyle}" />
-                         <Grid ColumnSpacing="8">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <TextBox x:Name="WorkingDirTextBox" 
-                                     PlaceholderText="Select working directory..."
-                                     Grid.Column="0" />
-                            <Button x:Name="BrowseWorkingDirButton" Content="Browse..." 
-                                    Click="BrowseWorkingDir_Click" Grid.Column="1" />
-                        </Grid>
                     </StackPanel>
                 </Border>
 
