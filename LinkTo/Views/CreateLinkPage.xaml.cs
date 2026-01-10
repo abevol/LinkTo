@@ -297,10 +297,16 @@ public sealed partial class CreateLinkPage : Page
     {
         if (WorkingDirectoryBorder == null || BatchLinkRadio == null || ShortcutLinkRadio == null) return; // Not initialized yet
 
-        bool isBatchOrShortcut = BatchLinkRadio.IsChecked == true || ShortcutLinkRadio.IsChecked == true;
-        WorkingDirectoryBorder.Visibility = isBatchOrShortcut ? Visibility.Visible : Visibility.Collapsed;
+        bool isBatch = BatchLinkRadio.IsChecked == true;
+        bool isShortcut = ShortcutLinkRadio.IsChecked == true;
         
-        if (isBatchOrShortcut && string.IsNullOrEmpty(WorkingDirTextBox.Text))
+        WorkingDirectoryBorder.Visibility = (isBatch || isShortcut) ? Visibility.Visible : Visibility.Collapsed;
+        
+        if (isBatch)
+        {
+            UpdateWorkingDirectoryDefault();
+        }
+        else if (isShortcut && string.IsNullOrEmpty(WorkingDirTextBox.Text))
         {
             UpdateWorkingDirectoryDefault();
         }
@@ -308,6 +314,12 @@ public sealed partial class CreateLinkPage : Page
 
     private void UpdateWorkingDirectoryDefault()
     {
+        if (BatchLinkRadio != null && BatchLinkRadio.IsChecked == true)
+        {
+            WorkingDirTextBox.Text = string.Empty;
+            return;
+        }
+
         var sourcePath = SourcePathTextBox.Text;
         if (!string.IsNullOrEmpty(sourcePath))
         {
