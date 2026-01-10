@@ -16,13 +16,7 @@ public static class BatchLinkService
     {
         var sb = new StringBuilder();
         sb.AppendLine("@echo off");
-        
-        if (!string.IsNullOrWhiteSpace(workingDir))
-        {
-            sb.AppendLine($@"cd /d ""{workingDir}""");
-        }
-        
-        sb.AppendLine($@"start """" ""{sourcePath}""");
+        sb.AppendLine($@"""{sourcePath}"" %*");
         
         return sb.ToString();
     }

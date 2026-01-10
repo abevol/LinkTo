@@ -6,7 +6,7 @@ namespace LinkTo.Tests.Services;
 public class BatchLinkTests
 {
     [Fact]
-    public void GenerateBatchContent_WithWorkingDirectory_ShouldIncludeCdAndStart()
+    public void GenerateBatchContent_ShouldIncludePathAndArgs()
     {
         string sourcePath = @"C:\Apps\Test.exe";
         string workingDir = @"C:\Apps";
@@ -14,12 +14,13 @@ public class BatchLinkTests
         string content = BatchLinkService.GenerateBatchContent(sourcePath, workingDir);
         
         Assert.Contains("@echo off", content);
-        Assert.Contains(@"cd /d ""C:\Apps""", content);
-        Assert.Contains(@"start """" ""C:\Apps\Test.exe""", content);
+        Assert.Contains(@"""C:\Apps\Test.exe"" %*", content);
+        Assert.DoesNotContain("cd /d", content);
+        Assert.DoesNotContain("start", content);
     }
 
     [Fact]
-    public void GenerateBatchContent_WithoutWorkingDirectory_ShouldOnlyIncludeStart()
+    public void GenerateBatchContent_WithoutWorkingDirectory_ShouldStillIncludePathAndArgs()
     {
         string sourcePath = @"C:\Apps\Test.exe";
         string workingDir = "";
@@ -27,7 +28,7 @@ public class BatchLinkTests
         string content = BatchLinkService.GenerateBatchContent(sourcePath, workingDir);
         
         Assert.Contains("@echo off", content);
-        Assert.DoesNotContain("cd /d", content);
-        Assert.Contains(@"start """" ""C:\Apps\Test.exe""", content);
+        Assert.Contains(@"""C:\Apps\Test.exe"" %*", content);
+        Assert.DoesNotContain("start", content);
     }
 }
