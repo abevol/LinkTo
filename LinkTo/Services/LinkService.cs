@@ -169,8 +169,13 @@ public partial class LinkService
     /// <summary>
     /// Create a link (symbolic, hard, batch or shortcut) and add to history
     /// </summary>
-    public (bool Success, string? Error) CreateLink(string sourcePath, string targetDirectory, string linkName, LinkType linkType, string? workingDir = null)
+    public (bool Success, string? Error) CreateLink(string sourcePath, string targetDirectory, string linkName, LinkType linkType, string? workingDir = null, bool migrateData = false)
     {
+        if (migrateData)
+        {
+            return CreateLinkWithMigration(sourcePath, targetDirectory, linkName, linkType, workingDir);
+        }
+
         var linkPath = Path.Combine(targetDirectory, linkName);
         var isDirectory = Directory.Exists(sourcePath);
 
@@ -220,6 +225,86 @@ public partial class LinkService
         }
 
         return result;
+    }
+
+    private (bool Success, string? Error) CreateLinkWithMigration(string sourcePath, string targetDirectory, string linkName, LinkType linkType, string? workingDir)
+    {
+        // 1. Determine paths
+        // In Migration Mode, "targetDirectory" is where the file moves TO.
+        var destinationPath = Path.Combine(targetDirectory, linkName);
+        
+        // "Link" will be created at the ORIGINAL sourcePath.
+        var linkLocation = sourcePath; 
+
+        // 2. Validate Source
+        if (!File.Exists(sourcePath) && !Directory.Exists(sourcePath))
+        {
+             return (false, GetLocalizedString("Error_SourceNotExist"));
+        }
+
+        // 3. Move File/Folder
+        // Blocking call for async method as CreateLink is synchronous
+        var moveResult = System.Threading.Tasks.Task.Run(() => FileMigrationService.Instance.MoveAsync(sourcePath, destinationPath)).Result;
+        
+        if (!moveResult.Success)
+        {
+            return (false, moveResult.Error);
+        }
+
+        // 4. Create Link at original location (linkLocation) pointing to new location (destinationPath)
+        (bool Success, string? Error) linkResult;
+        
+        switch (linkType)
+        {
+            case LinkType.Symbolic:
+                linkResult = CreateSymbolicLink(destinationPath, linkLocation);
+                break;
+            case LinkType.Hard:
+                linkResult = CreateHardLink(destinationPath, linkLocation);
+                break;
+            case LinkType.Batch:
+                linkResult = BatchLinkService.CreateBatchFile(destinationPath, linkLocation, workingDir ?? string.Empty);
+                break;
+            case LinkType.Shortcut:
+                linkResult = ShortcutService.CreateShortcut(destinationPath, linkLocation, workingDir ?? string.Empty);
+                break;
+            default:
+                // Rollback!
+                System.Threading.Tasks.Task.Run(() => FileMigrationService.Instance.RollbackAsync(destinationPath, sourcePath)).Wait();
+                return (false, "Not implemented for this link type");
+        }
+        
+        if (!linkResult.Success)
+        {
+            // 5. Rollback on Link Failure
+            LogService.Instance.LogError($"Link creation failed after migration. Rolling back. Error: {linkResult.Error}");
+            var rollbackResult = System.Threading.Tasks.Task.Run(() => FileMigrationService.Instance.RollbackAsync(destinationPath, sourcePath)).Result;
+            
+            if (!rollbackResult.Success)
+            {
+                 return (false, $"Link creation failed AND Rollback failed! Critical Error: {rollbackResult.Error}");
+            }
+            
+            return (false, $"Link creation failed: {linkResult.Error} (Rolled back successfully)");
+        }
+        
+        // 6. Success - History
+        var isDirectory = Directory.Exists(destinationPath);
+        
+        var historyEntry = new LinkHistoryEntry
+        {
+            SourcePath = destinationPath, // Where data is now
+            LinkPath = linkLocation,      // Where link is (original location)
+            WorkingDirectory = workingDir,
+            LinkType = linkType,
+            IsDirectory = isDirectory,
+            CreatedAt = DateTime.Now
+        };
+        ConfigService.Instance.AddLinkHistory(historyEntry);
+        
+        ConfigService.Instance.AddCommonDirectory(targetDirectory);
+
+        return (true, null);
     }
 
     private static string GetLocalizedString(string key)
