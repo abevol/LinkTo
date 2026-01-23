@@ -1,6 +1,6 @@
 # Implementation Plan - 数据迁移功能
 
-## Phase 1: Core Logic & Services (Backend)
+## Phase 1: Core Logic & Services (Backend) [checkpoint: 2850677]
 本阶段专注于核心业务逻辑的实现，不涉及 UI。我们将扩展 `LinkService` 或创建新的 `MigrationService` 来处理文件移动和原子性操作。
 
 - [x] Task: Create `FileMigrationService` structure and interfaces 11063dc
@@ -18,7 +18,7 @@
 - [x] Task: Integrate with existing `LinkService` 90ca001
     - [x] Write tests ensuring `LinkService` can accept a "MigrateFirst" flag or strategy
     - [x] Update `LinkService` to call `MigrationService` before link creation
-- [ ] Task: Conductor - User Manual Verification 'Core Logic & Services (Backend)' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Core Logic & Services (Backend)' (Protocol in workflow.md) 2850677
 
 ## Phase 2: User Interface Implementation
 本阶段将“数据迁移”的控件添加到 MainWindow，并将其绑定到后端的逻辑。
