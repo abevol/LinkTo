@@ -50,16 +50,16 @@
     - [x] Add tests for cross-volume scenario (simulation)
 - [x] Task: Conductor - User Manual Verification 'Refinements & Enhancements' (Protocol in workflow.md) 6d5a31e
 
-## Phase 3: Integration & Polish
+## Phase 3: Integration & Polish [checkpoint: f342014]
 本阶段进行端到端的集成测试，权限处理优化以及最终的验收。
 
-- [ ] Task: Implement Permission Handling (Admin Access)
-    - [ ] Test migration to protected folders (e.g., Program Files)
-    - [ ] Integrate with existing `AdminHelper` to request elevation if `UnauthorizedAccessException` occurs during move
-- [ ] Task: End-to-End Testing & Bug Fixes
-    - [ ] Manual test: Move file -> Create Symlink
-    - [ ] Manual test: Move folder -> Create Junction
-    - [ ] Manual test: Rollback scenario (force link creation failure)
-- [ ] Task: Update Documentation
-    - [ ] Update README or user help text to explain Data Migration mode
-- [ ] Task: Conductor - User Manual Verification 'Integration & Polish' (Protocol in workflow.md)
+- [x] Task: Implement Permission Handling (Admin Access) f342014
+    - [x] Test migration to protected folders (e.g., Program Files)
+    - [x] Integrate with existing `AdminHelper` to request elevation if `UnauthorizedAccessException` occurs during move
+- [x] Task: End-to-End Testing & Bug Fixes f342014
+    - [x] Manual test: Move file -> Create Symlink
+    - [x] Manual test: Move folder -> Create Junction
+    - [x] Manual test: Rollback scenario (force link creation failure)
+- [x] Task: Update Documentation f342014
+    - [x] Update README or user help text to explain Data Migration mode
+- [x] Task: Conductor - User Manual Verification 'Integration & Polish' (Protocol in workflow.md) f342014
