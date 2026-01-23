@@ -180,6 +180,18 @@
             </StackPanel>
         </ScrollViewer>
         
+        <!-- Progress Overlay -->
+        <StackPanel x:Name="ProgressOverlay" 
+                    Grid.Row="1" 
+                    Orientation="Horizontal" 
+                    Spacing="12" 
+                    HorizontalAlignment="Center" 
+                    Visibility="Collapsed"
+                    Margin="0,-40,0,0">
+            <ProgressRing IsActive="True" Width="20" Height="20" />
+            <TextBlock x:Name="ProgressStatusText" x:Uid="Status_Processing" Text="Processing..." VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+        </StackPanel>
+
         <!-- Fixed Create Link Button at Bottom -->
         <Button x:Name="CreateLinkButton" 
                 Grid.Row="1"

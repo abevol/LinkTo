@@ -75,10 +75,36 @@ public sealed partial class CreateLinkPage : Page
             WorkingDirTextBox.PlaceholderText = LocalizationHelper.GetString("Placeholder_SelectWorkingDir");
             LinkNameTextBox.PlaceholderText = LocalizationHelper.GetString("Placeholder_LinkName");
             BrowseWorkingDirButton.Content = LocalizationHelper.GetString("Button_Browse");
+
+            if (MigrateDataCheckBox != null)
+            {
+                MigrateDataCheckBox.Content = LocalizationHelper.GetString("MigrateDataCheckBox.Content");
+            }
+            if (DataMigrationDescription != null)
+            {
+                DataMigrationDescription.Text = LocalizationHelper.GetString("DataMigrationDescription.Text");
+            }
+            if (ProgressStatusText != null)
+            {
+                ProgressStatusText.Text = LocalizationHelper.GetString("Status_Processing");
+            }
         }
         catch
         {
             // Use default English if resource loading fails
+        }
+    }
+
+    private void SetLoading(bool isLoading)
+    {
+        ProgressOverlay.Visibility = isLoading ? Visibility.Visible : Visibility.Collapsed;
+        CreateLinkButton.IsEnabled = !isLoading;
+
+        // Try to disable NavigationView during processing to prevent navigation
+        if (App.MainWindow?.Content is Grid mainGrid)
+        {
+            var navView = mainGrid.Children.OfType<NavigationView>().FirstOrDefault();
+            if (navView != null) navView.IsEnabled = !isLoading;
         }
     }
 
@@ -428,6 +454,7 @@ public sealed partial class CreateLinkPage : Page
 
         var workingDir = WorkingDirTextBox.Text;
         var linkPath = Path.Combine(targetDir, linkName);
+        bool migrateData = MigrateDataCheckBox?.IsChecked == true;
 
         // Append extension for Batch or Shortcut if not present
         if (linkType == LinkType.Batch && !linkPath.EndsWith(".bat", StringComparison.OrdinalIgnoreCase))
@@ -439,6 +466,16 @@ public sealed partial class CreateLinkPage : Page
         {
             linkPath += ".lnk";
             linkName += ".lnk";
+        }
+
+        // Confirm migration (since it moves files)
+        if (migrateData)
+        {
+            var migrationConfirm = await ShowConfirmDialog(
+                LocalizationHelper.GetString("Dialog_Warning"),
+                LocalizationHelper.GetString("Dialog_MigrationConfirm"));
+
+            if (!migrationConfirm) return;
         }
 
         // Check if target exists
@@ -457,7 +494,7 @@ public sealed partial class CreateLinkPage : Page
             try
             {
                 if (Directory.Exists(linkPath))
-                    Directory.Delete(linkPath, false);
+                    Directory.Delete(linkPath, true); // true for recursive delete if it's a dir
                 else
                     File.Delete(linkPath);
             }
@@ -488,21 +525,36 @@ public sealed partial class CreateLinkPage : Page
         }
 
         // Create the link
-        var result = LinkService.Instance.CreateLink(sourcePath, targetDir, linkName, linkType, workingDir);
-
-        if (result.Success)
+        try
         {
-            LoadCommonDirectories(); // Refresh common directories
+            SetLoading(true);
 
-            await ShowSuccessDialog(LocalizationHelper.GetString("Dialog_LinkCreated"));
+            var result = await System.Threading.Tasks.Task.Run(() => 
+                LinkService.Instance.CreateLink(sourcePath, targetDir, linkName, linkType, workingDir, migrateData));
 
-            // Clear inputs
-            SourcePathTextBox.Text = string.Empty;
-            LinkNameTextBox.Text = string.Empty;
+            if (result.Success)
+            {
+                LoadCommonDirectories(); // Refresh common directories
+
+                await ShowSuccessDialog(LocalizationHelper.GetString("Dialog_LinkCreated"));
+
+                // Clear inputs
+                SourcePathTextBox.Text = string.Empty;
+                LinkNameTextBox.Text = string.Empty;
+                if (MigrateDataCheckBox != null) MigrateDataCheckBox.IsChecked = false;
+            }
+            else
+            {
+                await ShowErrorDialog(result.Error ?? "Unknown error");
+            }
         }
-        else
+        catch (Exception ex)
         {
-            await ShowErrorDialog(result.Error ?? "Unknown error");
+            await ShowErrorDialog(ex.Message);
+        }
+        finally
+        {
+            SetLoading(false);
         }
     }
 

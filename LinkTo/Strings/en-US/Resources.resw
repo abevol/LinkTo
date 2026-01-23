@@ -323,4 +323,7 @@ Alternatively, write a batch script to change the working directory before launc
   <data name="Dialog_MigrationConfirm" xml:space="preserve">
     <value>Data migration will move the source file/folder. Do you want to continue?</value>
   </data>
+  <data name="Status_Processing" xml:space="preserve">
+    <value>Processing...</value>
+  </data>
 </root>

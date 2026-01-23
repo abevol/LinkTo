@@ -323,4 +323,7 @@
   <data name="Dialog_MigrationConfirm" xml:space="preserve">
     <value>数据迁移将会移动源文件。是否继续？</value>
   </data>
+  <data name="Status_Processing" xml:space="preserve">
+    <value>正在处理...</value>
+  </data>
 </root>
