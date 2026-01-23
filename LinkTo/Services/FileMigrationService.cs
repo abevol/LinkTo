@@ -49,11 +49,25 @@ public class FileMigrationService : IMigrationService
                          // Basic overwrite for directory: Delete dest then move
                          Directory.Delete(destinationPath, true);
                      }
-                     Directory.Move(sourcePath, destinationPath);
+
+                     // Check for cross-volume move
+                     var sourceRoot = Path.GetPathRoot(Path.GetFullPath(sourcePath));
+                     var destRoot = Path.GetPathRoot(Path.GetFullPath(destinationPath));
+
+                     if (!string.Equals(sourceRoot, destRoot, StringComparison.OrdinalIgnoreCase))
+                     {
+                         // Directory.Move does not support cross-volume, so we must Copy + Delete
+                         CopyDirectory(sourcePath, destinationPath);
+                         Directory.Delete(sourcePath, true);
+                     }
+                     else
+                     {
+                         Directory.Move(sourcePath, destinationPath);
+                     }
                 }
                 else
                 {
-                    // File move
+                    // File move (File.Move supports cross-volume)
                     File.Move(sourcePath, destinationPath, overwrite);
                 }
             });
@@ -64,6 +78,26 @@ public class FileMigrationService : IMigrationService
         {
             LogService.Instance.LogError($"Migration failed: {sourcePath} -> {destinationPath}", ex);
             return (false, ex.Message);
+        }
+    }
+
+    private void CopyDirectory(string sourceDir, string destDir)
+    {
+        // Ensure destination directory exists
+        Directory.CreateDirectory(destDir);
+
+        // Copy files
+        foreach (var file in Directory.GetFiles(sourceDir))
+        {
+            var destFile = Path.Combine(destDir, Path.GetFileName(file));
+            File.Copy(file, destFile, true);
+        }
+
+        // Copy subdirectories recursively
+        foreach (var subDir in Directory.GetDirectories(sourceDir))
+        {
+            var destSubDir = Path.Combine(destDir, Path.GetFileName(subDir));
+            CopyDirectory(subDir, destSubDir);
         }
     }
 

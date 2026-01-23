@@ -314,6 +314,9 @@ Alternatively, write a batch script to change the working directory before launc
   <data name="HardLinkReason_CrossVolumeNotSupported" xml:space="preserve">
     <value>Hard links cannot span across different volumes.</value>
   </data>
+  <data name="Group_ExtendedOptions" xml:space="preserve">
+    <value>Extended Options</value>
+  </data>
   <data name="MigrateDataCheckBox.Content" xml:space="preserve">
     <value>Data Migration</value>
   </data>

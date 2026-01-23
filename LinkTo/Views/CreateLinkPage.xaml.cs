@@ -75,6 +75,11 @@ public sealed partial class CreateLinkPage : Page
             WorkingDirTextBox.PlaceholderText = LocalizationHelper.GetString("Placeholder_SelectWorkingDir");
             LinkNameTextBox.PlaceholderText = LocalizationHelper.GetString("Placeholder_LinkName");
             BrowseWorkingDirButton.Content = LocalizationHelper.GetString("Button_Browse");
+            
+            if (ExtendedOptionsHeader != null)
+            {
+                ExtendedOptionsHeader.Text = LocalizationHelper.GetString("Group_ExtendedOptions");
+            }
 
             if (MigrateDataCheckBox != null)
             {

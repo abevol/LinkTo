@@ -314,6 +314,9 @@
   <data name="HardLinkReason_CrossVolumeNotSupported" xml:space="preserve">
     <value>硬链接不能跨不同的卷。</value>
   </data>
+  <data name="Group_ExtendedOptions" xml:space="preserve">
+    <value>扩展选项</value>
+  </data>
   <data name="MigrateDataCheckBox.Content" xml:space="preserve">
     <value>数据迁移</value>
   </data>

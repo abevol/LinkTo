@@ -163,17 +163,32 @@
                     </StackPanel>
                 </Border>
 
-                <!-- Data Migration Group -->
+                <!-- Extended Options Group -->
                 <Border Style="{StaticResource CardBorderStyle}">
                     <StackPanel Spacing="8">
-                        <CheckBox x:Name="MigrateDataCheckBox" 
-                                  x:Uid="MigrateDataCheckBox"
-                                  Content="Data Migration" />
-                        <TextBlock x:Name="DataMigrationDescription" 
-                                   x:Uid="DataMigrationDescription"
-                                   Text="Move source file/folder to target path before creating link." 
-                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                   TextWrapping="Wrap" />
+                        <TextBlock x:Name="ExtendedOptionsHeader" x:Uid="Group_ExtendedOptions" Text="Extended Options" Style="{StaticResource SubtitleTextBlockStyle}" />
+                        
+                        <Grid ColumnSpacing="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <CheckBox x:Name="MigrateDataCheckBox" 
+                                      x:Uid="MigrateDataCheckBox"
+                                      Content="Data Migration" 
+                                      Grid.Column="0"
+                                      VerticalAlignment="Center"/>
+                                      
+                            <TextBlock x:Name="DataMigrationDescription" 
+                                       x:Uid="DataMigrationDescription"
+                                       Text="Move source file/folder to target path before creating link." 
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                       TextWrapping="Wrap"
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       Style="{ThemeResource CaptionTextBlockStyle}"/>
+                        </Grid>
                     </StackPanel>
                 </Border>
 
