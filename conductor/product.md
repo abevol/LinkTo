@@ -18,6 +18,7 @@ LinkTo aims to democratize the power of Windows file system links and launchers 
 - **Windows Shortcut (.lnk):** Create standard shortcuts with configurable "Start in" properties.
 - **Windows Explorer Integration:** Quick access via the right-click context menu.
 - **Link History:** A clear view of managed links to ensure users always know where their data is truly stored.
+- **Data Migration Mode:** Option to move original files to a new target location and automatically create a link at the original source, simplifying file organization and disk space management.
 
 # Design Tone & Style
 - **Action-Oriented:** Focused on "what" the user wants to do.
