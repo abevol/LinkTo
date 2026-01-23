@@ -10,6 +10,7 @@ A Windows application for creating and managing symbolic links and hard links.
 
 - **Create Symbolic Links** - Create symbolic links for files and directories
 - **Create Hard Links** - Create hard links for files (same volume only)
+- **Data Migration** - Move source files to target location while keeping a link at the original path
 - **Shell Integration** - Right-click context menu integration in Windows Explorer
 - **Link History** - Track and manage created links
 - **Multi-language** - English and Chinese interface

@@ -550,7 +550,24 @@ public sealed partial class CreateLinkPage : Page
             }
             else
             {
-                await ShowErrorDialog(result.Error ?? "Unknown error");
+                // Check for permission error
+                if (result.Error != null && (result.Error.Contains("Access denied") || result.Error.Contains("Unauthorized")))
+                {
+                    var elevateResult = await ShowConfirmDialog(
+                        LocalizationHelper.GetString("Dialog_Error"),
+                        LocalizationHelper.GetString("Error_AccessDenied") + "\n" + LocalizationHelper.GetString("Dialog_AdminRequired"));
+
+                    if (elevateResult)
+                    {
+                        AdminHelper.RestartAsAdmin($"\"{sourcePath}\"");
+                        Application.Current.Exit();
+                        return;
+                    }
+                }
+                else
+                {
+                    await ShowErrorDialog(result.Error ?? "Unknown error");
+                }
             }
         }
         catch (Exception ex)
