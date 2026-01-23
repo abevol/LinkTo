@@ -11,10 +11,10 @@
     - [x] Implement move logic using `System.IO`
     - [x] Write failing tests for rollback scenario (move success, callback failure)
     - [x] Implement rollback mechanism
-- [ ] Task: Implement Conflict Handling (TDD)
-    - [ ] Write failing tests for destination collision
-    - [ ] Implement detection logic (File.Exists / Directory.Exists)
-    - [ ] Implement resolution strategy (throw specific exception to be caught by UI or callback)
+- [x] Task: Implement Conflict Handling (TDD) 395ba8c
+    - [x] Write failing tests for destination collision
+    - [x] Implement detection logic (File.Exists / Directory.Exists)
+    - [x] Implement resolution strategy (throw specific exception to be caught by UI or callback)
 - [ ] Task: Integrate with existing `LinkService`
     - [ ] Write tests ensuring `LinkService` can accept a "MigrateFirst" flag or strategy
     - [ ] Update `LinkService` to call `MigrationService` before link creation
