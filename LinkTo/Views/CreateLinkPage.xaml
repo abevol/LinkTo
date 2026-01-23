@@ -163,6 +163,20 @@
                     </StackPanel>
                 </Border>
 
+                <!-- Data Migration Group -->
+                <Border Style="{StaticResource CardBorderStyle}">
+                    <StackPanel Spacing="8">
+                        <CheckBox x:Name="MigrateDataCheckBox" 
+                                  x:Uid="MigrateDataCheckBox"
+                                  Content="Data Migration" />
+                        <TextBlock x:Name="DataMigrationDescription" 
+                                   x:Uid="DataMigrationDescription"
+                                   Text="Move source file/folder to target path before creating link." 
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+
             </StackPanel>
         </ScrollViewer>
         

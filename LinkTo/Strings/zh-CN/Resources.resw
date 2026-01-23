@@ -314,4 +314,13 @@
   <data name="HardLinkReason_CrossVolumeNotSupported" xml:space="preserve">
     <value>硬链接不能跨不同的卷。</value>
   </data>
+  <data name="MigrateDataCheckBox.Content" xml:space="preserve">
+    <value>数据迁移</value>
+  </data>
+  <data name="DataMigrationDescription.Text" xml:space="preserve">
+    <value>开启后，将先移动源文件/文件夹至目标路径，再在原位创建链接。</value>
+  </data>
+  <data name="Dialog_MigrationConfirm" xml:space="preserve">
+    <value>数据迁移将会移动源文件。是否继续？</value>
+  </data>
 </root>
