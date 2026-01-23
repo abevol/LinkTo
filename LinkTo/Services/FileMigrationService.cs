@@ -25,6 +25,12 @@ public class FileMigrationService : IMigrationService
                 return (false, "Source does not exist");
             }
 
+            // Explicit check for destination existence to provide consistent error message
+            if ((File.Exists(destinationPath) || Directory.Exists(destinationPath)) && !overwrite)
+            {
+                return (false, "Target already exists");
+            }
+
             await Task.Run(() =>
             {
                 // Ensure parent directory of destination exists

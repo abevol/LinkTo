@@ -89,6 +89,40 @@ public class FileMigrationServiceTests : IDisposable
         Assert.True(File.Exists(originalPath), "File should be back at original path");
     }
 
+    [Fact]
+    public async Task MoveAsync_ShouldFail_WhenTargetExists_AndOverwriteIsFalse()
+    {
+        // Arrange
+        var sourceFile = Path.Combine(_tempDir, "source.txt");
+        var destFile = Path.Combine(_tempDir, "dest.txt");
+        await File.WriteAllTextAsync(sourceFile, "source");
+        await File.WriteAllTextAsync(destFile, "existing");
+
+        // Act
+        var result = await FileMigrationService.Instance.MoveAsync(sourceFile, destFile, overwrite: false);
+
+        // Assert
+        Assert.False(result.Success);
+        Assert.Contains("already exists", result.Error, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public async Task MoveAsync_ShouldSucceed_WhenTargetExists_AndOverwriteIsTrue()
+    {
+        // Arrange
+        var sourceFile = Path.Combine(_tempDir, "source.txt");
+        var destFile = Path.Combine(_tempDir, "dest.txt");
+        await File.WriteAllTextAsync(sourceFile, "new content");
+        await File.WriteAllTextAsync(destFile, "old content");
+
+        // Act
+        var result = await FileMigrationService.Instance.MoveAsync(sourceFile, destFile, overwrite: true);
+
+        // Assert
+        Assert.True(result.Success, result.Error);
+        Assert.Equal("new content", await File.ReadAllTextAsync(destFile));
+    }
+
     public void Dispose()
     {
         try
