@@ -23,9 +23,9 @@
 ## Phase 2: User Interface Implementation
 本阶段将“数据迁移”的控件添加到 MainWindow，并将其绑定到后端的逻辑。
 
-- [ ] Task: Update MainWindow UI Layout
-    - [ ] Add `GroupBox` (or similar container) below Link Type selection in `MainWindow.xaml`
-    - [ ] Add Checkbox and Description Textblock inside the container
+- [x] Task: Update MainWindow UI Layout df0f030
+    - [x] Add `GroupBox` (or similar container) below Link Type selection in `MainWindow.xaml`
+    - [x] Add Checkbox and Description Textblock inside the container
 - [ ] Task: Bind UI State to ViewModel/Code-behind
     - [ ] Add `IsMigrationEnabled` property to `MainWindow` or its ViewModel
     - [ ] Ensure the Checkbox state reflects this property
