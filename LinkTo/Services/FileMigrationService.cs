@@ -18,16 +18,61 @@ public class FileMigrationService : IMigrationService
     /// <inheritdoc/>
     public async Task<(bool Success, string? Error)> MoveAsync(string sourcePath, string destinationPath, bool overwrite = false)
     {
-        // TODO: Implement actual logic in TDD phase
-        await Task.CompletedTask;
-        return (false, "Not implemented");
+        try
+        {
+            if (!File.Exists(sourcePath) && !Directory.Exists(sourcePath))
+            {
+                return (false, "Source does not exist");
+            }
+
+            await Task.Run(() =>
+            {
+                // Ensure parent directory of destination exists
+                var parentDir = Path.GetDirectoryName(destinationPath);
+                if (!string.IsNullOrEmpty(parentDir) && !Directory.Exists(parentDir))
+                {
+                    Directory.CreateDirectory(parentDir);
+                }
+
+                if (Directory.Exists(sourcePath))
+                {
+                     // Directory move
+                     // Note: Conflict handling will be refined in a later task
+                     if (overwrite && Directory.Exists(destinationPath))
+                     {
+                         // Basic overwrite for directory: Delete dest then move
+                         Directory.Delete(destinationPath, true);
+                     }
+                     Directory.Move(sourcePath, destinationPath);
+                }
+                else
+                {
+                    // File move
+                    File.Move(sourcePath, destinationPath, overwrite);
+                }
+            });
+
+            return (true, null);
+        }
+        catch (Exception ex)
+        {
+            LogService.Instance.LogError($"Migration failed: {sourcePath} -> {destinationPath}", ex);
+            return (false, ex.Message);
+        }
     }
 
     /// <inheritdoc/>
     public async Task<(bool Success, string? Error)> RollbackAsync(string currentPath, string originalPath)
     {
-         // TODO: Implement actual logic in TDD phase
-        await Task.CompletedTask;
-        return (false, "Not implemented");
+        try
+        {
+            LogService.Instance.LogInfo($"Rolling back migration: {currentPath} -> {originalPath}");
+            return await MoveAsync(currentPath, originalPath, overwrite: false);
+        }
+        catch (Exception ex)
+        {
+            LogService.Instance.LogError($"Rollback failed: {currentPath} -> {originalPath}", ex);
+            return (false, ex.Message);
+        }
     }
 }
