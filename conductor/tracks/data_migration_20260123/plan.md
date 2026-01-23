@@ -15,9 +15,9 @@
     - [x] Write failing tests for destination collision
     - [x] Implement detection logic (File.Exists / Directory.Exists)
     - [x] Implement resolution strategy (throw specific exception to be caught by UI or callback)
-- [ ] Task: Integrate with existing `LinkService`
-    - [ ] Write tests ensuring `LinkService` can accept a "MigrateFirst" flag or strategy
-    - [ ] Update `LinkService` to call `MigrationService` before link creation
+- [x] Task: Integrate with existing `LinkService` 90ca001
+    - [x] Write tests ensuring `LinkService` can accept a "MigrateFirst" flag or strategy
+    - [x] Update `LinkService` to call `MigrationService` before link creation
 - [ ] Task: Conductor - User Manual Verification 'Core Logic & Services (Backend)' (Protocol in workflow.md)
 
 ## Phase 2: User Interface Implementation
