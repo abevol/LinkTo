@@ -3,9 +3,9 @@
 ## Phase 1: Core Logic & Services (Backend)
 本阶段专注于核心业务逻辑的实现，不涉及 UI。我们将扩展 `LinkService` 或创建新的 `MigrationService` 来处理文件移动和原子性操作。
 
-- [~] Task: Create `FileMigrationService` structure and interfaces
-    - [~] Create `IMigrationService` interface definition
-    - [~] Create `FileMigrationService` class skeleton
+- [x] Task: Create `FileMigrationService` structure and interfaces 11063dc
+    - [x] Create `IMigrationService` interface definition
+    - [x] Create `FileMigrationService` class skeleton
 - [ ] Task: Implement Atomic Move Logic (TDD)
     - [ ] Write failing tests for successful file/folder move
     - [ ] Implement move logic using `System.IO`
