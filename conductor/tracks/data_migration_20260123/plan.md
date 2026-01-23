@@ -6,11 +6,11 @@
 - [x] Task: Create `FileMigrationService` structure and interfaces 11063dc
     - [x] Create `IMigrationService` interface definition
     - [x] Create `FileMigrationService` class skeleton
-- [ ] Task: Implement Atomic Move Logic (TDD)
-    - [ ] Write failing tests for successful file/folder move
-    - [ ] Implement move logic using `System.IO`
-    - [ ] Write failing tests for rollback scenario (move success, callback failure)
-    - [ ] Implement rollback mechanism
+- [x] Task: Implement Atomic Move Logic (TDD) 12996ed
+    - [x] Write failing tests for successful file/folder move
+    - [x] Implement move logic using `System.IO`
+    - [x] Write failing tests for rollback scenario (move success, callback failure)
+    - [x] Implement rollback mechanism
 - [ ] Task: Implement Conflict Handling (TDD)
     - [ ] Write failing tests for destination collision
     - [ ] Implement detection logic (File.Exists / Directory.Exists)
