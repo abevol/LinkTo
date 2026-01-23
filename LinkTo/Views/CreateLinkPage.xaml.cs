@@ -83,11 +83,11 @@ public sealed partial class CreateLinkPage : Page
 
             if (MigrateDataCheckBox != null)
             {
-                MigrateDataCheckBox.Content = LocalizationHelper.GetString("MigrateDataCheckBox.Content");
+                MigrateDataCheckBox.Content = LocalizationHelper.GetString("Checkbox_DataMigration");
             }
             if (DataMigrationDescription != null)
             {
-                DataMigrationDescription.Text = LocalizationHelper.GetString("DataMigrationDescription.Text");
+                DataMigrationDescription.Text = LocalizationHelper.GetString("Desc_DataMigration");
             }
             if (ProgressStatusText != null)
             {
@@ -551,7 +551,11 @@ public sealed partial class CreateLinkPage : Page
             else
             {
                 // Check for permission error
-                if (result.Error != null && (result.Error.Contains("Access denied") || result.Error.Contains("Unauthorized")))
+                // "ERROR_UNAUTHORIZED" is returned by FileMigrationService
+                bool isPermissionError = result.Error == "ERROR_UNAUTHORIZED" || 
+                                         (result.Error != null && (result.Error.Contains("Access denied") || result.Error.Contains("Unauthorized")));
+
+                if (isPermissionError)
                 {
                     var elevateResult = await ShowConfirmDialog(
                         LocalizationHelper.GetString("Dialog_Error"),
@@ -572,7 +576,23 @@ public sealed partial class CreateLinkPage : Page
         }
         catch (Exception ex)
         {
-            await ShowErrorDialog(ex.Message);
+            if (ex is UnauthorizedAccessException)
+            {
+                 var elevateResult = await ShowConfirmDialog(
+                        LocalizationHelper.GetString("Dialog_Error"),
+                        LocalizationHelper.GetString("Error_AccessDenied") + "\n" + LocalizationHelper.GetString("Dialog_AdminRequired"));
+                 
+                 if (elevateResult)
+                 {
+                    AdminHelper.RestartAsAdmin($"\"{sourcePath}\"");
+                    Application.Current.Exit();
+                    return;
+                 }
+            }
+            else
+            {
+                await ShowErrorDialog(ex.Message);
+            }
         }
         finally
         {

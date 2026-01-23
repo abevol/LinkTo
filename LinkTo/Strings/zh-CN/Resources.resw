@@ -317,10 +317,10 @@
   <data name="Group_ExtendedOptions" xml:space="preserve">
     <value>扩展选项</value>
   </data>
-  <data name="MigrateDataCheckBox.Content" xml:space="preserve">
+  <data name="Checkbox_DataMigration" xml:space="preserve">
     <value>数据迁移</value>
   </data>
-  <data name="DataMigrationDescription.Text" xml:space="preserve">
+  <data name="Desc_DataMigration" xml:space="preserve">
     <value>开启后，将先移动源文件/文件夹至目标路径，再在原位创建链接。</value>
   </data>
   <data name="Dialog_MigrationConfirm" xml:space="preserve">

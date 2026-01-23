@@ -317,10 +317,10 @@ Alternatively, write a batch script to change the working directory before launc
   <data name="Group_ExtendedOptions" xml:space="preserve">
     <value>Extended Options</value>
   </data>
-  <data name="MigrateDataCheckBox.Content" xml:space="preserve">
+  <data name="Checkbox_DataMigration" xml:space="preserve">
     <value>Data Migration</value>
   </data>
-  <data name="DataMigrationDescription.Text" xml:space="preserve">
+  <data name="Desc_DataMigration" xml:space="preserve">
     <value>When enabled, the source will be moved to the target path before creating the link at the original location.</value>
   </data>
   <data name="Dialog_MigrationConfirm" xml:space="preserve">

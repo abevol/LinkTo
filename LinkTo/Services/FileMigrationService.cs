@@ -74,6 +74,11 @@ public class FileMigrationService : IMigrationService
 
             return (true, null);
         }
+        catch (UnauthorizedAccessException ex)
+        {
+            LogService.Instance.LogError($"Migration failed (Access Denied): {sourcePath} -> {destinationPath}", ex);
+            return (false, "ERROR_UNAUTHORIZED");
+        }
         catch (Exception ex)
         {
             LogService.Instance.LogError($"Migration failed: {sourcePath} -> {destinationPath}", ex);
