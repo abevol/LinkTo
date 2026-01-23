@@ -26,16 +26,29 @@
 - [x] Task: Update MainWindow UI Layout df0f030
     - [x] Add `GroupBox` (or similar container) below Link Type selection in `MainWindow.xaml`
     - [x] Add Checkbox and Description Textblock inside the container
-- [ ] Task: Bind UI State to ViewModel/Code-behind
-    - [ ] Add `IsMigrationEnabled` property to `MainWindow` or its ViewModel
-    - [ ] Ensure the Checkbox state reflects this property
-- [ ] Task: Implement Progress Feedback UI
-    - [ ] Add/Reuse ProgressRing or ProgressBar in MainWindow for migration status
-    - [ ] Wire up progress events from `FileMigrationService` to UI updates
-- [ ] Task: Handle Conflict Dialogs
-    - [ ] Implement ContentDialog for "File Exists" scenarios (Overwrite/Cancel)
-    - [ ] Connect `FileMigrationService` conflict exceptions to trigger this dialog
+- [x] Task: Bind UI State to ViewModel/Code-behind df0f030
+    - [x] Add `IsMigrationEnabled` property to `MainWindow` or its ViewModel
+    - [x] Ensure the Checkbox state reflects this property
+- [x] Task: Implement Progress Feedback UI 0d07a2c
+    - [x] Add/Reuse ProgressRing or ProgressBar in MainWindow for migration status
+    - [x] Wire up progress events from `FileMigrationService` to UI updates
+- [x] Task: Handle Conflict Dialogs 0d07a2c
+    - [x] Implement ContentDialog for "File Exists" scenarios (Overwrite/Cancel)
+    - [x] Connect `FileMigrationService` conflict exceptions to trigger this dialog
 - [ ] Task: Conductor - User Manual Verification 'User Interface Implementation' (Protocol in workflow.md)
+
+## Phase 2.5: Refinements & Enhancements (User Requested) [checkpoint: 6d5a31e]
+- [x] Task: Refactor UI Layout 6d5a31e
+    - [x] Rename "Data Migration" group to "Extended Options"
+    - [x] Move description text to be inline with the CheckBox
+- [x] Task: Complete Internationalization 6d5a31e
+    - [x] Identify missing strings (Group Header, CheckBox content, etc.)
+    - [x] Add translations for zh-CN and en-US
+- [x] Task: Implement Cross-Volume Move Support 6d5a31e
+    - [x] Update `FileMigrationService` to detect cross-volume move
+    - [x] Implement Copy+Delete fallback logic for directories
+    - [x] Add tests for cross-volume scenario (simulation)
+- [x] Task: Conductor - User Manual Verification 'Refinements & Enhancements' (Protocol in workflow.md) 6d5a31e
 
 ## Phase 3: Integration & Polish
 本阶段进行端到端的集成测试，权限处理优化以及最终的验收。
