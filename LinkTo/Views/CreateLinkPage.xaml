@@ -117,50 +117,69 @@
                 </Border>
 
                 <!-- Link Type Group -->
-                <Border Style="{StaticResource CardBorderStyle}">
-                    <StackPanel Spacing="8">
-                        <TextBlock x:Name="LinkTypeGroupHeader" Text="Link Type" Style="{StaticResource SubtitleTextBlockStyle}" />
-                        <RadioButton x:Name="SymbolicLinkRadio" 
-                                     Content="Symbolic Link" 
-                                     IsChecked="True"
-                                     GroupName="LinkType"
-                                     Checked="LinkType_Checked" />
-                        <Grid ColumnSpacing="16">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <RadioButton x:Name="HardLinkRadio" 
-                                         Grid.Column="0"
-                                         Content="Hard Link" 
-                                         GroupName="LinkType"
-                                         VerticalAlignment="Center"
-                                         Checked="LinkType_Checked" />
-                            <StackPanel x:Name="HardLinkInfoPanel"
-                                        Grid.Column="1"
-                                        Orientation="Horizontal"
-                                        Spacing="8"
-                                        VerticalAlignment="Center"
-                                        Visibility="Collapsed">
-                                <FontIcon Glyph="&#xE7BA;" 
-                                          FontFamily="Segoe MDL2 Assets" 
-                                          Foreground="{ThemeResource SystemFillColorCautionBrush}" 
-                                          FontSize="16" />
-                                <TextBlock x:Name="HardLinkInfoText" 
-                                           VerticalAlignment="Center" 
-                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                           TextTrimming="CharacterEllipsis" />
+                <Border Style="{StaticResource CardBorderStyle}" Padding="0">
+                    <Expander x:Name="LinkTypeExpander" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" IsExpanded="False"
+                              Expanding="LinkTypeExpander_Expanding" Collapsed="LinkTypeExpander_Collapsed">
+                        <Expander.Header>
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <TextBlock x:Name="LinkTypeGroupHeader" Text="Link Type" Style="{StaticResource SubtitleTextBlockStyle}" />
+                                <Border x:Name="LinkTypeSelectedBorder"
+                                        Background="{ThemeResource ControlAltFillColorTertiaryBrush}"
+                                        CornerRadius="4"
+                                        Padding="8,4"
+                                        BorderBrush="{ThemeResource ControlStrongStrokeColorDefaultBrush}"
+                                        BorderThickness="1"
+                                        VerticalAlignment="Center">
+                                    <TextBlock x:Name="LinkTypeSelectedText" 
+                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                </Border>
                             </StackPanel>
-                        </Grid>
-                        <RadioButton x:Name="BatchLinkRadio" 
-                                     Content="Batch File (.bat)" 
-                                     GroupName="LinkType"
-                                     Checked="LinkType_Checked" />
-                        <RadioButton x:Name="ShortcutLinkRadio" 
-                                     Content="Windows Shortcut (.lnk)" 
-                                     GroupName="LinkType"
-                                     Checked="LinkType_Checked" />
-                    </StackPanel>
+                        </Expander.Header>
+                        <Expander.Content>
+                            <StackPanel Spacing="8" Padding="0,8,0,0">
+                                <RadioButton x:Name="SymbolicLinkRadio" 
+                                             Content="Symbolic Link" 
+                                             IsChecked="True"
+                                             GroupName="LinkType"
+                                             Checked="LinkType_Checked" />
+                                <Grid ColumnSpacing="16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <RadioButton x:Name="HardLinkRadio" 
+                                                 Grid.Column="0"
+                                                 Content="Hard Link" 
+                                                 GroupName="LinkType"
+                                                 VerticalAlignment="Center"
+                                                 Checked="LinkType_Checked" />
+                                    <StackPanel x:Name="HardLinkInfoPanel"
+                                                Grid.Column="1"
+                                                Orientation="Horizontal"
+                                                Spacing="8"
+                                                VerticalAlignment="Center"
+                                                Visibility="Collapsed">
+                                        <FontIcon Glyph="&#xE7BA;" 
+                                                  FontFamily="Segoe MDL2 Assets" 
+                                                  Foreground="{ThemeResource SystemFillColorCautionBrush}" 
+                                                  FontSize="16" />
+                                        <TextBlock x:Name="HardLinkInfoText" 
+                                                   VerticalAlignment="Center" 
+                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                   TextTrimming="CharacterEllipsis" />
+                                    </StackPanel>
+                                </Grid>
+                                <RadioButton x:Name="BatchLinkRadio" 
+                                             Content="Batch File (.bat)" 
+                                             GroupName="LinkType"
+                                             Checked="LinkType_Checked" />
+                                <RadioButton x:Name="ShortcutLinkRadio" 
+                                             Content="Windows Shortcut (.lnk)" 
+                                             GroupName="LinkType"
+                                             Checked="LinkType_Checked" />
+                            </StackPanel>
+                        </Expander.Content>
+                    </Expander>
                 </Border>
 
                 <!-- Extended Options Group -->

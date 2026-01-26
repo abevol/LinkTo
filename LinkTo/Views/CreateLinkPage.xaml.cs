@@ -30,6 +30,7 @@ public sealed partial class CreateLinkPage : Page
 
         ApplyLocalization();
         UpdateHardLinkAvailability();
+        UpdateLinkTypeSelectedText();
         this.Loaded += CreateLinkPage_Loaded;
     }
 
@@ -322,6 +323,49 @@ public sealed partial class CreateLinkPage : Page
     {
         UpdateWorkingDirectoryVisibility();
         UpdateLinkName();
+        UpdateLinkTypeSelectedText();
+    }
+
+    private void LinkTypeExpander_Expanding(object sender, ExpanderExpandingEventArgs e)
+    {
+        if (LinkTypeSelectedBorder != null)
+        {
+            LinkTypeSelectedBorder.Visibility = Visibility.Collapsed;
+        }
+    }
+
+    private void LinkTypeExpander_Collapsed(Expander sender, ExpanderCollapsedEventArgs e)
+    {
+        if (LinkTypeSelectedBorder != null)
+        {
+            LinkTypeSelectedBorder.Visibility = Visibility.Visible;
+        }
+        UpdateLinkTypeSelectedText();
+    }
+
+    private void UpdateLinkTypeSelectedText()
+    {
+        if (LinkTypeSelectedText == null) return;
+
+        string selectedType = string.Empty;
+        if (SymbolicLinkRadio?.IsChecked == true)
+        {
+            selectedType = SymbolicLinkRadio.Content?.ToString() ?? string.Empty;
+        }
+        else if (HardLinkRadio?.IsChecked == true)
+        {
+            selectedType = HardLinkRadio.Content?.ToString() ?? string.Empty;
+        }
+        else if (BatchLinkRadio?.IsChecked == true)
+        {
+            selectedType = BatchLinkRadio.Content?.ToString() ?? string.Empty;
+        }
+        else if (ShortcutLinkRadio?.IsChecked == true)
+        {
+            selectedType = ShortcutLinkRadio.Content?.ToString() ?? string.Empty;
+        }
+
+        LinkTypeSelectedText.Text = selectedType;
     }
 
     private void UpdateWorkingDirectoryVisibility()
