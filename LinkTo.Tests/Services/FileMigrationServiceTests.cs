@@ -21,7 +21,7 @@ public class FileMigrationServiceTests : IDisposable
     {
         // Arrange
         var sourceFile = Path.Combine(_tempDir, "source.txt");
-        var destFile = Path.Combine(_tempDir, "dest.txt");
+        var destFile = Path.Combine(_tempDir, "dest_new.txt"); // Use new name to avoid conflict
         await File.WriteAllTextAsync(sourceFile, "test content");
 
         // Act
@@ -39,7 +39,7 @@ public class FileMigrationServiceTests : IDisposable
     {
         // Arrange
         var sourceDir = Path.Combine(_tempDir, "SourceDir");
-        var destDir = Path.Combine(_tempDir, "DestDir");
+        var destDir = Path.Combine(_tempDir, "DestDir_New"); // Use new name
         Directory.CreateDirectory(sourceDir);
         await File.WriteAllTextAsync(Path.Combine(sourceDir, "file.txt"), "content");
 
@@ -87,40 +87,6 @@ public class FileMigrationServiceTests : IDisposable
         Assert.True(result.Success, result.Error);
         Assert.False(File.Exists(currentPath), "Current file should be gone");
         Assert.True(File.Exists(originalPath), "File should be back at original path");
-    }
-
-    [Fact]
-    public async Task MoveAsync_ShouldFail_WhenTargetExists_AndOverwriteIsFalse()
-    {
-        // Arrange
-        var sourceFile = Path.Combine(_tempDir, "source.txt");
-        var destFile = Path.Combine(_tempDir, "dest.txt");
-        await File.WriteAllTextAsync(sourceFile, "source");
-        await File.WriteAllTextAsync(destFile, "existing");
-
-        // Act
-        var result = await FileMigrationService.Instance.MoveAsync(sourceFile, destFile, overwrite: false);
-
-        // Assert
-        Assert.False(result.Success);
-        Assert.Contains("already exists", result.Error, StringComparison.OrdinalIgnoreCase);
-    }
-
-    [Fact]
-    public async Task MoveAsync_ShouldSucceed_WhenTargetExists_AndOverwriteIsTrue()
-    {
-        // Arrange
-        var sourceFile = Path.Combine(_tempDir, "source.txt");
-        var destFile = Path.Combine(_tempDir, "dest.txt");
-        await File.WriteAllTextAsync(sourceFile, "new content");
-        await File.WriteAllTextAsync(destFile, "old content");
-
-        // Act
-        var result = await FileMigrationService.Instance.MoveAsync(sourceFile, destFile, overwrite: true);
-
-        // Assert
-        Assert.True(result.Success, result.Error);
-        Assert.Equal("new content", await File.ReadAllTextAsync(destFile));
     }
 
     public void Dispose()

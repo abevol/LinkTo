@@ -2,11 +2,12 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using LinkTo.Helpers;
+using Microsoft.VisualBasic.FileIO;
 
 namespace LinkTo.Services;
 
 /// <summary>
-/// Service for handling file and directory migration operations with safety checks
+/// Service for handling file and directory migration operations with safety checks and Native Windows UI
 /// </summary>
 public class FileMigrationService : IMigrationService
 {
@@ -25,54 +26,35 @@ public class FileMigrationService : IMigrationService
                 return (false, "Source does not exist");
             }
 
-            // Explicit check for destination existence to provide consistent error message
-            if ((File.Exists(destinationPath) || Directory.Exists(destinationPath)) && !overwrite)
-            {
-                return (false, "Target already exists");
-            }
+            // Note: Microsoft.VisualBasic.FileIO handles most checks and UI dialogs automatically
+            // but we still want to maintain the async nature and basic error handling.
 
             await Task.Run(() =>
             {
-                // Ensure parent directory of destination exists
-                var parentDir = Path.GetDirectoryName(destinationPath);
-                if (!string.IsNullOrEmpty(parentDir) && !Directory.Exists(parentDir))
-                {
-                    Directory.CreateDirectory(parentDir);
-                }
-
                 if (Directory.Exists(sourcePath))
                 {
-                     // Directory move
-                     // Note: Conflict handling will be refined in a later task
-                     if (overwrite && Directory.Exists(destinationPath))
-                     {
-                         // Basic overwrite for directory: Delete dest then move
-                         Directory.Delete(destinationPath, true);
-                     }
-
-                     // Check for cross-volume move
-                     var sourceRoot = Path.GetPathRoot(Path.GetFullPath(sourcePath));
-                     var destRoot = Path.GetPathRoot(Path.GetFullPath(destinationPath));
-
-                     if (!string.Equals(sourceRoot, destRoot, StringComparison.OrdinalIgnoreCase))
-                     {
-                         // Directory.Move does not support cross-volume, so we must Copy + Delete
-                         CopyDirectory(sourcePath, destinationPath);
-                         Directory.Delete(sourcePath, true);
-                     }
-                     else
-                     {
-                         Directory.Move(sourcePath, destinationPath);
-                     }
+                    FileSystem.MoveDirectory(
+                        sourcePath, 
+                        destinationPath, 
+                        UIOption.AllDialogs, 
+                        UICancelOption.ThrowException);
                 }
                 else
                 {
-                    // File move (File.Move supports cross-volume)
-                    File.Move(sourcePath, destinationPath, overwrite);
+                    FileSystem.MoveFile(
+                        sourcePath, 
+                        destinationPath, 
+                        UIOption.AllDialogs, 
+                        UICancelOption.ThrowException);
                 }
             });
 
             return (true, null);
+        }
+        catch (OperationCanceledException)
+        {
+            LogService.Instance.LogInfo($"Migration cancelled by user: {sourcePath} -> {destinationPath}");
+            return (false, "USER_CANCELLED");
         }
         catch (UnauthorizedAccessException ex)
         {
@@ -86,32 +68,14 @@ public class FileMigrationService : IMigrationService
         }
     }
 
-    private void CopyDirectory(string sourceDir, string destDir)
-    {
-        // Ensure destination directory exists
-        Directory.CreateDirectory(destDir);
-
-        // Copy files
-        foreach (var file in Directory.GetFiles(sourceDir))
-        {
-            var destFile = Path.Combine(destDir, Path.GetFileName(file));
-            File.Copy(file, destFile, true);
-        }
-
-        // Copy subdirectories recursively
-        foreach (var subDir in Directory.GetDirectories(sourceDir))
-        {
-            var destSubDir = Path.Combine(destDir, Path.GetFileName(subDir));
-            CopyDirectory(subDir, destSubDir);
-        }
-    }
-
     /// <inheritdoc/>
     public async Task<(bool Success, string? Error)> RollbackAsync(string currentPath, string originalPath)
     {
         try
         {
             LogService.Instance.LogInfo($"Rolling back migration: {currentPath} -> {originalPath}");
+            // Rollback usually doesn't need UI unless it's a large operation, 
+            // but for consistency we use MoveAsync which now has UI.
             return await MoveAsync(currentPath, originalPath, overwrite: false);
         }
         catch (Exception ex)
