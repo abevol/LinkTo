@@ -242,16 +242,38 @@ public partial class LinkService
              return (false, GetLocalizedString("Error_SourceNotExist"));
         }
 
-        // 3. Move File/Folder
+        // 3. Validate LinkType support before moving
+        switch (linkType)
+        {
+            case LinkType.Symbolic:
+            case LinkType.Hard:
+            case LinkType.Batch:
+            case LinkType.Shortcut:
+                break;
+            default:
+                return (false, "Not implemented for this link type");
+        }
+
+        // 4. Move File/Folder
         // Blocking call for async method as CreateLink is synchronous
         var moveResult = System.Threading.Tasks.Task.Run(() => FileMigrationService.Instance.MoveAsync(sourcePath, destinationPath)).Result;
         
         if (!moveResult.Success)
         {
+            // If the operation was cancelled or failed, we might need to rollback 
+            // if it was a partial move (i.e., destination now exists).
+            // Windows native cancellation is not always atomic for directories.
+            if ((File.Exists(destinationPath) || Directory.Exists(destinationPath)) && 
+                (File.Exists(sourcePath) || Directory.Exists(sourcePath)))
+            {
+                LogService.Instance.LogInfo("Migration failed or cancelled, but destination exists. Attempting rollback of partial move...");
+                System.Threading.Tasks.Task.Run(() => FileMigrationService.Instance.RollbackAsync(destinationPath, sourcePath)).Wait();
+            }
+            
             return (false, moveResult.Error);
         }
 
-        // 4. Create Link at original location (linkLocation) pointing to new location (destinationPath)
+        // 5. Create Link at original location (linkLocation) pointing to new location (destinationPath)
         (bool Success, string? Error) linkResult;
         
         switch (linkType)
@@ -269,9 +291,9 @@ public partial class LinkService
                 linkResult = ShortcutService.CreateShortcut(destinationPath, linkLocation, workingDir ?? string.Empty);
                 break;
             default:
-                // Rollback!
-                System.Threading.Tasks.Task.Run(() => FileMigrationService.Instance.RollbackAsync(destinationPath, sourcePath)).Wait();
-                return (false, "Not implemented for this link type");
+                // Should not happen due to pre-check
+                linkResult = (false, "Not implemented for this link type");
+                break;
         }
         
         if (!linkResult.Success)

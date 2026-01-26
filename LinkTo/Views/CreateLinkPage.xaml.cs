@@ -482,31 +482,33 @@ public sealed partial class CreateLinkPage : Page
 
             if (!migrationConfirm) return;
         }
-
-        // Check if target exists
-        if (File.Exists(linkPath) || Directory.Exists(linkPath))
+        else
         {
-            var confirmResult = await ShowConfirmDialog(
-                LocalizationHelper.GetString("Dialog_Warning"),
-                LocalizationHelper.GetString("Dialog_OverwriteConfirm"));
+            // Check if target exists (only for normal link creation, migration handles its own target check)
+            if (File.Exists(linkPath) || Directory.Exists(linkPath))
+            {
+                var confirmResult = await ShowConfirmDialog(
+                    LocalizationHelper.GetString("Dialog_Warning"),
+                    LocalizationHelper.GetString("Dialog_OverwriteConfirm"));
 
-            if (!confirmResult)
-            {
-                return;
-            }
+                if (!confirmResult)
+                {
+                    return;
+                }
 
-            // Delete existing
-            try
-            {
-                if (Directory.Exists(linkPath))
-                    Directory.Delete(linkPath, true); // true for recursive delete if it's a dir
-                else
-                    File.Delete(linkPath);
-            }
-            catch (Exception ex)
-            {
-                await ShowErrorDialog(ex.Message);
-                return;
+                // Delete existing
+                try
+                {
+                    if (Directory.Exists(linkPath))
+                        Directory.Delete(linkPath, true); // true for recursive delete if it's a dir
+                    else
+                        File.Delete(linkPath);
+                }
+                catch (Exception ex)
+                {
+                    await ShowErrorDialog(ex.Message);
+                    return;
+                }
             }
         }
 
