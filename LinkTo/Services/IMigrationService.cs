@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 
 namespace LinkTo.Services;
@@ -13,14 +14,16 @@ public interface IMigrationService
     /// <param name="sourcePath">The full path of the source file or directory.</param>
     /// <param name="destinationPath">The full path of the destination.</param>
     /// <param name="overwrite">Whether to overwrite the destination if it exists.</param>
+    /// <param name="ownerHwnd">Owner window handle for the progress dialog.</param>
     /// <returns>A task representing the asynchronous operation. Result is true if successful.</returns>
-    Task<(bool Success, string? Error)> MoveAsync(string sourcePath, string destinationPath, bool overwrite = false);
+    Task<(bool Success, string? Error)> MoveAsync(string sourcePath, string destinationPath, bool overwrite = false, IntPtr ownerHwnd = default);
 
     /// <summary>
     /// Moves a file or directory back to its original location (rollback).
     /// </summary>
     /// <param name="currentPath">The current location of the item.</param>
     /// <param name="originalPath">The original location to move back to.</param>
+    /// <param name="ownerHwnd">Owner window handle for the progress dialog.</param>
     /// <returns>A task representing the asynchronous operation. Result is true if successful.</returns>
-    Task<(bool Success, string? Error)> RollbackAsync(string currentPath, string originalPath);
+    Task<(bool Success, string? Error)> RollbackAsync(string currentPath, string originalPath, IntPtr ownerHwnd = default);
 }
