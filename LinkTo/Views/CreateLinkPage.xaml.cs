@@ -580,8 +580,11 @@ public sealed partial class CreateLinkPage : Page
         {
             SetLoading(true);
 
+            // Get the main window handle so the shell progress dialog is modal to it
+            var hwnd = App.MainWindow != null ? WindowNative.GetWindowHandle(App.MainWindow) : IntPtr.Zero;
+
             var result = await System.Threading.Tasks.Task.Run(() => 
-                LinkService.Instance.CreateLink(sourcePath, targetDir, linkName, linkType, workingDir, migrateData));
+                LinkService.Instance.CreateLink(sourcePath, targetDir, linkName, linkType, workingDir, migrateData, hwnd));
 
             if (result.Success)
             {
@@ -613,6 +616,11 @@ public sealed partial class CreateLinkPage : Page
                         Application.Current.Exit();
                         return;
                     }
+                }
+                else if (result.Error == "USER_CANCELLED")
+                {
+                    // Map the error code to the user-friendly localized text
+                    await ShowErrorDialog(LocalizationHelper.GetString("Error_UserCancelled"));
                 }
                 else
                 {

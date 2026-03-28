@@ -329,4 +329,7 @@ Alternatively, write a batch script to change the working directory before launc
   <data name="Status_Processing" xml:space="preserve">
     <value>Processing...</value>
   </data>
+  <data name="Error_UserCancelled" xml:space="preserve">
+    <value>Operation cancelled by user.</value>
+  </data>
 </root>

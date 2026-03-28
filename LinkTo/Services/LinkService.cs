@@ -169,11 +169,11 @@ public partial class LinkService
     /// <summary>
     /// Create a link (symbolic, hard, batch or shortcut) and add to history
     /// </summary>
-    public (bool Success, string? Error) CreateLink(string sourcePath, string targetDirectory, string linkName, LinkType linkType, string? workingDir = null, bool migrateData = false)
+    public (bool Success, string? Error) CreateLink(string sourcePath, string targetDirectory, string linkName, LinkType linkType, string? workingDir = null, bool migrateData = false, IntPtr ownerHwnd = default)
     {
         if (migrateData)
         {
-            return CreateLinkWithMigration(sourcePath, targetDirectory, linkName, linkType, workingDir);
+            return CreateLinkWithMigration(sourcePath, targetDirectory, linkName, linkType, workingDir, ownerHwnd);
         }
 
         var linkPath = Path.Combine(targetDirectory, linkName);
@@ -227,7 +227,7 @@ public partial class LinkService
         return result;
     }
 
-    private (bool Success, string? Error) CreateLinkWithMigration(string sourcePath, string targetDirectory, string linkName, LinkType linkType, string? workingDir)
+    private (bool Success, string? Error) CreateLinkWithMigration(string sourcePath, string targetDirectory, string linkName, LinkType linkType, string? workingDir, IntPtr ownerHwnd = default)
     {
         // 1. Determine paths
         // In Migration Mode, "targetDirectory" is where the file moves TO.
@@ -256,7 +256,7 @@ public partial class LinkService
 
         // 4. Move File/Folder
         // Blocking call for async method as CreateLink is synchronous
-        var moveResult = System.Threading.Tasks.Task.Run(() => FileMigrationService.Instance.MoveAsync(sourcePath, destinationPath)).Result;
+        var moveResult = System.Threading.Tasks.Task.Run(() => FileMigrationService.Instance.MoveAsync(sourcePath, destinationPath, ownerHwnd: ownerHwnd)).Result;
         
         if (!moveResult.Success)
         {
@@ -267,7 +267,7 @@ public partial class LinkService
                 (File.Exists(sourcePath) || Directory.Exists(sourcePath)))
             {
                 LogService.Instance.LogInfo("Migration failed or cancelled, but destination exists. Attempting rollback of partial move...");
-                System.Threading.Tasks.Task.Run(() => FileMigrationService.Instance.RollbackAsync(destinationPath, sourcePath)).Wait();
+                System.Threading.Tasks.Task.Run(() => FileMigrationService.Instance.RollbackAsync(destinationPath, sourcePath, ownerHwnd: ownerHwnd)).Wait();
             }
             
             return (false, moveResult.Error);
@@ -300,7 +300,7 @@ public partial class LinkService
         {
             // 5. Rollback on Link Failure
             LogService.Instance.LogError($"Link creation failed after migration. Rolling back. Error: {linkResult.Error}");
-            var rollbackResult = System.Threading.Tasks.Task.Run(() => FileMigrationService.Instance.RollbackAsync(destinationPath, sourcePath)).Result;
+            var rollbackResult = System.Threading.Tasks.Task.Run(() => FileMigrationService.Instance.RollbackAsync(destinationPath, sourcePath, ownerHwnd: ownerHwnd)).Result;
             
             if (!rollbackResult.Success)
             {
