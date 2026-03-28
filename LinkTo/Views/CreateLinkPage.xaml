@@ -127,7 +127,7 @@
                                         Background="{ThemeResource ControlAltFillColorTertiaryBrush}"
                                         CornerRadius="4"
                                         Padding="8,4"
-                                        BorderBrush="{ThemeResource ControlStrongStrokeColorDefaultBrush}"
+                                        BorderBrush="{ThemeResource AccentFillColorDefaultBrush}"
                                         BorderThickness="1"
                                         VerticalAlignment="Center">
                                     <TextBlock x:Name="LinkTypeSelectedText" 

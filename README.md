@@ -1,6 +1,6 @@
 # LinkTo
 
-A Windows application for creating and managing symbolic links and hard links.
+A WinUI 3-based application for creating and managing symbolic links and hard links on Windows.
 
 ![WinUI 3](https://img.shields.io/badge/WinUI-3-blue)
 ![.NET 10](https://img.shields.io/badge/.NET-10.0-purple)
