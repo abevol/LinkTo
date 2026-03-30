@@ -73,7 +73,7 @@ dotnet publish LinkTo\LinkTo.csproj /p:PublishProfile=win-x64
 
 1. 在应用的“设置”中启用“右键菜单外壳集成”
 2. 在 Windows 资源管理器中右键点击任意文件或文件夹
-3. 选择 `Link to...`（或你设置的本地化菜单项）
+3. 选择 `链接到...`
 4. 在弹出的窗口中选择放置位置并创建链接
 
 ## 链接类型对比
