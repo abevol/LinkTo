@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -42,10 +42,10 @@
 
   <!-- Create Link Page -->
   <data name="Group_Source" xml:space="preserve">
-    <value>源文件 / 目录</value>
+    <value>源文件 / 文件夹</value>
   </data>
   <data name="Group_Target" xml:space="preserve">
-    <value>目标目录</value>
+    <value>放置位置</value>
   </data>
   <data name="Group_LinkName" xml:space="preserve">
     <value>链接名称</value>
@@ -93,7 +93,7 @@
     <value>选择文件或文件夹...</value>
   </data>
   <data name="Placeholder_SelectTarget" xml:space="preserve">
-    <value>选择目标目录...</value>
+    <value>选择放置位置...</value>
   </data>
   <data name="Placeholder_SelectWorkingDir" xml:space="preserve">
     <value>选择工作目录...</value>
@@ -178,7 +178,7 @@
   </data>
   <data name="Help_SymbolicLinkDesc" xml:space="preserve">
     <value>• 类似于快捷方式，指向原始文件/文件夹的路径
-• 支持文件和目录
+• 支持文件和文件夹
 • 可以跨不同的驱动器/卷
 • 可以链接到网络路径
 • 如果原始文件被删除，符号链接将变为无效
@@ -189,7 +189,7 @@
   </data>
   <data name="Help_HardLinkDesc" xml:space="preserve">
     <value>• 创建指向磁盘上相同文件数据的另一个引用
-• 仅支持文件，不支持目录
+• 仅支持文件，不支持文件夹
 • 必须与原始文件在同一驱动器/卷上
 • 不能链接到网络路径
 • 如果原始文件被删除，硬链接仍然有效（数据保留）
@@ -263,7 +263,7 @@
     <value>警告</value>
   </data>
   <data name="Dialog_OverwriteConfirm" xml:space="preserve">
-    <value>已存在同名文件或目录。是否覆盖？</value>
+    <value>已存在同名文件或文件夹。是否覆盖？</value>
   </data>
   <data name="Dialog_LinkCreated" xml:space="preserve">
     <value>链接创建成功！</value>
@@ -277,13 +277,13 @@
 
   <!-- Errors -->
   <data name="Error_SourceNotExist" xml:space="preserve">
-    <value>源文件或目录不存在。</value>
+    <value>源文件或文件夹不存在。</value>
   </data>
   <data name="Error_TargetNotExist" xml:space="preserve">
-    <value>目标目录不存在。</value>
+    <value>放置位置不存在。</value>
   </data>
   <data name="Error_TargetExists" xml:space="preserve">
-    <value>目标位置已存在同名文件或目录。</value>
+    <value>放置位置已存在同名文件或文件夹。</value>
   </data>
   <data name="Error_AccessDenied" xml:space="preserve">
     <value>访问被拒绝。可能需要管理员权限。</value>
@@ -292,10 +292,10 @@
     <value>创建硬链接失败。</value>
   </data>
   <data name="Error_SourceRequired" xml:space="preserve">
-    <value>请选择源文件或目录。</value>
+    <value>请选择源文件或文件夹。</value>
   </data>
   <data name="Error_TargetRequired" xml:space="preserve">
-    <value>请选择目标目录。</value>
+    <value>请选择放置位置。</value>
   </data>
   <data name="Error_LinkNameRequired" xml:space="preserve">
     <value>请输入链接名称。</value>
@@ -306,7 +306,7 @@
     <value>源文件不存在。</value>
   </data>
   <data name="HardLinkReason_DirectoryNotSupported" xml:space="preserve">
-    <value>硬链接不支持目录。</value>
+    <value>硬链接不支持文件夹。</value>
   </data>
   <data name="HardLinkReason_NetworkNotSupported" xml:space="preserve">
     <value>硬链接不支持网络路径。</value>

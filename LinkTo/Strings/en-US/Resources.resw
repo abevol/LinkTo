@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -42,10 +42,10 @@
 
   <!-- Create Link Page -->
   <data name="Group_Source" xml:space="preserve">
-    <value>Source File / Directory</value>
+    <value>Source File / Folder</value>
   </data>
   <data name="Group_Target" xml:space="preserve">
-    <value>Target Directory</value>
+    <value>Target Location</value>
   </data>
   <data name="Group_LinkName" xml:space="preserve">
     <value>Link Name</value>
@@ -93,7 +93,7 @@
     <value>Select file or folder...</value>
   </data>
   <data name="Placeholder_SelectTarget" xml:space="preserve">
-    <value>Select target directory...</value>
+    <value>Select target location...</value>
   </data>
   <data name="Placeholder_SelectWorkingDir" xml:space="preserve">
     <value>Select working directory...</value>
@@ -178,7 +178,7 @@
   </data>
   <data name="Help_SymbolicLinkDesc" xml:space="preserve">
     <value>• Works like a shortcut, points to the original file/folder path
-• Supports both files and directories
+• Supports both files and folders
 • Can link across different drives/volumes
 • Can link to network paths
 • If original is deleted, symbolic link becomes broken
@@ -189,7 +189,7 @@
   </data>
   <data name="Help_HardLinkDesc" xml:space="preserve">
     <value>• Creates another reference to the same file data on disk
-• Only supports files, not directories
+• Only supports files, not folders
 • Must be on the same drive/volume as the original
 • Cannot link to network paths
 • If original is deleted, hard link still works (data persists)
@@ -263,7 +263,7 @@ Alternatively, write a batch script to change the working directory before launc
     <value>Warning</value>
   </data>
   <data name="Dialog_OverwriteConfirm" xml:space="preserve">
-    <value>A file or directory with this name already exists. Do you want to overwrite it?</value>
+    <value>A file or folder with this name already exists. Do you want to overwrite it?</value>
   </data>
   <data name="Dialog_LinkCreated" xml:space="preserve">
     <value>Link created successfully!</value>
@@ -277,13 +277,13 @@ Alternatively, write a batch script to change the working directory before launc
 
   <!-- Errors -->
   <data name="Error_SourceNotExist" xml:space="preserve">
-    <value>Source file or directory does not exist.</value>
+    <value>Source file or folder does not exist.</value>
   </data>
   <data name="Error_TargetNotExist" xml:space="preserve">
-    <value>Target directory does not exist.</value>
+    <value>Target location does not exist.</value>
   </data>
   <data name="Error_TargetExists" xml:space="preserve">
-    <value>A file or directory already exists at the target location.</value>
+    <value>A file or folder already exists at the target location.</value>
   </data>
   <data name="Error_AccessDenied" xml:space="preserve">
     <value>Access denied. Administrator privileges may be required.</value>
@@ -292,10 +292,10 @@ Alternatively, write a batch script to change the working directory before launc
     <value>Failed to create hard link.</value>
   </data>
   <data name="Error_SourceRequired" xml:space="preserve">
-    <value>Please select a source file or directory.</value>
+    <value>Please select a source file or folder.</value>
   </data>
   <data name="Error_TargetRequired" xml:space="preserve">
-    <value>Please select a target directory.</value>
+    <value>Please select a target location.</value>
   </data>
   <data name="Error_LinkNameRequired" xml:space="preserve">
     <value>Please enter a link name.</value>
@@ -306,7 +306,7 @@ Alternatively, write a batch script to change the working directory before launc
     <value>Source file does not exist.</value>
   </data>
   <data name="HardLinkReason_DirectoryNotSupported" xml:space="preserve">
-    <value>Hard links do not support directories.</value>
+    <value>Hard links do not support folders.</value>
   </data>
   <data name="HardLinkReason_NetworkNotSupported" xml:space="preserve">
     <value>Hard links do not support network paths.</value>
@@ -321,7 +321,7 @@ Alternatively, write a batch script to change the working directory before launc
     <value>Data Migration</value>
   </data>
   <data name="Desc_DataMigration" xml:space="preserve">
-    <value>When enabled, the source will be moved to the target path before creating the link at the original location.</value>
+    <value>When enabled, the source will be moved to the target location before creating the link at the original location.</value>
   </data>
   <data name="Dialog_MigrationConfirm" xml:space="preserve">
     <value>Data migration will move the source file/folder. Do you want to continue?</value>
