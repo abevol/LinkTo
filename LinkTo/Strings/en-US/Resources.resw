@@ -84,7 +84,7 @@
     <value>Drag and drop file or folder here</value>
   </data>
   <data name="CommonDirectories" xml:space="preserve">
-    <value>Common Directories</value>
+    <value>Common Locations</value>
   </data>
   <data name="Button_Delete" xml:space="preserve">
     <value>Delete</value>

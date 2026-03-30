@@ -84,7 +84,7 @@
     <value>拖放文件或文件夹到此处</value>
   </data>
   <data name="CommonDirectories" xml:space="preserve">
-    <value>常用目录</value>
+    <value>常用位置</value>
   </data>
   <data name="Button_Delete" xml:space="preserve">
     <value>删除</value>
