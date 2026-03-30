@@ -1,8 +1,0 @@
-{
-  "track_id": "native_ui_migration_20260126",
-  "type": "feature",
-  "status": "new",
-  "created_at": "2026-01-26T08:33:00Z",
-  "updated_at": "2026-01-26T08:33:00Z",
-  "description": "@LinkTo/Services/FileMigrationService.cs 将移动文件/目录的方法改为以调用带有 Windows 原生 UI的方法"
-}

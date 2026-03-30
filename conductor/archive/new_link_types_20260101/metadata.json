@@ -1,8 +1,0 @@
-{
-  "track_id": "new_link_types_20260101",
-  "type": "feature",
-  "status": "new",
-  "created_at": "2026-01-01T00:00:00Z",
-  "updated_at": "2026-01-01T00:00:00Z",
-  "description": "Add support for creating Batch file launchers and Windows Shortcuts (.lnk) with configurable working directories."
-}
