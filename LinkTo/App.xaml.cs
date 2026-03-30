@@ -13,6 +13,11 @@ public partial class App : Application
 
     public static MainWindow? MainWindow => _mainWindow;
 
+    static App()
+    {
+        Environment.SetEnvironmentVariable("MICROSOFT_WINDOWSAPPRUNTIME_BASE_DIRECTORY", AppContext.BaseDirectory);
+    }
+
     /// <summary>
     /// Initializes the singleton application object.
     /// </summary>

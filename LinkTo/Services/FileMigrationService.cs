@@ -89,7 +89,7 @@ public class FileMigrationService : IMigrationService
                 EnableWindow(ownerHwnd, false);
 
                 // Start background thread to forcefully reparent the Windows 10/11 out-of-proc shell dialog
-                Task.Run(async () =>
+                _ = Task.Run(async () =>
                 {
                     uint currentPid = (uint)Environment.ProcessId;
 
