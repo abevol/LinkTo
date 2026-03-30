@@ -1,4 +1,4 @@
-[English](README.md) | [简体中文](README-zh-CN.md)
+﻿[English](README.md) | [简体中文](README-zh-CN.md)
 
 # LinkTo
 
@@ -17,7 +17,7 @@ A WinUI 3-based application for creating and managing symbolic links, hard links
 - **Shell Integration** - Right-click context menu integration in Windows Explorer
 - **Link History** - Track and manage created links
 - **Multi-language** - English and Chinese interfaces
-- **Standalone (NativeAOT)** - Compiled with NativeAOT for zero runtime dependencies, minimal footprint, and blazing fast startup
+- **NativeAOT** - Compiled with NativeAOT for minimal footprint and blazing fast startup
 - **Modern UI** - Beautiful WinUI 3 interface with Mica backdrop
 
 ## Screenshots
@@ -27,8 +27,8 @@ A WinUI 3-based application for creating and managing symbolic links, hard links
 ## Requirements
 
 - Windows 10 version 1809 (build 17763) or later
-- **No runtime required** (The release is a standalone NativeAOT executable)
-- *.NET 10.0 SDK is only required if building from source*
+- [.NET 10.0 Runtime](https://dotnet.microsoft.com/download/dotnet/10.0)
+- [Windows App SDK Runtime](https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/downloads)
 
 ## Installation
 

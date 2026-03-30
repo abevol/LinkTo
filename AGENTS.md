@@ -10,7 +10,7 @@
 ## 2. 项目架构与技术栈
 * **应用类型**：基于 **WinUI 3** (Windows App SDK) 的桌面应用程序。
 * **目标框架**：`.NET 10.0` (`net10.0-windows10.0.19041.0`)。
-* **发布模式**：**NativeAOT** (独立发布、单文件、免安装运行时)。
+* **发布模式**：**NativeAOT** (需安装 Windows App SDK 运行时)。
 * **核心功能**：在 Windows 上可视化地创建和管理符号链接 (Symbolic Link)、硬链接 (Hard Link)、批处理脚本 (.bat) 和 Windows 快捷方式 (.lnk)。
 * **项目结构**：
   * `/LinkTo/Views/`：XAML 页面及 Code-Behind。
@@ -31,8 +31,8 @@
   4. 使用 `SetWindowLongPtr(..., GWLP_HWNDPARENT, ownerHwnd)` 强制剥夺其所有权，实现窗口置顶锁定。
 * **禁令**：**绝对禁止**尝试将底层文件操作替换为 `IFileOperation` 的原生 COM 接口调用（我们曾尝试过，不仅代码臃肿且会导致各种 `E_NOTIMPL 0x80004001` 异常）。保持现有的 `FileSystem` + `Win32 Hook` 方案！
 
-### 3.2 NativeAOT (单文件打包) 兼容性
-* **背景**：WinUI 3 官方在单文件/AOT 打包下存在一些路径解析的 Bug。
+### 3.2 NativeAOT 兼容性
+* **背景**：WinUI 3 官方在AOT 打包下存在一些路径解析的 Bug。
 * **当前方案**：
   1. `win-x64.pubxml` 中必须包含 `<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>`。
   2. `App.xaml.cs` 的静态构造函数中必须包含：`Environment.SetEnvironmentVariable("MICROSOFT_WINDOWSAPPRUNTIME_BASE_DIRECTORY", AppContext.BaseDirectory);`。

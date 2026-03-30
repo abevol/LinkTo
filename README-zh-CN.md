@@ -1,4 +1,4 @@
-[English](README.md) | [简体中文](README-zh-CN.md)
+﻿[English](README.md) | [简体中文](README-zh-CN.md)
 
 # LinkTo
 
@@ -17,7 +17,7 @@
 - **外壳集成** - 一键集成到 Windows 资源管理器的右键上下文菜单
 - **链接历史** - 跟踪和管理历史创建的链接
 - **多语言支持** - 原生支持简体中文与英文界面
-- **独立运行 (NativeAOT)** - 使用 NativeAOT 编译，零运行时依赖，体积小且启动极快
+- **NativeAOT** - 使用 NativeAOT 编译，体积小且启动极快
 - **现代 UI** - 基于 WinUI 3 打造，支持精美的云母 (Mica) 材质背景
 
 ## 界面截图
@@ -27,8 +27,8 @@
 ## 运行环境
 
 - Windows 10 版本 1809 (内部版本 17763) 或更高版本
-- **无需安装运行时**（最终发布版为独立的 NativeAOT 可执行程序）
-- *仅当你想从源码自行构建时，才需要安装 .NET 10.0 SDK*
+- [.NET 10.0 运行时](https://dotnet.microsoft.com/download/dotnet/10.0)
+- [Windows App SDK 运行时](https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/downloads)
 
 ## 安装指南
 
