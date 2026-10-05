@@ -150,6 +150,12 @@
   <data name="Settings_RequiresAdmin" xml:space="preserve">
     <value>Requires Administrator</value>
   </data>
+  <data name="Settings_AutoExit" xml:space="preserve">
+    <value>Auto Exit After Command-Line Task</value>
+  </data>
+  <data name="Settings_AutoExitDesc" xml:space="preserve">
+    <value>When launched with a command-line argument, close the app automatically after a link is created successfully and confirmed</value>
+  </data>
   <data name="Settings_RestartRequired" xml:space="preserve">
     <value>Restart required to apply language change</value>
   </data>

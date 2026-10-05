@@ -13,6 +13,11 @@ public partial class App : Application
 
     public static MainWindow? MainWindow => _mainWindow;
 
+    /// <summary>
+    /// True when the app was started with a command-line argument (e.g. shell context menu)
+    /// </summary>
+    public static bool LaunchedFromCommandLine { get; private set; }
+
     static App()
     {
         Environment.SetEnvironmentVariable("MICROSOFT_WINDOWSAPPRUNTIME_BASE_DIRECTORY", AppContext.BaseDirectory);
@@ -72,6 +77,7 @@ public partial class App : Application
 
         // Handle command-line arguments
         var commandLineArgs = Environment.GetCommandLineArgs();
+        LaunchedFromCommandLine = commandLineArgs.Length > 1;
         if (commandLineArgs.Length > 1)
         {
             var sourcePath = commandLineArgs[1];

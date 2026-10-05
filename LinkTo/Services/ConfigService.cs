@@ -140,4 +140,15 @@ public class ConfigService
             Save();
         }
     }
+
+    // Auto exit after a command-line launched task
+    public bool AutoExitOnCommandLineTask
+    {
+        get => _config.AutoExitOnCommandLineTask;
+        set
+        {
+            _config.AutoExitOnCommandLineTask = value;
+            Save();
+        }
+    }
 }

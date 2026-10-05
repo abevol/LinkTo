@@ -63,11 +63,34 @@
                                        FontSize="12" />
                         </StackPanel>
                     </StackPanel>
-                    <ToggleSwitch x:Name="ShellMenuToggle" 
+                    <ToggleSwitch x:Name="ShellMenuToggle"
                                   Grid.Column="1"
                                   OnContent=""
                                   OffContent=""
                                   Toggled="ShellMenuToggle_Toggled" />
+                </Grid>
+            </Border>
+
+            <!-- Auto Exit After Command-Line Task -->
+            <Border Style="{StaticResource CardBorderStyle}">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Spacing="4">
+                        <TextBlock x:Name="AutoExitLabel" Text="Auto Exit After Command-Line Task"
+                                   Style="{StaticResource SubtitleTextBlockStyle}" />
+                        <TextBlock x:Name="AutoExitDescription"
+                                   Text="When launched with a command-line argument, close the app automatically after a link is created successfully and confirmed"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                    <ToggleSwitch x:Name="AutoExitToggle"
+                                  Grid.Column="1"
+                                  OnContent=""
+                                  OffContent=""
+                                  Toggled="AutoExitToggle_Toggled" />
                 </Grid>
             </Border>
 

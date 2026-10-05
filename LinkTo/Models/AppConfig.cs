@@ -40,6 +40,7 @@ public class AppConfig
 
     public string Language { get; set; } = "en-US";
     public bool ShellMenuEnabled { get; set; } = false;
+    public bool AutoExitOnCommandLineTask { get; set; } = true;
     public List<string> CommonDirectories { get; set; } = new();
     public List<LinkHistoryEntry> LinkHistory { get; set; } = new();
 }

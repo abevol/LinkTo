@@ -596,6 +596,13 @@ public sealed partial class CreateLinkPage : Page
                 SourcePathTextBox.Text = string.Empty;
                 LinkNameTextBox.Text = string.Empty;
                 if (MigrateDataCheckBox != null) MigrateDataCheckBox.IsChecked = false;
+
+                // Optional auto exit when launched from the command line and the user confirmed success
+                if (ConfigService.Instance.Config.AutoExitOnCommandLineTask && App.LaunchedFromCommandLine)
+                {
+                    Application.Current.Exit();
+                    return;
+                }
             }
             else
             {

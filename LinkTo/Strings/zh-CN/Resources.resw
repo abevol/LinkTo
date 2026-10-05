@@ -150,6 +150,12 @@
   <data name="Settings_RequiresAdmin" xml:space="preserve">
     <value>需要管理员权限</value>
   </data>
+  <data name="Settings_AutoExit" xml:space="preserve">
+    <value>命令行任务后自动退出</value>
+  </data>
+  <data name="Settings_AutoExitDesc" xml:space="preserve">
+    <value>通过命令行参数（如右键菜单）启动时，成功创建链接并确认后自动关闭应用</value>
+  </data>
   <data name="Settings_RestartRequired" xml:space="preserve">
     <value>需要重启应用以应用语言更改</value>
   </data>

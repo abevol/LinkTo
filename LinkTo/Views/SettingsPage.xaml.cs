@@ -30,6 +30,8 @@ public sealed partial class SettingsPage : Page
             ShellMenuLabel.Text = LocalizationHelper.GetString("Settings_ShellMenu");
             ShellMenuDescription.Text = LocalizationHelper.GetString("Settings_ShellMenuDesc");
             AdminWarningText.Text = LocalizationHelper.GetString("Settings_RequiresAdmin");
+            AutoExitLabel.Text = LocalizationHelper.GetString("Settings_AutoExit");
+            AutoExitDescription.Text = LocalizationHelper.GetString("Settings_AutoExitDesc");
             EnglishItem.Content = LocalizationHelper.GetString("Language_English");
             ChineseItem.Content = LocalizationHelper.GetString("Language_Chinese");
         }
@@ -48,8 +50,17 @@ public sealed partial class SettingsPage : Page
         // Shell menu
         ShellMenuToggle.IsOn = ShellIntegrationService.Instance.IsRegistered();
 
+        // Auto exit after command-line task
+        AutoExitToggle.IsOn = ConfigService.Instance.Config.AutoExitOnCommandLineTask;
+
         // Show admin warning if not running as admin
         AdminWarningPanel.Visibility = AdminHelper.IsRunningAsAdmin() ? Visibility.Collapsed : Visibility.Visible;
+    }
+
+    private void AutoExitToggle_Toggled(object sender, RoutedEventArgs e)
+    {
+        if (_isInitializing) return;
+        ConfigService.Instance.AutoExitOnCommandLineTask = AutoExitToggle.IsOn;
     }
 
     private async void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
