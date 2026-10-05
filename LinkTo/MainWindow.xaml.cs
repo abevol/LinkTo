@@ -20,6 +20,12 @@ public sealed partial class MainWindow : Window
     {
         InitializeComponent();
 
+        // Command-line theme override for UI testing (--theme=dark|light)
+        if (App.TestTheme is { } theme && Content is FrameworkElement root)
+        {
+            root.RequestedTheme = theme;
+        }
+
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
 

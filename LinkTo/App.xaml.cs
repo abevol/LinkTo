@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.UI.Xaml;
 using LinkTo.Services;
 
@@ -17,6 +18,21 @@ public partial class App : Application
     /// True when the app was started with a command-line argument (e.g. shell context menu)
     /// </summary>
     public static bool LaunchedFromCommandLine { get; private set; }
+
+    /// <summary>
+    /// Loading-state preview duration in seconds when started with --test-loading[=seconds]
+    /// </summary>
+    public static int? TestLoadingSeconds { get; private set; }
+
+    /// <summary>
+    /// Theme override for this run when started with --theme=dark|light; null follows the system
+    /// </summary>
+    public static ElementTheme? TestTheme { get; private set; }
+
+    /// <summary>
+    /// Frost scrim tint strength (0..1) when started with --test-tint=&lt;value&gt;
+    /// </summary>
+    public static double? TestTintOpacity { get; private set; }
 
     static App()
     {
@@ -73,22 +89,60 @@ public partial class App : Application
     /// <param name="args">Details about the launch request and process.</param>
     protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
     {
-        _mainWindow = new MainWindow();
-
-        // Handle command-line arguments
+        // Parse switches before creating the window: MainWindow reads them in its constructor
         var commandLineArgs = Environment.GetCommandLineArgs();
         LaunchedFromCommandLine = commandLineArgs.Length > 1;
-        if (commandLineArgs.Length > 1)
+        TestLoadingSeconds = ParseTestLoadingSeconds(commandLineArgs);
+        TestTheme = ParseTestTheme(commandLineArgs);
+        TestTintOpacity = ParseTestTintOpacity(commandLineArgs);
+
+        _mainWindow = new MainWindow();
+
+        var sourcePath = commandLineArgs.Skip(1).FirstOrDefault(a => !a.StartsWith("--", StringComparison.Ordinal));
+        if (!string.IsNullOrEmpty(sourcePath))
         {
-            var sourcePath = commandLineArgs[1];
-            if (!string.IsNullOrEmpty(sourcePath))
-            {
-                LogService.Instance.LogInfo($"Launched with source path: {sourcePath}");
-                _mainWindow.SetInitialSourcePath(sourcePath);
-            }
+            LogService.Instance.LogInfo($"Launched with source path: {sourcePath}");
+            _mainWindow.SetInitialSourcePath(sourcePath);
         }
 
         _mainWindow.Activate();
         LogService.Instance.LogInfo("Application launched successfully");
+    }
+
+    private static int? ParseTestLoadingSeconds(string[] args)
+    {
+        var arg = args.FirstOrDefault(a => a.StartsWith("--test-loading", StringComparison.Ordinal));
+        if (arg == null) return null;
+
+        var separator = arg.IndexOf('=');
+        if (separator > 0 && int.TryParse(arg[(separator + 1)..], out var seconds) && seconds > 0)
+        {
+            return seconds;
+        }
+        return 10;
+    }
+
+    private static ElementTheme? ParseTestTheme(string[] args)
+    {
+        var arg = args.FirstOrDefault(a => a.StartsWith("--theme", StringComparison.Ordinal));
+        var value = arg?[(arg.IndexOf('=') + 1)..];
+        return value?.ToLowerInvariant() switch
+        {
+            "dark" => ElementTheme.Dark,
+            "light" => ElementTheme.Light,
+            _ => null
+        };
+    }
+
+    private static double? ParseTestTintOpacity(string[] args)
+    {
+        var arg = args.FirstOrDefault(a => a.StartsWith("--test-tint", StringComparison.Ordinal));
+        var value = arg?[(arg.IndexOf('=') + 1)..];
+        if (double.TryParse(value, System.Globalization.CultureInfo.InvariantCulture, out var opacity)
+            && opacity is >= 0 and <= 1)
+        {
+            return opacity;
+        }
+        return null;
     }
 }

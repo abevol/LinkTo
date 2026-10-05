@@ -224,21 +224,27 @@
                 Margin="0,16,0,0"
                 Click="CreateLink_Click" />
 
-        <!-- Progress Overlay: full-page scrim blocking interaction while an operation runs -->
+        <!-- Progress Overlay: frosted scrim blocking interaction while an operation runs.
+             The frost sprite is attached in code-behind (ApplyFrostScrim) so its blur is
+             testable via the test tint switch. -->
         <Grid x:Name="ProgressOverlay"
               Grid.RowSpan="2"
               Visibility="Collapsed">
-            <Grid.Background>
-                <SolidColorBrush Color="{ThemeResource ApplicationPageBackgroundThemeBrush}" Opacity="0.6" />
-            </Grid.Background>
+            <!-- Frost layer only; the card is a sibling drawn above it and stays clear -->
+            <Border x:Name="FrostHost"
+                    CornerRadius="8" />
+            <!-- Opaque base keeps the card from blending with the dimmed content behind it -->
             <Border HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Style="{StaticResource CardBorderStyle}"
-                    Padding="28,20">
-                <StackPanel Orientation="Horizontal" Spacing="12">
-                    <ProgressRing IsActive="True" Width="24" Height="24" />
-                    <TextBlock x:Name="ProgressStatusText" x:Uid="Status_Processing" Text="Processing..." VerticalAlignment="Center" />
-                </StackPanel>
+                    CornerRadius="8"
+                    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <Border Style="{StaticResource CardBorderStyle}"
+                        Padding="28,20">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <ProgressRing IsActive="True" Width="24" Height="24" />
+                        <TextBlock x:Name="ProgressStatusText" x:Uid="Status_Processing" Text="Processing..." VerticalAlignment="Center" />
+                    </StackPanel>
+                </Border>
             </Border>
         </Grid>
     </Grid>

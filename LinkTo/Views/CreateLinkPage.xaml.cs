@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Hosting;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Input;
 using Microsoft.Windows.ApplicationModel.Resources;
@@ -28,15 +29,95 @@ public sealed partial class CreateLinkPage : Page
     {
         InitializeComponent();
 
+        ApplyFrostScrim();
         ApplyLocalization();
         UpdateHardLinkAvailability();
         UpdateLinkTypeSelectedText();
         this.Loaded += CreateLinkPage_Loaded;
     }
 
+    // Win2D composition frost: GaussianBlurEffect radius is adjustable (--test-tint scales
+    // it 0..16px), unlike AcrylicBrush whose blur is fixed. Falls back to a plain scrim.
+    private void ApplyFrostScrim()
+    {
+        var blurAmount = (float)(App.TestTintOpacity ?? 0.1) * 16f;
+        var tintColor = ActualTheme == ElementTheme.Dark
+            ? Windows.UI.Color.FromArgb(90, 0x00, 0x00, 0x00)
+            : Windows.UI.Color.FromArgb(70, 0xFF, 0xFF, 0xFF);
+
+        try
+        {
+            var compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
+            var hostVisual = ElementCompositionPreview.GetElementVisual(FrostHost);
+
+            var blur = new Microsoft.Graphics.Canvas.Effects.GaussianBlurEffect
+            {
+                Name = "Frost",
+                BlurAmount = blurAmount,
+                BorderMode = Microsoft.Graphics.Canvas.Effects.EffectBorderMode.Hard,
+                Source = new Microsoft.UI.Composition.CompositionEffectSourceParameter("backdrop")
+            };
+            var tint = new Microsoft.Graphics.Canvas.Effects.ColorSourceEffect
+            {
+                Name = "Tint",
+                Color = tintColor
+            };
+            var composite = new Microsoft.Graphics.Canvas.Effects.CompositeEffect
+            {
+                Mode = Microsoft.Graphics.Canvas.CanvasComposite.SourceOver,
+                Sources = { blur, tint }
+            };
+
+            var brush = compositor.CreateEffectFactory(composite).CreateBrush();
+            brush.SetSourceParameter("backdrop", compositor.CreateBackdropBrush());
+
+            var sprite = compositor.CreateSpriteVisual();
+            sprite.Brush = brush;
+
+            var sizeAnimation = compositor.CreateExpressionAnimation("host.Size");
+            sizeAnimation.SetReferenceParameter("host", hostVisual);
+            sprite.StartAnimation("Size", sizeAnimation);
+
+            var radius = new System.Numerics.Vector2(8f, 8f);
+            var clip = compositor.CreateRectangleClip(0, 0, 0, 0, radius, radius, radius, radius);
+            var clipWidthAnimation = compositor.CreateExpressionAnimation("host.Size.X");
+            clipWidthAnimation.SetReferenceParameter("host", hostVisual);
+            clip.StartAnimation("Right", clipWidthAnimation);
+            var clipHeightAnimation = compositor.CreateExpressionAnimation("host.Size.Y");
+            clipHeightAnimation.SetReferenceParameter("host", hostVisual);
+            clip.StartAnimation("Bottom", clipHeightAnimation);
+            sprite.Clip = clip;
+
+            ElementCompositionPreview.SetElementChildVisual(FrostHost, sprite);
+        }
+        catch
+        {
+            FrostHost.Background = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black)
+            {
+                Opacity = App.TestTintOpacity ?? 0.1
+            };
+        }
+    }
+
     private void CreateLinkPage_Loaded(object sender, RoutedEventArgs e)
     {
         LoadCommonDirectories();
+        RunLoadingPreviewIfRequested();
+    }
+
+    private bool _loadingPreviewActive;
+
+    // --test-loading: shows the progress overlay without running any operation
+    private async void RunLoadingPreviewIfRequested()
+    {
+        var seconds = App.TestLoadingSeconds;
+        if (seconds is not > 0 || _loadingPreviewActive) return;
+
+        _loadingPreviewActive = true;
+        SetLoading(true);
+        await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(seconds.Value));
+        SetLoading(false);
+        _loadingPreviewActive = false;
     }
 
     /// <summary>
