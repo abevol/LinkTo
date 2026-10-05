@@ -565,7 +565,7 @@ public sealed partial class CreateLinkPage : Page
 
             if (elevateResult)
             {
-                AdminHelper.RestartAsAdmin($"\"{sourcePath}\"");
+                AdminHelper.RestartAsAdmin(sourcePath);
                 Application.Current.Exit();
                 return;
             }
@@ -612,7 +612,7 @@ public sealed partial class CreateLinkPage : Page
 
                     if (elevateResult)
                     {
-                        AdminHelper.RestartAsAdmin($"\"{sourcePath}\"");
+                        AdminHelper.RestartAsAdmin(sourcePath);
                         Application.Current.Exit();
                         return;
                     }
@@ -638,7 +638,7 @@ public sealed partial class CreateLinkPage : Page
                  
                  if (elevateResult)
                  {
-                    AdminHelper.RestartAsAdmin($"\"{sourcePath}\"");
+                    AdminHelper.RestartAsAdmin(sourcePath);
                     Application.Current.Exit();
                     return;
                  }

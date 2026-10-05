@@ -78,12 +78,8 @@ public sealed partial class SettingsPage : Page
                 if (result == ContentDialogResult.Primary)
                 {
                     // Restart application
-                    var exePath = Environment.ProcessPath;
-                    if (!string.IsNullOrEmpty(exePath))
-                    {
-                        System.Diagnostics.Process.Start(exePath);
-                        Application.Current.Exit();
-                    }
+                    AdminHelper.Restart();
+                    Application.Current.Exit();
                 }
             }
         }

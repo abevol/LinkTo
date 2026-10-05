@@ -26,15 +26,20 @@ public static class AdminHelper
         }
     }
 
+    private static string? GetExecutablePath()
+    {
+        return Environment.ProcessPath;
+    }
+
     /// <summary>
     /// Restart the application with administrator privileges
     /// </summary>
     /// <returns>True if restart was initiated successfully</returns>
-    public static bool RestartAsAdmin(string? arguments = null)
+    public static bool RestartAsAdmin(params string[] arguments)
     {
         try
         {
-            var exePath = Environment.ProcessPath;
+            var exePath = GetExecutablePath();
             if (string.IsNullOrEmpty(exePath)) return false;
 
             var startInfo = new ProcessStartInfo
@@ -42,7 +47,36 @@ public static class AdminHelper
                 FileName = exePath,
                 UseShellExecute = true,
                 Verb = "runas",
-                Arguments = arguments ?? string.Empty
+            };
+            foreach (var argument in arguments)
+            {
+                startInfo.ArgumentList.Add(argument);
+            }
+
+            Process.Start(startInfo);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Restart the application with the current privileges
+    /// </summary>
+    /// <returns>True if restart was initiated successfully</returns>
+    public static bool Restart()
+    {
+        try
+        {
+            var exePath = GetExecutablePath();
+            if (string.IsNullOrEmpty(exePath)) return false;
+
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = exePath,
+                UseShellExecute = false,
             };
 
             Process.Start(startInfo);
