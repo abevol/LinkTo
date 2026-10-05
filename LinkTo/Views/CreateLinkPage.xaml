@@ -214,20 +214,8 @@
             </StackPanel>
         </ScrollViewer>
         
-        <!-- Progress Overlay -->
-        <StackPanel x:Name="ProgressOverlay" 
-                    Grid.Row="1" 
-                    Orientation="Horizontal" 
-                    Spacing="12" 
-                    HorizontalAlignment="Center" 
-                    Visibility="Collapsed"
-                    Margin="0,-40,0,0">
-            <ProgressRing IsActive="True" Width="20" Height="20" />
-            <TextBlock x:Name="ProgressStatusText" x:Uid="Status_Processing" Text="Processing..." VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-        </StackPanel>
-
         <!-- Fixed Create Link Button at Bottom -->
-        <Button x:Name="CreateLinkButton" 
+        <Button x:Name="CreateLinkButton"
                 Grid.Row="1"
                 Content="Create Link"
                 Style="{StaticResource AccentButtonStyle}"
@@ -235,5 +223,23 @@
                 Height="40"
                 Margin="0,16,0,0"
                 Click="CreateLink_Click" />
+
+        <!-- Progress Overlay: full-page scrim blocking interaction while an operation runs -->
+        <Grid x:Name="ProgressOverlay"
+              Grid.RowSpan="2"
+              Visibility="Collapsed">
+            <Grid.Background>
+                <SolidColorBrush Color="{ThemeResource ApplicationPageBackgroundThemeBrush}" Opacity="0.6" />
+            </Grid.Background>
+            <Border HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource CardBorderStyle}"
+                    Padding="28,20">
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <ProgressRing IsActive="True" Width="24" Height="24" />
+                    <TextBlock x:Name="ProgressStatusText" x:Uid="Status_Processing" Text="Processing..." VerticalAlignment="Center" />
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </Page>
