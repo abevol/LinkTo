@@ -70,3 +70,6 @@ BundleArtifacts/
 
 # Generated files
 Generated\ Files/
+
+# Agent files
+.codegraph
