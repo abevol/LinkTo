@@ -221,7 +221,7 @@ public partial class LinkService
             ConfigService.Instance.AddLinkHistory(historyEntry);
 
             // Add target directory to common directories
-            ConfigService.Instance.AddCommonDirectory(targetDirectory);
+            ConfigService.Instance.TouchCommonDirectory(targetDirectory);
         }
 
         return result;
@@ -324,7 +324,7 @@ public partial class LinkService
         };
         ConfigService.Instance.AddLinkHistory(historyEntry);
         
-        ConfigService.Instance.AddCommonDirectory(targetDirectory);
+        ConfigService.Instance.TouchCommonDirectory(targetDirectory);
 
         return (true, null);
     }

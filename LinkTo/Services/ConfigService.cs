@@ -79,14 +79,15 @@ public class ConfigService
     }
 
     // Common directories management
-    public void AddCommonDirectory(string path)
+    // The list is kept in most-recently-used order; index 0 is the latest used location
+    public void TouchCommonDirectory(string path)
     {
-        if (!string.IsNullOrWhiteSpace(path) && 
-            !_config.CommonDirectories.Contains(path, StringComparer.OrdinalIgnoreCase))
-        {
-            _config.CommonDirectories.Add(path);
-            Save();
-        }
+        if (string.IsNullOrWhiteSpace(path)) return;
+
+        _config.CommonDirectories.RemoveAll(d =>
+            string.Equals(d, path, StringComparison.OrdinalIgnoreCase));
+        _config.CommonDirectories.Insert(0, path);
+        Save();
     }
 
     public void RemoveCommonDirectory(string path)

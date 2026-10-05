@@ -48,6 +48,23 @@ public sealed partial class CreateLinkPage : Page
         UpdateLinkName();
         UpdateWorkingDirectoryDefault();
         UpdateHardLinkAvailability();
+        PrefillTargetFromRecent();
+    }
+
+    /// <summary>
+    /// Fill the target directory with the most recently used common directory.
+    /// Only called on the command-line launch path, which currently passes no
+    /// target argument; if one is added later it must skip this prefill.
+    /// </summary>
+    private void PrefillTargetFromRecent()
+    {
+        if (!string.IsNullOrEmpty(TargetPathTextBox.Text)) return;
+
+        var dirs = ConfigService.Instance.Config.CommonDirectories;
+        if (dirs is { Count: > 0 })
+        {
+            TargetPathTextBox.Text = dirs[0];
+        }
     }
 
     private void ApplyLocalization()
@@ -299,6 +316,10 @@ public sealed partial class CreateLinkPage : Page
         {
             TargetPathTextBox.Text = path;
             UpdateHardLinkAvailability();
+
+            // Selecting a location counts as using it; move it to the top of the list
+            ConfigService.Instance.TouchCommonDirectory(path);
+            LoadCommonDirectories();
         }
     }
 
